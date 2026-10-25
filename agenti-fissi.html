@@ -1,172 +1,530 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Agenti Fissi — 21studio</title>
 <meta name="description" content="Moduli di automazione pronti, testati, a prezzo fisso. Un singolo processo automatizzato, attivo in pochi giorni — senza co-progettazione.">
-<meta name="theme-color" content="#0B0C08">
-<link rel="stylesheet" href="style.css">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&family=Inter:wght@400..700&family=Inter+Tight:wght@700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500&display=swap">
 <style>
-.ig{display:inline-flex;align-items:center;gap:.3rem;text-decoration:none;opacity:.72;transition:opacity .3s}
-.ig:hover{opacity:1}
-.ig s{text-decoration:none;font-size:.85em;opacity:.7}
+
+/* ===== base delle pagine interne: valori finali (calcolati) della home ===== */
+:root{
+  --paper:#FFFFFF; --soft:#F5F5F2; --ink:#1A1C17; --ink-2:#4F524A; --ink-3:#686B62;
+  --acc:#5C6A32; --fill:#B7C17E; --hair:rgba(26,28,23,.12); --nero:#0B0C0A;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:"Geist","Inter",ui-sans-serif,system-ui,sans-serif;
+  --btn-dk:linear-gradient(rgba(255,255,255,.08),rgba(0,0,0,0) 42%),linear-gradient(145deg,#343432,#242422 46%,#11110F);
+  --alza:0 1px 2px rgba(26,28,23,.04),0 14px 34px -22px rgba(26,28,23,.22);
+  --r-l:30px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--paper);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{width:min(1120px,92vw);margin-inline:auto}
+h2{font-family:var(--disp);font-size:clamp(1.85rem,2.8vw,2.5rem);font-weight:650;letter-spacing:-.04em;line-height:1.06}
+h3{font-size:clamp(1.08rem,1.3vw,1.2rem);font-weight:600;letter-spacing:-.022em;line-height:1.24}
+.lab{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--acc)}
+.body{font-size:.94rem;line-height:1.6;color:var(--ink-2)}
+
+/* fasce */
+.band{padding-block:clamp(56px,5vw,72px)}
+.band+.band{border-top:1px solid var(--hair)}
+.band.soft{background:var(--soft)}
+.band.nera{background:var(--nero);color:#fff;border-top:0}
+.band.nera+.band{border-top:0}
+.band.nera .lab{color:#B7C17E}
+.band.nera .body{color:rgba(255,255,255,.68)}
+.centro{width:min(720px,100%);margin-inline:auto;text-align:center}
+.centro h2{margin-top:1rem}
+.centro .body{margin:1rem auto 0;max-width:60ch}
+.testa{margin-bottom:clamp(28px,3vw,40px)}
+
+/* apertura di pagina: tipografica come l'hero della home, senza la lava */
+.ph{position:relative;overflow:hidden;text-align:center;padding:clamp(150px,15vw,196px) 0 clamp(60px,6vw,92px)}
+.ph::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 62% 70% at 50% 118%,rgba(183,193,126,.30),transparent 68%)}
+.ph>*{position:relative}
+.ph h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.5rem,5.4vw,4.6rem);line-height:.96;
+  letter-spacing:-.058em;color:#0D0D0D;max-width:17ch;margin:1.1rem auto 0}
+.ph .lead{margin:1.5rem auto 0;max-width:60ch;font-size:clamp(1.02rem,1.3vw,1.18rem);line-height:1.55;
+  letter-spacing:-.015em;color:#55554F;text-wrap:pretty}
+.ph .em{color:var(--acc)}
+.hnota{margin-top:1.2rem;font-size:13.76px;color:#55584F}
+
+/* bottoni: primario scuro stile mez, secondario chiaro; su nero il primario diventa chiaro */
+.bs{display:flex;flex-wrap:wrap;gap:10px 12px;justify-content:center;align-items:center;margin-top:2rem}
+.b{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;
+  font-size:14px;font-weight:650;letter-spacing:-.012em;line-height:1.5;white-space:nowrap;
+  transition:filter .25s,transform .25s,background-color .25s}
+.b i{font-style:normal;padding:0 4px 0 18px}
+.b s{text-decoration:none;padding:0 18px 0 6px;font-size:15px}
+.b i:only-child{padding:0 20px}
+.b.su{background:var(--btn-dk);border:1px solid rgba(255,255,255,.16);color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 0 1px #11110F}
+.b.su:hover{filter:brightness(1.18)}
+.b.suv{background:#fff;border:1px solid rgba(13,13,13,.14);color:#0D0D0D}
+.b.suv:hover{background:var(--soft)}
+.b:active{transform:scale(.98)}
+.nera .b.su{background:linear-gradient(180deg,#FFFFFF,#E9E9E4);color:#0D0D0D;border:1px solid rgba(255,255,255,.7);
+  box-shadow:inset 0 1px 0 #FFFFFF,0 0 0 1px rgba(0,0,0,.5)}
+.nera .b.su:hover{filter:brightness(1.04)}
+
+/* schede: bianche, bordo sottile, ombra leggera (come .vc / .opz della home) */
+.card{background:#fff;border:1px solid rgba(26,28,23,.10);border-radius:var(--r-l);padding:28px;box-shadow:var(--alza)}
+.card.top{border-color:rgba(92,106,50,.4);background:linear-gradient(168deg,rgba(183,193,126,.16),#FFFFFF 70%)}
+.nera .card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);box-shadow:none}
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.65rem}
+.tl li{display:flex;gap:.7rem;font-size:.94rem;line-height:1.5;color:var(--ink-2)}
+.tl li::before{content:"\2713";flex:none;color:var(--acc)}
+
+/* chiusura, come #fine della home */
+.fine{position:relative;overflow:hidden;padding-block:clamp(72px,7vw,104px);text-align:center}
+.fine::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 58% 60% at 50% 108%,rgba(183,193,126,.22),transparent 66%)}
+.fine>*{position:relative}
+.fine h2{max-width:24ch;margin:1rem auto 0}
+.fine .body{max-width:46ch;margin:1.2rem auto 0}
+.fine .hnota{margin-top:1.4rem}
+
+@media(max-width:860px){
+  .band{padding-block:clamp(48px,11vw,60px)}
+  h2{font-size:clamp(1.75rem,7.6vw,2.1rem)}
+}
+@media(max-width:640px){.ph h1{letter-spacing:-.05em;line-height:1}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---- giro 5: snippet header-mez (pillola fluttuante, sostituisce la barra) ---- */
+/* ================================================================
+   Header a pillola — giro 5 (pattern: mez.systems, stato "scrollato")
+   Misure dal vivo (computed style, 24/10/2026): pillola 1160x68, top 18px,
+   padding 9/10/9/20, bg #262626, bordo 1px rgba(255,255,255,.1),
+   ombra 0 18px 58px -28px rgba(0,0,0,.78); allo scroll si stringe e sale a 12px.
+   CTA a pillola alta 48, bordo 1px, gap 10; sfere 24px sovrapposte di 7px.
+   Testi portati a >=12px (regola del sito: niente testo sotto i 12px).
+   Tutti i selettori sono prefissati .mh / mh- per non toccare il resto.
+   ================================================================ */
+.mh{
+  --mh-bg:#262626; --mh-fg:#F5F5F2; --mh-fg-2:rgba(245,245,242,.72);
+  --mh-line:rgba(255,255,255,.10); --mh-line-2:rgba(255,255,255,.24);
+  --mh-h:68px; --mh-top:18px; --mh-w:1160px;
+  --mh-out:cubic-bezier(.16,1,.3,1);
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding-top:calc(var(--mh-top) + env(safe-area-inset-top,0px));
+  display:flex;justify-content:center;pointer-events:none;
+  font-family:var(--sans,"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);
+  transition:padding-top .52s var(--mh-out)}
+.mh *{box-sizing:border-box}
+.mh-shell{pointer-events:auto;position:relative;width:min(var(--mh-w),calc(100% - 32px));
+  background:var(--mh-bg);color:var(--mh-fg);
+  border:1px solid var(--mh-line);border-radius:calc(var(--mh-h) / 2);
+  box-shadow:0 18px 58px -28px rgba(0,0,0,.78),0 8px 24px -14px rgba(0,0,0,.28);
+  transition:width .62s var(--mh-out),border-radius .3s var(--mh-out),border-color .3s ease}
+.mh-bar{height:calc(var(--mh-h) - 2px);padding:9px 10px 9px 20px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+
+/* logo (giro 6): wordmark come il logo ufficiale - grottesco bold, maiuscolo, tracking stretto.
+   Inter Tight 700 a -0.025em: rapporto larghezza/altezza maiuscole 6.0 contro 6.04 del PNG ufficiale. */
+.wm{font-family:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;
+  letter-spacing:-.025em;line-height:1;text-transform:uppercase;white-space:nowrap}
+.mh-brand{justify-self:start;display:inline-flex;align-items:center;color:#fff;text-decoration:none;
+  font-size:20px;padding:4px 2px}
+
+/* link centrali */
+.mh-links{display:flex;align-items:center;gap:30px}
+.mh-links a{color:var(--mh-fg-2);text-decoration:none;font-size:12.5px;font-weight:450;letter-spacing:-.01em;
+  white-space:nowrap;transition:color .25s ease}
+.mh-links a:hover{color:var(--mh-fg)}
+
+.mh-dx{justify-self:end;display:flex;align-items:center;gap:8px}
+
+/* CTA a pillola con bordo sottile + fila di sfere */
+.mh-cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;height:48px;padding:0 12px 0 20px;
+  border:1px solid var(--mh-line-2);border-radius:999px;color:var(--mh-fg);text-decoration:none;
+  font-size:12.5px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;
+  transition:border-color .25s ease,background-color .25s ease}
+.mh-cta:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
+.mh a:focus-visible,.mh button:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-radius:999px}
+
+.mh-orbs{display:flex;align-items:center}
+.mh-orbs i{width:24px;height:24px;flex:none;margin-left:-7px;transition:margin-left .4s var(--mh-out),transform .4s var(--mh-out)}
+.mh-orbs i:first-child{margin-left:0}
+.mh-cta:hover .mh-orbs i:not(:first-child){margin-left:-3px}
+
+/* --- sfera in miniatura: stessa ricetta di .cc-orb (gradienti + grana), toni dei reparti --- */
+.mh-orbs i{
+  --o1:#D7E08F; --o2:#7C8A3C; --o3:#26310F; --o4:#EEF3B8; --o5:#4E6A2A;
+  position:relative;border-radius:50%;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(ellipse 60% 44% at 26% 22%,color-mix(in srgb,var(--o4) 70%,transparent) 0,transparent 70%),
+    radial-gradient(ellipse 54% 60% at 80% 78%,var(--o3) 0,transparent 72%),
+    radial-gradient(ellipse 70% 50% at 60% 52%,var(--o5) 0,transparent 75%),
+    radial-gradient(circle at 42% 40%,var(--o1) 0,var(--o2) 58%,color-mix(in srgb,var(--o2) 60%,var(--o3)) 100%);
+  box-shadow:0 1px 4px rgba(0,0,0,.22),inset -2px -3px 6px rgba(0,0,0,.22)}
+.mh-orbs i::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:60px 60px}
+.mh [data-o="1"]{--o1:#A9BC4A;--o2:#5D7022;--o3:#1B2608;--o4:#DCE88A;--o5:#84A030}  /* oliva lime */
+.mh [data-o="3"]{--o1:#82AA88;--o2:#3F6A4C;--o3:#0E2216;--o4:#C6E3C4;--o5:#5E9470}  /* salvia */
+.mh [data-o="4"]{--o1:#8CC7A6;--o2:#3F8466;--o3:#0D2A1E;--o4:#D2F0DD;--o5:#6DB896}  /* menta */
+.mh [data-o="6"]{--o1:#6FAFA2;--o2:#2F6B62;--o3:#0A1F1C;--o4:#BFE5DA;--o5:#4F978A}  /* eucalipto */
+.mh [data-o="8"]{--o1:#B7C17E;--o2:#3D5A26;--o3:#0A1607;--o4:#E2EBA8;--o5:#7F9A45}  /* verde 21studio */
+
+/* --- allo scroll: si stringe e sale (come mez), resta sempre visibile --- */
+.mh.is-scrolled{--mh-top:12px;--mh-w:1040px}
+/* sopra le fasce nere il bordo si accende per staccare la pillola dal fondo */
+.mh.su-scuro .mh-shell{border-color:rgba(255,255,255,.16)}
+
+/* --- bottone menu (solo mobile) --- */
+.mh-tog{display:none;width:44px;height:44px;flex:none;border:0;border-radius:50%;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.08);color:var(--mh-fg);place-items:center;transition:background-color .25s ease}
+.mh-tog:hover{background:rgba(255,255,255,.14)}
+.mh-tog span{display:block;width:16px;height:1.5px;position:relative}
+.mh-tog span::before,.mh-tog span::after{content:"";position:absolute;left:0;width:16px;height:1.5px;border-radius:2px;background:currentColor;
+  transition:transform .35s var(--mh-out),top .35s var(--mh-out)}
+.mh-tog span::before{top:-3.5px}
+.mh-tog span::after{top:3.5px}
+.mh.is-open .mh-tog span::before{top:0;transform:rotate(45deg)}
+.mh.is-open .mh-tog span::after{top:0;transform:rotate(-45deg)}
+
+/* --- menu a tendina dentro la pillola --- */
+.mh-menu{display:grid;grid-template-rows:0fr;opacity:0;
+  transition:grid-template-rows .45s var(--mh-out),opacity .3s ease}
+.mh-menu[hidden]{display:none}
+.mh-menu>*{min-height:0;overflow:hidden}
+.mh.is-open .mh-menu{grid-template-rows:1fr;opacity:1}
+.mh-menu nav{display:flex;flex-direction:column;padding:6px 20px 0}
+.mh-menu nav a{display:flex;align-items:center;min-height:52px;color:var(--mh-fg);text-decoration:none;
+  font-family:var(--disp,var(--sans,"Inter",sans-serif));font-size:22px;font-weight:600;letter-spacing:-.03em;
+  border-top:1px solid var(--mh-line)}
+.mh-menu nav a:first-child{border-top:0}
+.mh-menu .mh-cta-big{margin:12px 16px 16px;height:52px}
+.mh.is-open .mh-shell{border-radius:26px}
+.mh-bar .mh-cta{transition:opacity .25s ease,border-color .25s ease,background-color .25s ease}
+.mh.is-open .mh-bar .mh-cta{opacity:0;visibility:hidden}   /* nel menu aperto resta solo la CTA grande */
+
+/* ---------- mobile / tablet ---------- */
+@media (max-width:900px){
+  .mh{--mh-h:60px;--mh-top:10px}
+  .mh.is-scrolled{--mh-top:8px;--mh-w:1160px}
+  .mh-bar{grid-template-columns:1fr auto;padding:7px 7px 7px 16px;gap:8px}
+  .mh-links{display:none}
+  .mh-tog{display:grid}
+  .mh-bar .mh-cta{height:44px;padding:0 10px 0 16px;gap:10px}
+}
+@media (max-width:440px){
+  .mh-bar .mh-cta{padding:0 16px}
+  .mh-bar .mh-orbs{display:none}   /* a 390px servono spazio per logo + CTA + menu */
+}
+@media (min-width:901px){ .mh-menu{display:none !important} }
+
+/* le ancore non finiscono sotto la pillola */
+html{scroll-padding-top:100px}
+
+@media (prefers-reduced-motion:reduce){
+  .mh,.mh *,.mh *::before,.mh *::after{transition:none !important}
+}
+
+
+/* footer (giro 6, pattern da pletor.ai): card scura arrotondata + wordmark enorme tagliato dal bordo */
+footer.ft{background:#1c1c1c;color:rgba(255,255,255,.56);border-top:0;padding:clamp(16px,3vw,40px) 0 0;
+  font-size:.9rem;overflow:hidden}
+footer.ft a{color:inherit;text-decoration:none;transition:color .2s ease}
+footer.ft a:hover{color:#fff}
+footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-radius:4px}
+.ft-card{background:#262626;border-radius:clamp(28px,4.4vw,64px);padding:clamp(28px,4.4vw,64px)}
+.ft-top{display:grid;grid-template-columns:minmax(0,1.1fr) repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,56px)}
+.ft-brand .wm{display:inline-block;font-size:22px;color:#fff}
+.ft-brand p{margin:1rem 0 .7rem;color:#fff;font-size:1rem;line-height:1.45;max-width:24ch}
+.ft-col h3{margin:0 0 1.1rem;font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.36)}
+.ft-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.95rem}
+.ft-bot{margin-top:clamp(32px,4vw,48px);padding-top:32px;border-top:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.ft-ig{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:7px;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.ft-ig svg{width:18px;height:18px;display:block}
+.ft-bot small{font-size:.86rem}
+.ft-big{display:block;margin:clamp(40px,7vw,110px) 0 0;color:#2a2a2a;font-size:20.5vw;
+  text-align:center;height:.6em;line-height:.8;overflow:hidden;user-select:none;pointer-events:none}
+@media(max-width:860px){.ft-top{grid-template-columns:1fr 1fr}.ft-brand{grid-column:1/-1}}
+@media(max-width:480px){.ft-top{grid-template-columns:1fr}}
+@media(max-width:600px){.mh-brand{font-size:18px}}
+
+/* ===== questa pagina ===== */
+
+.diff{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.diff .card h3{margin-bottom:.55rem}
+.lib{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ag{display:flex;flex-direction:column;gap:.7rem}
+.ag .lab{font-size:12px}
+.ag h3{color:#fff}
+.ag .body{flex:1}
+.prezzo{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  margin-top:.6rem;padding-top:1.1rem;border-top:1px solid rgba(255,255,255,.12)}
+.prezzo b{font-family:var(--disp);font-size:1.7rem;font-weight:650;letter-spacing:-.04em;line-height:1}
+.prezzo b span{font-family:var(--sans);font-size:.82rem;font-weight:400;letter-spacing:0;color:rgba(255,255,255,.6);margin-left:.35rem}
+.prezzo a{font-size:14px;font-weight:650;letter-spacing:-.012em;color:#fff;border-bottom:1px solid rgba(255,255,255,.3);
+  padding-bottom:1px;transition:border-color .25s}
+.prezzo a:hover{border-color:#fff}
+.pilot{display:flex;align-items:center;justify-content:space-between;gap:clamp(20px,4vw,56px);
+  padding:clamp(28px,3.4vw,44px)}
+.pilot h3{font-family:var(--disp);font-size:clamp(1.4rem,2.1vw,1.8rem);font-weight:650;letter-spacing:-.035em}
+.pilot .body{margin-top:.7rem;max-width:56ch}
+.pilot .b{flex:none}
+@media(max-width:960px){.lib{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.diff,.lib{grid-template-columns:1fr}.pilot{flex-direction:column;align-items:flex-start}}
+
 </style>
 </head>
 <body>
 
-<header class="site">
-  <div class="wrap">
-    <a href="index.html" class="logo">
-      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="1" y="1" width="26" height="26" stroke="#8A9A5B" stroke-width="1.4"/><path d="M8 10.5C8 8.6 9.6 7 11.6 7C13.6 7 15.2 8.6 15.2 10.5C15.2 12.2 14 13.3 12.4 14.6L8.4 18V19.4H15.6" stroke="#F3F1EC" stroke-width="1.3" fill="none" stroke-linecap="round"/><path d="M18.5 8H20.5V19.4" stroke="#F3F1EC" stroke-width="1.3" fill="none" stroke-linecap="round"/></svg>
-      21studio
-    </a>
-    <nav class="main">
-      <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="agenti-fissi.html" class="current">Agenti Fissi</a>
-        <a href="contatti.html">Contatti</a>
+<header class="mh" id="mh">
+  <div class="mh-shell">
+    <div class="mh-bar">
+      <a href="index.html" class="mh-brand wm" aria-label="21studio, torna alla home">21STUDIO</a>
+      <nav class="mh-links" aria-label="Sezioni">
+        <a href="index.html#metodo">Come funziona</a>
+        <a href="index.html#trio">Cosa costruiamo</a>
+        <a href="index.html#strumenti">Strumenti</a>
+        <a href="index.html#dove">Dove gira</a>
+      </nav>
+      <div class="mh-dx">
+        <a class="mh-cta" href="contatti.html">
+          <span class="mh-cta-t">Prenota una call</span>
+          <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+        </a>
+        <button class="mh-tog" id="mhTog" type="button" aria-expanded="false" aria-controls="mhMenu" aria-label="Apri il menu">
+          <span aria-hidden="true"></span>
+        </button>
       </div>
-      <a href="contatti.html" class="btn btn-ghost">Prenota una call<span class="arrow">→</span></a>
-      <button class="nav-toggle" aria-label="Menu">☰</button>
-    </nav>
+    </div>
+    <div class="mh-menu" id="mhMenu" hidden>
+      <nav aria-label="Sezioni (menu)">
+        <a href="index.html#metodo">Come funziona</a>
+        <a href="index.html#trio">Cosa costruiamo</a>
+        <a href="index.html#strumenti">Strumenti</a>
+        <a href="index.html#dove">Dove gira</a>
+      </nav>
+      <a class="mh-cta mh-cta-big" href="contatti.html">
+        <span class="mh-cta-t">Prenota una call</span>
+        <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+      </a>
+    </div>
   </div>
 </header>
 
-<section class="page-hero">
+<main id="top">
+
+<section class="ph">
   <div class="wrap">
-    <div class="eyebrow reveal">Ingresso leggero</div>
-    <h1 class="reveal">Non un sistema intero. Un processo, <em>risolto</em>.</h1>
-    <p class="lede reveal">Gli Agenti Fissi sono moduli già costruiti e testati per un compito specifico — a prezzo fisso, attivi in pochi giorni. Non c'è co-progettazione: scegli l'agente, lo configuriamo sui tuoi dati, va in produzione.</p>
-    <div class="hero-cta reveal">
-      <a href="contatti.html" class="btn btn-primary">Richiedi un Agente Fisso<span class="arrow">→</span></a>
-    </div>
+    <span class="lab">Ingresso leggero</span>
+    <h1>Non un sistema intero. Un processo, <span class="em">risolto</span>.</h1>
+    <p class="lead">Gli Agenti Fissi sono moduli già costruiti e testati per un compito specifico — a prezzo fisso, attivi in pochi giorni. Non c'è co-progettazione: scegli l'agente, lo configuriamo sui tuoi dati, va in produzione.</p>
+    <div class="bs"><a class="b su" href="contatti.html"><i>Prenota una call</i></a><a class="b suv" href="#libreria"><i>Vedi i sei agenti</i><s>&darr;</s></a></div>
   </div>
 </section>
 
-<section class="tight">
+<section class="band soft" id="differenze">
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">In cosa differisce dalla Consulenza</div>
+    <div class="centro testa">
+      <span class="lab">In cosa differisce dalla Consulenza</span>
       <h2>Stesso standard di qualità, scope più piccolo, decisione più veloce.</h2>
     </div>
-    <div class="included-grid">
-      <div class="included-item reveal">
-        <h4>Un solo processo, non un'architettura</h4>
-        <p>La Consulenza coordina più agenti sulla tua azienda intera. Un Agente Fisso risolve un processo specifico e ben definito.</p>
-      </div>
-      <div class="included-item reveal">
-        <h4>Prezzo fisso, non a preventivo</h4>
-        <p>Sai il prezzo prima di scriverci. Nessuna call di scoping necessaria per iniziare.</p>
-      </div>
-      <div class="included-item reveal">
-        <h4>Giorni, non settimane</h4>
-        <p>Configurazione sui tuoi dati e go-live in pochi giorni lavorativi — non un progetto di co-progettazione esteso.</p>
-      </div>
-      <div class="included-item reveal">
-        <h4>Cresce quando vuoi tu</h4>
-        <p>Puoi fermarti a un Agente Fisso, sommarne altri, o farne il primo mattone di una Consulenza 1:1 più avanti — è tuo in ogni caso.</p>
-      </div>
+    <div class="diff">
+      <div class="card"><h3>Un solo processo, non un'architettura</h3><p class="body">La Consulenza coordina più agenti sulla tua azienda intera. Un Agente Fisso risolve un processo specifico e ben definito.</p></div>
+      <div class="card"><h3>Prezzo fisso, non a preventivo</h3><p class="body">Sai il prezzo prima di scriverci. Nessuna call di scoping necessaria per iniziare.</p></div>
+      <div class="card"><h3>Giorni, non settimane</h3><p class="body">Configurazione sui tuoi dati e go-live in pochi giorni lavorativi — non un progetto di co-progettazione esteso.</p></div>
+      <div class="card"><h3>Cresce quando vuoi tu</h3><p class="body">Puoi fermarti a un Agente Fisso, sommarne altri, o farne il primo mattone di una Consulenza 1:1 più avanti — è tuo in ogni caso.</p></div>
     </div>
   </div>
 </section>
 
-<hr class="divider">
-
-<section>
+<section class="band nera" id="libreria" data-scuro>
   <div class="wrap">
-    <div class="section-head reveal">
-      <div class="eyebrow">La libreria</div>
+    <div class="centro testa">
+      <span class="lab">La libreria</span>
       <h2>Sei agenti pronti. Scegli quello che ti fa risparmiare più ore, oggi.</h2>
     </div>
-    <div class="agents-grid" style="grid-template-columns: repeat(3,1fr);">
-      <div class="agent-card reveal" data-accent="gold">
-        <span class="cat-tag">Lead Generation</span>
-        <h4>Agente Lead Scraper</h4>
-        <p>Trova decine di lead locali con email e telefono da Google Maps ogni settimana, senza intervento manuale.</p>
-        <div class="price-row"><div class="price">€390 <span>una tantum</span></div><a href="contatti.html">Richiedi →</a></div>
-      </div>
-      <div class="agent-card reveal" data-accent="green">
-        <span class="cat-tag">Sales Research</span>
-        <h4>Agente Company Briefing</h4>
-        <p>Un briefing AI su ogni azienda con cui hai una call, pronto in automatico prima di ogni incontro.</p>
-        <div class="price-row"><div class="price">€290 <span>una tantum</span></div><a href="contatti.html">Richiedi →</a></div>
-      </div>
-      <div class="agent-card reveal" data-accent="purple">
-        <span class="cat-tag">Content</span>
-        <h4>Agente Content Repurposing</h4>
-        <p>Trasforma un contenuto in più formati per i social e li pubblica in automatico, senza editing manuale.</p>
-        <div class="price-row"><div class="price">€490 <span>una tantum</span></div><a href="contatti.html">Richiedi →</a></div>
-      </div>
-      <div class="agent-card reveal" data-accent="green">
-        <span class="cat-tag">Voice AI</span>
-        <h4>Agente Reception Vocale</h4>
-        <p>Risponde al telefono, prenota appuntamenti e gestisce il calendario 24/7 — anche fuori orario.</p>
-        <div class="price-row"><div class="price">€590 <span>una tantum</span></div><a href="contatti.html">Richiedi →</a></div>
-      </div>
-      <div class="agent-card reveal" data-accent="gold">
-        <span class="cat-tag">Operations</span>
-        <h4>Agente Follow-up Preventivi</h4>
-        <p>Segue automaticamente ogni preventivo inviato finché il cliente non risponde — nessun lead dimenticato.</p>
-        <div class="price-row"><div class="price">€350 <span>una tantum</span></div><a href="contatti.html">Richiedi →</a></div>
-      </div>
-      <div class="agent-card reveal" data-accent="purple">
-        <span class="cat-tag">Client Retention</span>
-        <h4>Agente Recensioni</h4>
-        <p>Richiede automaticamente recensioni Google dopo ogni acquisto e instrada i clienti insoddisfatti in privato.</p>
-        <div class="price-row"><div class="price">€290 <span>una tantum</span></div><a href="contatti.html">Richiedi →</a></div>
-      </div>
+    <div class="lib">
+      <article class="card ag">
+        <span class="lab">Lead Generation</span>
+        <h3>Agente Lead Scraper</h3>
+        <p class="body">Trova decine di lead locali con email e telefono da Google Maps ogni settimana, senza intervento manuale.</p>
+        <div class="prezzo"><b>€390<span>una tantum</span></b><a href="contatti.html">Richiedi &rarr;</a></div>
+      </article>
+      <article class="card ag">
+        <span class="lab">Sales Research</span>
+        <h3>Agente Company Briefing</h3>
+        <p class="body">Un briefing AI su ogni azienda con cui hai una call, pronto in automatico prima di ogni incontro.</p>
+        <div class="prezzo"><b>€290<span>una tantum</span></b><a href="contatti.html">Richiedi &rarr;</a></div>
+      </article>
+      <article class="card ag">
+        <span class="lab">Content</span>
+        <h3>Agente Content Repurposing</h3>
+        <p class="body">Trasforma un contenuto in più formati per i social e li pubblica in automatico, senza editing manuale.</p>
+        <div class="prezzo"><b>€490<span>una tantum</span></b><a href="contatti.html">Richiedi &rarr;</a></div>
+      </article>
+      <article class="card ag">
+        <span class="lab">Voice AI</span>
+        <h3>Agente Reception Vocale</h3>
+        <p class="body">Risponde al telefono, prenota appuntamenti e gestisce il calendario 24/7 — anche fuori orario.</p>
+        <div class="prezzo"><b>€590<span>una tantum</span></b><a href="contatti.html">Richiedi &rarr;</a></div>
+      </article>
+      <article class="card ag">
+        <span class="lab">Operations</span>
+        <h3>Agente Follow-up Preventivi</h3>
+        <p class="body">Segue automaticamente ogni preventivo inviato finché il cliente non risponde — nessun lead dimenticato.</p>
+        <div class="prezzo"><b>€350<span>una tantum</span></b><a href="contatti.html">Richiedi &rarr;</a></div>
+      </article>
+      <article class="card ag">
+        <span class="lab">Client Retention</span>
+        <h3>Agente Recensioni</h3>
+        <p class="body">Richiede automaticamente recensioni Google dopo ogni acquisto e instrada i clienti insoddisfatti in privato.</p>
+        <div class="prezzo"><b>€290<span>una tantum</span></b><a href="contatti.html">Richiedi &rarr;</a></div>
+      </article>
     </div>
   </div>
 </section>
 
-<hr class="divider">
-
-<section>
+<section class="band">
   <div class="wrap">
-    <div class="pilot reveal">
+    <div class="card top pilot">
       <div>
         <h3>Non trovi il processo che ti serve?</h3>
-        <p>La libreria cresce. Scrivici il processo che vuoi automatizzare — se non esiste ancora come Agente Fisso, lo valutiamo per la Consulenza 1:1.</p>
+        <p class="body">La libreria cresce. Scrivici il processo che vuoi automatizzare — se non esiste ancora come Agente Fisso, lo valutiamo per la Consulenza 1:1.</p>
       </div>
-      <a href="contatti.html" class="btn btn-primary">Scrivici il tuo caso<span class="arrow">→</span></a>
+      <a class="b su" href="contatti.html"><i>Prenota una call</i><s>&rarr;</s></a>
     </div>
   </div>
 </section>
 
-<section class="final-cta">
+<section class="band fine">
   <div class="wrap">
-    <h2 class="reveal">Un processo automatizzato questa settimana.</h2>
-    <p class="lede reveal">Scegli l'Agente Fisso giusto per te — lo configuriamo sui tuoi dati e va in produzione in pochi giorni.</p>
-    <div class="hero-cta reveal"><a href="contatti.html" class="btn btn-primary">Richiedi un Agente Fisso<span class="arrow">→</span></a></div>
+    <span class="lab">Il primo passo</span>
+    <h2>Un processo automatizzato questa settimana.</h2>
+    <p class="body">Scegli l'Agente Fisso giusto per te — lo configuriamo sui tuoi dati e va in produzione in pochi giorni.</p>
+    <div class="bs"><a class="b su" href="contatti.html"><i>Prenota una call</i><s>&rarr;</s></a></div>
   </div>
 </section>
 
-<footer class="site">
+</main>
+
+<footer class="ft">
   <div class="wrap">
-    <div class="footer-grid">
-      <div>
-        <a href="index.html" class="logo" style="margin-bottom:16px; display:inline-flex;">21studio</a>
-        <p style="max-width:32ch;">Sistemi di agenti AI su misura per PMI italiane.</p>
-        <p style="margin-top:12px"><a class="ig" href="https://instagram.com/21studio.io" target="_blank" rel="noopener">Instagram <s>&#8599;</s></a></p>
+    <div class="ft-card">
+      <div class="ft-top">
+        <div class="ft-brand">
+          <a href="index.html" class="wm" aria-label="21studio, torna alla home">21STUDIO</a>
+          <p>Reparti AI su misura per PMI italiane.</p>
+          <a href="mailto:info@21studio.io">info@21studio.io</a>
+        </div>
+        <nav class="ft-col" aria-label="Sito">
+          <h3>Sito</h3>
+          <ul>
+            <li><a href="index.html#metodo">Come funziona</a></li>
+            <li><a href="index.html#trio">Cosa costruiamo</a></li>
+            <li><a href="index.html#strumenti">Strumenti</a></li>
+            <li><a href="index.html#dove">Dove gira</a></li>
+          </ul>
+        </nav>
+        <nav class="ft-col" aria-label="Offerta">
+          <h3>Offerta</h3>
+          <ul>
+            <li><a href="agenti-fissi.html">Agenti Fissi</a></li>
+            <li><a href="piano-di-mantenimento.html">Piano di mantenimento</a></li>
+          </ul>
+        </nav>
+        <nav class="ft-col" aria-label="Contatti">
+          <h3>Contatti</h3>
+          <ul>
+            <li><a href="contatti.html">Prenota una call</a></li>
+            <li><a href="mailto:info@21studio.io">info@21studio.io</a></li>
+          </ul>
+        </nav>
       </div>
-      <div>
-        <h5>Servizi</h5>
-        <a href="agenti-fissi.html">Agenti Fissi</a>
+      <!-- TODO: aggiungere i link a Privacy e Termini quando le pagine esisteranno -->
+      <div class="ft-bot">
+        <a class="ft-ig" href="https://instagram.com/21studio.io" target="_blank" rel="noopener" aria-label="Instagram di 21studio">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <small>&copy; 2026 21studio. Tutti i diritti riservati.</small>
       </div>
-      <div><h5>Studio</h5><a href="contatti.html">Contatti</a></div>
-      <div><h5>Contatti</h5><a href="contatti.html">Scrivici →</a></div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 21studio. Tutti i diritti riservati.</span>
-      <span>Italia</span>
     </div>
   </div>
+  <span class="ft-big wm" aria-hidden="true">21STUDIO</span>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-<script src="main.js"></script>
+<script>
+/* giro 5: snippet header-mez */
+/* Header a pillola — giro 5. Stato allo scroll, fasce scure, menu mobile accessibile. */
+(function(){
+  var mh=document.getElementById('mh');
+  if(!mh) return;
+  var tog=document.getElementById('mhTog');
+  var menu=document.getElementById('mhMenu');
+  var RID=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 1. scroll: pillola più stretta + bordo acceso sopra le fasce nere */
+  /* nella versione bianca le sole fasce nere sono #sistema e #trio */
+  var SCURE='#sistema,section#trio.ccp,[data-scuro]';
+  var scure=[].slice.call(document.querySelectorAll(SCURE));
+  var tick=false;
+  function aggiorna(){
+    tick=false;
+    mh.classList.toggle('is-scrolled', scrollY>24);
+    var y=mh.querySelector('.mh-shell').getBoundingClientRect();
+    var mid=y.top+y.height/2;
+    mh.classList.toggle('su-scuro', scure.some(function(s){var r=s.getBoundingClientRect();return r.top<=mid && r.bottom>=mid}));
+  }
+  function suScroll(){ if(!tick){tick=true;requestAnimationFrame(aggiorna)} }
+  aggiorna();
+  addEventListener('scroll',suScroll,{passive:true});
+  addEventListener('resize',suScroll,{passive:true});
+
+  /* 2. menu mobile */
+  var chiudiTimer;
+  function apri(){
+    clearTimeout(chiudiTimer);
+    menu.hidden=false;
+    tog.setAttribute('aria-expanded','true');
+    tog.setAttribute('aria-label','Chiudi il menu');
+    requestAnimationFrame(function(){ mh.classList.add('is-open') });
+    var primo=menu.querySelector('a');
+    if(primo) primo.focus({preventScroll:true});
+  }
+  function chiudi(rimettiFocus){
+    if(tog.getAttribute('aria-expanded')!=='true') return;
+    mh.classList.remove('is-open');
+    tog.setAttribute('aria-expanded','false');
+    tog.setAttribute('aria-label','Apri il menu');
+    chiudiTimer=setTimeout(function(){ menu.hidden=true }, RID?0:450);
+    if(rimettiFocus) tog.focus({preventScroll:true});
+  }
+  tog.addEventListener('click',function(){
+    tog.getAttribute('aria-expanded')==='true' ? chiudi(false) : apri();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape' && tog.getAttribute('aria-expanded')==='true'){ e.preventDefault(); chiudi(true); }
+  });
+  /* clic su un link del menu o fuori dalla pillola: chiude */
+  menu.addEventListener('click',function(e){ if(e.target.closest('a')) chiudi(false) });
+  document.addEventListener('pointerdown',function(e){ if(!mh.contains(e.target)) chiudi(false) });
+  /* il focus esce dalla pillola con Tab: chiude */
+  mh.addEventListener('focusout',function(e){ if(e.relatedTarget && !mh.contains(e.relatedTarget)) chiudi(false) });
+  /* tornando a desktop il menu non resta aperto */
+  matchMedia('(min-width: 901px)').addEventListener('change',function(m){ if(m.matches) chiudi(false) });
+})();
+</script>
+
 </body>
 </html>
