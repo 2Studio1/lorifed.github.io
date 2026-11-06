@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fiorìa · bibite botaniche di Sicilia · Concept di 21studio</title>
+<meta name="description" content="Concept dimostrativo di 21studio: e-commerce di bibite botaniche con lattina 3D, gusti, pagina prodotto e carrello. Marchio inventato, non un cliente reale.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#F2D75C">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.min.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script type="module" src="main.js"></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-lemon" viewBox="0 0 100 100"><path fill="var(--c1)" d="M50 10c21 0 37 15 40 34 1 6 7 7 7 11s-6 4-8 10c-6 17-21 27-39 27S17 82 11 65c-2-6-8-6-8-10s6-5 7-11c3-19 19-34 40-34z"/><path fill="#fff" opacity=".35" d="M30 30c6-7 14-10 22-10-9 4-15 10-18 18z"/></symbol>
+    <symbol id="i-slice" viewBox="0 0 100 100"><circle cx="50" cy="50" r="46" fill="var(--c1)"/><circle cx="50" cy="50" r="39" fill="#FFF8DC"/><g fill="var(--c1)" opacity=".85"><path d="M50 50 50 15A35 35 0 0 1 74.7 25.3z"/><path d="M50 50 79 37A35 35 0 0 1 84 59z"/><path d="M50 50 81 66A35 35 0 0 1 64 82z"/><path d="M50 50 55 85A35 35 0 0 1 32 80z"/><path d="M50 50 26 74A35 35 0 0 1 16 52z"/><path d="M50 50 16 42A35 35 0 0 1 30 21z"/><path d="M50 50 38 17A35 35 0 0 1 47 15z"/></g></symbol>
+    <symbol id="i-leaf" viewBox="0 0 100 100"><path fill="var(--c2)" d="M8 92C8 42 40 8 92 8c0 52-34 84-84 84z"/><path fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="3" stroke-linecap="round" d="M14 86 80 20M40 60l-4-20M52 48l-3-18M40 60l20 3M52 48l18 2"/></symbol>
+    <symbol id="i-flower" viewBox="0 0 100 100"><g fill="var(--c3)"><circle cx="50" cy="22" r="20"/><circle cx="77" cy="42" r="20"/><circle cx="67" cy="74" r="20"/><circle cx="33" cy="74" r="20"/><circle cx="23" cy="42" r="20"/></g><circle cx="50" cy="52" r="13" fill="#fff"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 100 100"><path fill="var(--c4)" d="M50 2l8 20 18-12-2 22 22-2-12 18 20 8-20 8 12 18-22-2 2 22-18-12-8 20-8-20-18 12 2-22-22 2 12-18L2 50l20-8-12-18 22 2-2-22 18 12z"/><circle cx="50" cy="50" r="17" fill="#fff" opacity=".35"/></symbol>
+    <symbol id="i-sprig" viewBox="0 0 100 100"><path fill="none" stroke="var(--c2)" stroke-width="4" stroke-linecap="round" d="M20 92Q48 52 84 10"/><g fill="var(--c2)"><ellipse cx="32" cy="72" rx="4" ry="12" transform="rotate(-60 32 72)"/><ellipse cx="38" cy="66" rx="4" ry="12" transform="rotate(30 38 66)"/><ellipse cx="48" cy="54" rx="4" ry="12" transform="rotate(-60 48 54)"/><ellipse cx="54" cy="48" rx="4" ry="12" transform="rotate(30 54 48)"/><ellipse cx="64" cy="36" rx="4" ry="12" transform="rotate(-60 64 36)"/><ellipse cx="70" cy="28" rx="4" ry="11" transform="rotate(30 70 28)"/><ellipse cx="80" cy="16" rx="4" ry="10" transform="rotate(-60 80 16)"/></g></symbol>
+    <symbol id="i-cloud" viewBox="0 0 100 100"><path fill="#fff" d="M22 72c-11 0-18-8-18-17s8-17 18-16c2-13 12-22 25-22 12 0 21 7 24 18 2-1 5-1 7-1 11 0 18 8 18 19s-8 19-19 19z"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip" href="#gusti">Salta ai gusti</a>
+
+<div class="top" data-top>
+  <div class="cbar"><span>Concept dimostrativo di 21studio · marchio inventato</span><a href="../../servizi/siti-web.html">← Torna a Siti web</a></div>
+  <header class="nav">
+    <a class="logo" href="#" aria-label="Fiorìa, torna su">Fiorìa</a>
+    <nav aria-label="Principale">
+      <a class="pill mag" href="#gusti">Negozio</a>
+      <a class="pill mag" href="#storia">La bibita</a>
+      <a class="pill mag" href="#abbonamento">Abbonamento</a>
+    </nav>
+    <button class="cart-btn pill mag" type="button" data-open-cart aria-label="Apri il carrello, 0 articoli"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2.4l2.2 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L21 8H6.3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg><b data-count>0</b></button>
+  </header>
+</div>
+
+<canvas class="stage" aria-hidden="true"></canvas>
+
+<main>
+  <section class="hero" aria-label="I gusti di Fiorìa">
+    <div class="deco" data-deco aria-hidden="true"></div>
+    <h1 class="sr">Fiorìa, bibite botaniche bio di Sicilia</h1>
+    <div class="hero-ui">
+      <button class="round mag" type="button" data-prev aria-label="Gusto precedente"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <button class="flav mag" type="button" data-open-product aria-live="polite"><span class="flav-n" data-flav-num>01</span><span class="flav-t" data-flav-name>Limone &amp; Basilico</span><span class="flav-c">Scopri</span></button>
+      <button class="round mag" type="button" data-next aria-label="Gusto successivo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+    <p class="hint" aria-hidden="true">Scorri</p>
+  </section>
+
+  <section class="storia" id="storia" aria-labelledby="storia-t">
+    <svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0h1440v40c-120 50-240 70-360 46S840 6 720 10 480 70 360 74 120 40 0 60z"/></svg>
+    <div class="storia-pin">
+      <h2 id="storia-t" class="storia-h"><span>Fiorìa? Bibita botanica?</span><span>Di cosa parliamo?</span></h2>
+      <p class="storia-s">(ve lo diciamo come lo diremmo a un amico)</p>
+      <div class="cards">
+        <article class="card"><span class="card-k">18% di succo</span><h3>Agrumi veri, spremuti a Ribera</h3><p>Niente aromi da laboratorio: il gusto arriva dal frutto e da una foglia fresca.</p><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-slice"/></svg></article>
+        <article class="card"><span class="card-k">4,2 g di zuccheri</span><h3>Dolce quanto basta</h3><p>Ogni 100 ml. Zucchero di canna bio, una parte di quello di una bibita classica.</p><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-flower"/></svg></article>
+        <article class="card"><span class="card-k">Bollicine fini</span><h3>Gassata piano, beva lunga</h3><p>Anidride carbonica leggera, da bere a temperatura di cantina o con tanto ghiaccio.</p><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#i-leaf"/></svg></article>
+      </div>
+      <div class="bubbles" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="curve" aria-label="Solo agrumi veri">
+    <svg viewBox="0 0 1440 520" aria-hidden="true"><path id="curva" fill="none" d="M-80 380C240 100 520 120 760 260s520 160 780-60"/><text><textPath href="#curva" startOffset="0%" data-curve>SOLO AGRUMI VERI · RACCOLTI A MANO · SOLO AGRUMI VERI ·</textPath></text></svg>
+    <p class="sr">Solo agrumi veri, raccolti a mano.</p>
+  </section>
+
+  <section class="gusti" id="gusti" aria-labelledby="gusti-t">
+    <div class="gusti-head">
+      <h2 id="gusti-t">I gusti</h2>
+      <p>Box da 6, 12 o 24 lattine da 330 ml. Spedizione in 48 ore in tutta Italia.</p>
+    </div>
+    <ul class="tiles" data-tiles></ul>
+  </section>
+
+  <section class="abbo" id="abbonamento" aria-labelledby="abbo-t">
+    <div class="badge" aria-hidden="true"><svg viewBox="0 0 200 200"><path id="cerchio" fill="none" d="M100 100m-78 0a78 78 0 1 1 156 0a78 78 0 1 1-156 0"/><text><textPath href="#cerchio">ABBONATI · RISPARMI IL 10% · DISDICI QUANDO VUOI · </textPath></text></svg><svg class="badge-in" viewBox="0 0 100 100"><use href="#i-sun"/></svg></div>
+    <h2 id="abbo-t" class="abbo-h"><span class="w">Non</span> <span class="w">la</span> <span class="w">berresti</span> <span class="w">ogni</span> <span class="w it">giorno?</span><br><span class="w">Noi</span> <span class="w it">sì.</span></h2>
+    <p class="abbo-p">Scegli gusti e frequenza: ogni 2, 4 o 8 settimane. Il 10% in meno su ogni box, e la spedizione è sempre gratis.</p>
+    <button class="btn mag" type="button" data-open-product data-sub>Crea il tuo abbonamento</button>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="foot-cols">
+    <div><p class="foot-k">Fiorìa</p><p>Bibite botaniche bio<br>Ribera (AG), Sicilia</p></div>
+    <div><p class="foot-k">Negozio</p><a href="#gusti">I gusti</a><a href="#abbonamento">Abbonamento</a><button type="button" data-open-cart>Carrello</button></div>
+    <div><p class="foot-k">Questa demo</p><p>Marchio, testi e prezzi sono inventati. Il carrello non invia dati.</p><a href="../../servizi/siti-web.html">← Torna a Siti web</a></div>
+  </div>
+  <p class="foot-word" aria-hidden="true"><span>F</span><span>i</span><span>o</span><span>r</span><span>ì</span><span>a</span></p>
+</footer>
+
+<!-- pagina prodotto -->
+<div class="pdp" data-pdp role="dialog" aria-modal="true" aria-labelledby="pdp-t" hidden>
+  <div class="pdp-media"><img data-pdp-img alt=""><div class="deco pdp-deco" aria-hidden="true"></div></div>
+  <div class="pdp-info">
+    <button class="close mag" type="button" data-close-pdp aria-label="Chiudi la scheda prodotto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <p class="pdp-k">Bibita botanica bio · lattina 330 ml</p>
+    <h2 id="pdp-t" data-pdp-name>Limone &amp; Basilico</h2>
+    <p class="pdp-d" data-pdp-desc></p>
+    <fieldset class="opt"><legend>Gusto</legend><div class="sw" data-sw></div></fieldset>
+    <fieldset class="opt"><legend>Formato</legend><div class="sizes" data-sizes></div></fieldset>
+    <fieldset class="opt"><legend>Acquisto</legend>
+      <div class="buy-mode">
+        <label><input type="radio" name="mode" value="una" checked><span>Una volta</span></label>
+        <label><input type="radio" name="mode" value="abbo"><span>Abbonamento <em>−10%</em></span></label>
+      </div>
+    </fieldset>
+    <div class="pdp-buy">
+      <div class="qty"><button type="button" data-q="-1" aria-label="Diminuisci quantità">−</button><output data-qty aria-live="polite">1</output><button type="button" data-q="1" aria-label="Aumenta quantità">+</button></div>
+      <button class="btn add mag" type="button" data-add><span>Aggiungi</span><b data-pdp-price>28,00 €</b></button>
+    </div>
+    <details><summary>Ingredienti</summary><p data-pdp-ingr></p></details>
+    <details><summary>Valori nutrizionali per 100 ml</summary><p>Energia 19 kcal · Grassi 0 g · Carboidrati 4,6 g, di cui zuccheri 4,2 g · Proteine 0 g · Sale 0,01 g</p></details>
+  </div>
+</div>
+<div class="bubble-wipe" aria-hidden="true"></div>
+
+<!-- carrello -->
+<div class="scrim" data-scrim hidden></div>
+<aside class="cart" data-cart role="dialog" aria-modal="true" aria-labelledby="cart-t" hidden>
+  <div class="cart-h"><h2 id="cart-t">Carrello</h2><button class="close mag" type="button" data-close-cart aria-label="Chiudi il carrello"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button></div>
+  <div class="ship"><p data-ship>Ti mancano 35,00 € per la spedizione gratuita</p><div class="ship-bar"><i data-ship-bar></i></div></div>
+  <ul class="lines" data-lines></ul>
+  <p class="empty" data-empty>Il carrello è vuoto. Un gusto da provare c'è sempre.</p>
+  <div class="cart-f">
+    <p class="tot"><span>Totale</span><b data-total>0,00 €</b></p>
+    <button class="btn wide mag" type="button" data-checkout>Vai al pagamento</button>
+    <p class="note" data-note role="status">Demo: il pagamento è disattivato e nessun dato viene inviato.</p>
+  </div>
+</aside>
+</body>
+</html>

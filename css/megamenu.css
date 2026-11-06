@@ -1,0 +1,106 @@
+/* Mega-menu "Agents" dell'header (pattern: orbitagents.com, voce Agents: griglia di agenti a 2 colonne + riquadro Featured a destra).
+   Solo desktop (>=901px): sotto, .mh-links e' nascosto e resta il menu mobile. Stato aperto: .mm.is-open, gestito da js/megamenu.js. */
+
+.mh .mm{display:flex}
+.mh-links .mm-a{display:inline-flex;align-items:center;gap:6px;padding:0;border:0;background:none;cursor:pointer;
+  font:inherit;font-size:12.5px;font-weight:450;letter-spacing:-.01em;color:var(--mh-fg-2);transition:color .25s ease}
+.mm-a svg{width:9px;height:6px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.75;
+  transition:transform .25s var(--mh-out)}
+.mm-a:hover,.mm.is-open .mm-a{color:var(--mh-fg)}
+.mm.is-open .mm-a svg{transform:rotate(180deg)}
+
+/* pannello: centrato sotto la pillola; il padding in alto fa da ponte per il mouse */
+.mm-p{position:absolute;top:100%;left:50%;width:min(900px,calc(100vw - 32px));padding-top:10px;
+  opacity:0;visibility:hidden;transform:translate(-50%,-6px);
+  transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s}
+.mm.is-open .mm-p{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+.mm-in{display:grid;grid-template-columns:minmax(0,1fr) 272px;gap:10px;padding:10px;
+  background:var(--mh-bg);border:1px solid var(--mh-line);border-radius:28px;
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.8),0 10px 30px -18px rgba(0,0,0,.4)}
+
+/* sinistra: agenti */
+.mm-sx{display:flex;flex-direction:column;min-width:0}
+.mm-ag{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px}
+.mm-ag li{min-width:0}
+.mh-links .mm-ag a{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;white-space:normal;
+  color:var(--mh-fg);transition:background-color .2s ease}
+.mh-links .mm-ag a:hover,.mh-links .mm-ag a:focus-visible{background:rgba(255,255,255,.07)}
+.mm-t{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mm-t b{font-size:13.5px;font-weight:600;letter-spacing:-.015em;line-height:1.3;color:var(--mh-fg)}
+.mm-t span{font-size:12.5px;line-height:1.4;color:rgba(245,245,242,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mh-links a.mm-tutti{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding:14px 12px 6px;
+  border-top:1px solid var(--mh-line);font-size:13px;font-weight:600;color:var(--mh-fg)}
+.mh-links a.mm-tutti:hover span{transform:translate(2px,-2px)}
+.mm-tutti span{transition:transform .2s ease;color:var(--mh-fg-2)}
+
+/* bollino dell'agente: stessa ricetta di .orb in _agenti/servizi.css (sfera del reparto + sigillo con le iniziali) */
+.mm .orb{--o1:#D7E08F;--o2:#7C8A3C;--o3:#26310F;--o4:#EEF3B8;--o5:#4E6A2A;--s:38px;
+  position:relative;display:inline-grid;place-items:center;width:var(--s);height:var(--s);flex:none;border-radius:50%;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(ellipse 60% 44% at 26% 22%,color-mix(in srgb,var(--o4) 70%,transparent) 0,transparent 70%),
+    radial-gradient(ellipse 54% 60% at 80% 78%,var(--o3) 0,transparent 72%),
+    radial-gradient(ellipse 70% 50% at 60% 52%,var(--o5) 0,transparent 75%),
+    radial-gradient(circle at 42% 40%,var(--o1) 0,var(--o2) 58%,color-mix(in srgb,var(--o2) 60%,var(--o3)) 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset -4px -7px 16px rgba(0,0,0,.22)}
+.mm .orb::after{content:"";position:absolute;inset:0;z-index:1;border-radius:50%;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:90px 90px}
+.mm .orb svg{position:relative;z-index:2;width:42%;height:42%;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.25))}
+.mm .orb svg .pt{stroke-width:3}
+.mm .orb[data-o="1"]{--o1:#A9BC4A;--o2:#5D7022;--o3:#1B2608;--o4:#DCE88A;--o5:#84A030}
+.mm .orb[data-o="2"]{--o1:#C9C243;--o2:#8A8320;--o3:#2A2606;--o4:#F0E890;--o5:#A9B238}
+.mm .orb[data-o="3"]{--o1:#82AA88;--o2:#3F6A4C;--o3:#0E2216;--o4:#C6E3C4;--o5:#5E9470}
+.mm .orb[data-o="4"]{--o1:#8CC7A6;--o2:#3F8466;--o3:#0D2A1E;--o4:#D2F0DD;--o5:#6DB896}
+.mm .orb[data-o="5"]{--o1:#8A9A45;--o2:#3C4A18;--o3:#0D1306;--o4:#C3CF7A;--o5:#5E6E26}
+.mm .orb[data-o="6"]{--o1:#6FAFA2;--o2:#2F6B62;--o3:#0A1F1C;--o4:#BFE5DA;--o5:#4F978A}
+.mm .orb[data-o="7"]{--o1:#BBAE62;--o2:#75692C;--o3:#221D08;--o4:#E9DEA2;--o5:#998D45}
+.mm .orb[data-o="8"]{--o1:#B7C17E;--o2:#3D5A26;--o3:#0A1607;--o4:#E2EBA8;--o5:#7F9A45}
+.mm .orb-w{position:relative;display:inline-flex;flex:none}
+.mm .orb-w>b{position:absolute;right:-3px;bottom:-3px;z-index:3;display:grid;place-items:center;width:17px;height:17px;
+  border-radius:50%;background:#fff;color:#1A1C17;font-family:"Geist","Inter",sans-serif;font-size:8.5px;font-weight:700;letter-spacing:-.04em;line-height:1;
+  box-shadow:0 0 0 2px var(--mh-bg)}
+
+/* destra: Featured (gradiente nei toni delle sfere) + piani mensili */
+.mm-dx{display:flex;flex-direction:column;gap:10px}
+.mh-links a.mm-feat{position:relative;flex:1;display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:20px;border-radius:20px;
+  white-space:normal;color:#fff;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(ellipse 85% 60% at 90% 105%,rgba(220,232,138,.55),transparent 70%),
+    radial-gradient(ellipse 70% 55% at 0% 100%,rgba(140,199,166,.45),transparent 70%),
+    linear-gradient(165deg,#24361A 0%,#3D5A26 45%,#2F6B62 100%)}
+.mm-feat::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.35;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.mm-k{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.78)}
+.mm-feat b{font-family:"Geist","Inter",sans-serif;font-size:19px;font-weight:650;letter-spacing:-.03em;line-height:1.15}
+.mm-d{font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.82)}
+.mm-feat .mh-orbs{margin-top:4px}
+.mm-pr{margin-top:auto;font-family:"Geist","Inter",sans-serif;font-size:24px;font-weight:650;letter-spacing:-.03em}
+.mm-pr small{font-family:"Inter",sans-serif;font-size:12.5px;font-weight:450;letter-spacing:0;color:rgba(255,255,255,.8)}
+.mm-go{font-size:13px;font-weight:600}
+.mm-go span{display:inline-block;transition:transform .2s ease}
+.mm-feat:hover .mm-go span{transform:translate(2px,-2px)}
+.mh-links a.mm-mese{position:relative;display:flex;flex-direction:column;gap:3px;padding:14px 44px 14px 16px;border-radius:18px;white-space:normal;
+  color:var(--mh-fg);background:rgba(255,255,255,.05);border:1px solid var(--mh-line);transition:background-color .2s ease}
+.mh-links a.mm-mese:hover{background:rgba(255,255,255,.09)}
+.mm-mese .mm-k{font-size:12px;color:#B7C17E}
+.mm-mese b{font-size:14px;font-weight:600;letter-spacing:-.015em}
+.mm-mese .mm-d{color:var(--mh-fg-2)}
+.mm-fr{position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--mh-fg-2);transition:transform .2s ease}
+.mm-mese:hover .mm-fr{transform:translate(3px,-50%)}
+.mh .mm-p a:focus-visible{outline:2px solid #B7C17E;outline-offset:2px;border-radius:16px}
+
+@media (max-width:1060px){.mm-in{grid-template-columns:minmax(0,1fr) 236px}}
+@media (prefers-reduced-motion:reduce){.mm-p,.mm.is-open .mm-p{transform:translate(-50%,0)}}
+
+/* selettore lingua EN · IT: nella barra da 601px in su, dentro il menu su mobile */
+.mh-lang{display:inline-flex;align-items:center;flex:none;padding:3px;border:1px solid var(--mh-line-2);border-radius:999px;
+  font-size:11.5px;font-weight:600;letter-spacing:.04em}
+.mh-lang>*{display:grid;place-items:center;min-width:34px;height:30px;padding:0 8px;border-radius:999px;color:var(--mh-fg-2);text-decoration:none;
+  transition:color .2s ease,background-color .2s ease}
+.mh-lang [aria-current]{background:rgba(255,255,255,.12);color:var(--mh-fg)}
+.mh-lang a:hover{color:var(--mh-fg)}
+.mh-lang-m{justify-self:start;margin:10px 16px 0}
+.mh-lang-m>*{min-width:52px;height:40px;font-size:13px}
+@media (max-width:600px){.mh-bar .mh-lang{display:none}}
+/* footer su mobile: link alti abbastanza da toccare col pollice */
+@media (max-width:600px){.ft-col a{display:inline-block;padding:8px 0}}

@@ -1,0 +1,120 @@
+/* Home, "Come funziona" in tre passi (#how-it-works).
+   Animazione: stessi tempi e curva della sezione how-it-works di skilltreeos.ai
+   (vedi note-design.md). Solo transform/opacity/stroke-dashoffset. */
+#how-it-works{--pa-ease:cubic-bezier(.2,.7,.2,1);background:#FFFFFF}
+
+/* entrata a scorrimento: attiva solo se il JS aggiunge .pa-js */
+.pa-js .pa-rv{opacity:0;transform:translateY(22px);
+  transition:opacity .9s var(--pa-ease) var(--d,0s),transform .9s var(--pa-ease) var(--d,0s)}
+.pa-js .pa-rv.in{opacity:1;transform:none}
+
+.pa-steps{list-style:none;margin:clamp(48px,6vw,84px) 0 0;padding:0;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.5vw,20px)}
+.pa-step{position:relative;border:1px solid var(--hair);border-radius:var(--r-l);background:#FFFFFF;
+  overflow:hidden;box-shadow:var(--alza)}
+.pa-anchor{position:absolute;top:-110px}
+.pa-vis{position:relative;height:270px;border-bottom:1px solid var(--hair);overflow:hidden;
+  background:radial-gradient(80% 75% at 50% 62%,#FFFFFF,#F2F2EE 78%)}
+.pa-body{padding:clamp(20px,2vw,26px) clamp(20px,2vw,26px) clamp(24px,2.4vw,30px)}
+.pa-n{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;
+  border:1px solid rgba(26,28,23,.2);font-family:var(--mono);font-size:11px;color:var(--ink-2);margin-bottom:14px}
+.pa-step h3{font-size:clamp(1.12rem,1.5vw,1.3rem);font-weight:600;letter-spacing:-.02em;line-height:1.25;margin:0 0 .5rem}
+.pa-step p{margin:0;font-size:.94rem;line-height:1.58;color:var(--ink-2)}
+.pa-nota{margin:clamp(28px,3vw,40px) auto 0;text-align:center;max-width:62ch}
+.pa-nota b{color:var(--ink);font-weight:600}
+
+/* didascalia in alto a sinistra di ogni visual */
+.pa-cap{position:absolute;left:16px;top:13px;z-index:2;display:flex;flex-direction:column;gap:3px}
+.pa-cap b{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.pa-count{font-size:13px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+
+/* ---- 1. mappa radiale ---- */
+.pa-gr{position:absolute;left:0;right:0;bottom:8px;width:100%;height:calc(100% - 52px)}
+.pa-ghost path{fill:none;stroke:var(--ink);stroke-opacity:.13;stroke-width:1.4;stroke-linecap:round}
+.pa-b{fill:none;stroke:var(--acc);stroke-width:1.7;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;
+  transition:stroke-dashoffset .5s var(--pa-ease)}
+.pa-d circle{fill:var(--acc);opacity:0;transition:opacity .3s .3s}
+.pa-d text{font-family:var(--mono);font-size:9px;letter-spacing:.14em;fill:var(--ink-3);opacity:.45;transition:opacity .3s .25s,fill .3s}
+.pa-d.on .pa-b{stroke-dashoffset:0}
+.pa-d.on circle{opacity:1}
+.pa-d.on text{opacity:1;fill:var(--acc)}
+.pa-d.cur text{fill:var(--ink)}
+.pa-core{fill:var(--acc)}
+.pa-halo{fill:var(--fill);opacity:.45}
+
+/* ---- 2. collegamenti ---- */
+.pa-oc-in{position:absolute;inset:44px 14px 14px 14px;display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:10px;align-items:center}
+.pa-list{display:grid;gap:6px;min-width:0}
+.pa-row{display:flex;align-items:center;gap:9px;height:40px;padding:0 6px 0 7px;border-radius:11px;
+  border:1px solid var(--hair);background:#FFFFFF;transition:border-color .3s}
+.pa-logo{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;
+  background:#F5F5F2;border:1px solid var(--hair)}
+.pa-logo svg{width:14px;height:14px}
+.pa-row b{flex:1;min-width:0;font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pa-btn{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:5px;height:26px;min-width:94px;padding:0 10px;
+  border-radius:999px;font-size:11.5px;font-weight:600;background:var(--ink);color:#FFFFFF;
+  transition:background-color .25s,color .25s,box-shadow .2s,transform .15s}
+.pa-ok{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.pa-btn .pa-ok{display:none}
+.pa-row.press .pa-btn{transform:scale(.94);box-shadow:0 0 0 4px rgba(183,193,126,.45)}
+.pa-row.done{border-color:rgba(92,106,50,.38)}
+.pa-row.done .pa-btn{background:rgba(183,193,126,.3);color:var(--ink)}
+.pa-row.done .pa-btn .pa-ok{display:block;color:var(--acc)}
+
+.pa-brain{position:relative;height:150px}
+.pa-ring{position:absolute;left:50%;top:50%;width:80px;height:80px;margin:-40px 0 0 -40px;border-radius:50%;
+  border:1px dashed rgba(26,28,23,.22)}
+.pa-nucleo{position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;
+  background:radial-gradient(circle,#FFFFFF 0 18%,var(--acc) 34%,rgba(183,193,126,.35) 64%,transparent 76%)}
+.pa-slot{position:absolute;left:50%;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:9px;
+  display:grid;place-items:center;background:#FFFFFF;border:1px solid var(--hair);
+  box-shadow:0 8px 18px -10px rgba(26,28,23,.4);
+  opacity:0;transform:translate(var(--x),var(--y)) scale(.4);
+  transition:opacity .45s var(--pa-ease),transform .55s var(--pa-ease)}
+.pa-slot svg{width:15px;height:15px}
+.pa-slot.in{opacity:1;transform:translate(var(--x),var(--y)) scale(1)}
+.pa-slot.in::after{content:"";position:absolute;left:50%;top:50%;width:40px;height:1px;z-index:-1;
+  transform-origin:0 0;transform:rotate(var(--r));background:linear-gradient(90deg,rgba(26,28,23,.3),transparent)}
+.pa-cur{position:absolute;left:0;top:0;z-index:3;width:18px;height:18px;opacity:0;pointer-events:none;
+  fill:#FFFFFF;stroke:var(--ink);stroke-width:1.4;stroke-linejoin:round;
+  filter:drop-shadow(0 2px 3px rgba(26,28,23,.35));
+  transition:transform .6s var(--pa-ease),opacity .3s ease}
+
+/* ---- 3. agenti al lavoro ---- */
+.pa-ags{position:absolute;inset:44px 14px 14px;display:grid;gap:7px;align-content:start}
+.pa-ag{display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:center;column-gap:10px;
+  padding:7px 10px 7px 7px;border-radius:12px;border:1px solid var(--hair);background:#FFFFFF;
+  opacity:.55;transition:opacity .35s,border-color .35s,background-color .35s}
+.pa-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(183,193,126,.32);color:var(--acc);font-family:var(--mono);font-size:11px;font-weight:500}
+.pa-t{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.pa-t b{font-size:12.5px;font-weight:600}
+.pa-t span{font-size:11.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pa-st{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--ink-3);white-space:nowrap}
+.pa-st .pa-ok{color:var(--acc)}
+.pa-spin{width:10px;height:10px;border-radius:50%;border:1.6px solid rgba(92,106,50,.25);border-top-color:var(--acc);
+  animation:pa-spin .8s linear infinite}
+@keyframes pa-spin{to{transform:rotate(360deg)}}
+@keyframes pa-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pa-act{grid-column:2/-1;display:none;align-items:center;gap:6px;margin-top:4px;font-size:11.5px;font-weight:600;color:var(--ink)}
+.pa-act .pa-ok{color:var(--acc)}
+.pa-ag.act{opacity:1;border-color:rgba(92,106,50,.45);background:rgba(183,193,126,.12)}
+.pa-ag.act .pa-st{color:var(--acc)}
+.pa-ag.done{opacity:1}
+.pa-ag.done .pa-act{display:flex;animation:pa-in .4s var(--pa-ease) both}
+
+/* ---- mobile: card in colonna ---- */
+@media (max-width:900px){
+  .pa-steps{grid-template-columns:minmax(0,1fr);max-width:560px;margin-inline:auto}
+  .pa-js .pa-rv{transition-delay:0s}
+}
+@media (max-width:420px){
+  .pa-oc-in{grid-template-columns:minmax(0,1fr) 104px;inset:44px 10px 12px 12px}
+  .pa-brain{transform:scale(.82)}
+  .pa-btn{min-width:86px;padding:0 8px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .pa-js .pa-rv{opacity:1;transform:none}
+  .pa-spin{animation:none}
+}

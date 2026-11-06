@@ -1,0 +1,25 @@
+/* contenuti-esempi.css: sezione "Esempi" di contenuti-ai.html (4 reel in cornice telefono). Usa i token di servizi.css. */
+.esempi{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,32px)}
+.esempio{margin:0}
+.tel{position:relative;padding:7px;border-radius:34px;background:var(--nero);box-shadow:var(--alza),0 30px 60px -36px rgba(26,28,23,.45)}
+.tel video{display:block;width:100%;height:auto;aspect-ratio:9/16;border-radius:27px;object-fit:cover;background:#1d1e1b}
+.tel-btn{position:absolute;right:18px;bottom:18px;width:44px;height:44px;border:0;border-radius:50%;cursor:pointer;
+  display:grid;place-items:center;color:#fff;background:rgba(11,12,10,.55);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:background-color .2s,transform .2s}
+.tel-btn:hover{background:rgba(11,12,10,.75)}
+.tel-btn:active{transform:scale(.94)}
+.tel-btn svg{width:16px;height:16px}
+.tel-btn .i-play{display:none}
+.tel-btn[data-stato="pausa"] .i-play{display:block}
+.tel-btn[data-stato="pausa"] .i-pausa{display:none}
+.esempio figcaption{margin-top:16px;padding-inline:4px}
+.esempio figcaption b{display:block;font-family:var(--disp);font-size:1.08rem;font-weight:650;letter-spacing:-.025em}
+.esempio figcaption span{display:block;margin-top:.2rem;font-size:.86rem;color:var(--ink-2)}
+.esempio figcaption small{display:block;margin-top:.45rem;font-size:12px;line-height:1.4;color:var(--ink-3)}
+@media(max-width:900px){.esempi{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}}
+@media(max-width:440px){
+  .esempi{gap:28px 12px}
+  .tel{padding:5px;border-radius:26px}
+  .tel video{border-radius:21px}
+  .tel-btn{right:12px;bottom:12px}
+}

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nebbia · studio di design digitale · Concept di 21studio</title>
+<meta name="description" content="Concept dimostrativo di 21studio: portfolio di uno studio creativo con preloader, titoli giganti, lavori in parallasse, showreel a scorrimento e transizioni tra i casi studio. Marchio inventato.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E0E10">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500&family=Instrument+Serif:ital@1&display=swap">
+<link rel="preload" as="image" href="img/hero.webp" imagesrcset="img/hero-960.webp 960w, img/hero.webp 1600w" imagesizes="100vw">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script src="main.js" defer></script>
+</head>
+<body class="is-loading">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mark" viewBox="0 0 48 48"><circle cx="24" cy="24" r="22" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 20h22M12 26h28M6 32h20M20 14h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></symbol></svg>
+
+<div class="loader" aria-hidden="true"><svg class="loader-mark"><use href="#mark"/></svg><span class="loader-n">0</span></div>
+
+<a class="skip" href="#lavori">Salta ai lavori</a>
+<div class="cbar"><span>Concept dimostrativo di 21studio · marchio inventato</span><a href="../../servizi/siti-web.html">← Torna a Siti web</a></div>
+
+<header class="nav" data-nav>
+  <a class="logo" href="#top" aria-label="Nebbia, torna su"><svg class="logo-mark"><use href="#mark"/></svg><span class="logo-t">nebbia <i>studio</i></span></a>
+  <nav class="links" aria-label="Principale"><a href="#lavori">Lavori</a><a href="#reel">Showreel</a><a href="#diario">Diario</a><a href="#contatti">Contatti</a></nav>
+  <button class="menu-btn" type="button" data-menu aria-expanded="false" aria-controls="menu"><span>Menu</span><i aria-hidden="true"></i></button>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav aria-label="Menu"><a href="#lavori"><span>Lavori</span></a><a href="#reel"><span>Showreel</span></a><a href="#diario"><span>Diario</span></a><a href="#contatti"><span>Contatti</span></a></nav>
+  <div class="menu-f"><p>Alba, Langhe<br>Lun–Ven 9–18</p><p>Instagram<br>LinkedIn<br>Behance</p></div>
+</div>
+
+<div class="cursor" aria-hidden="true"><span>Apri</span></div>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-t">
+    <div class="hero-media"><img src="img/hero.webp" srcset="img/hero-960.webp 960w, img/hero.webp 1600w" sizes="100vw" alt="Colline delle Langhe all'alba, con la nebbia tra i filari" width="1600" height="900" fetchpriority="high"></div>
+    <div class="hero-in">
+      <p class="hero-p" data-lines>Studio di design digitale per marchi che hanno una storia lunga e un sito che non la racconta ancora.</p>
+      <h1 id="hero-t" class="giant"><span class="row"><span>Disegno</span></span><span class="row"><span>digitale</span></span><span class="row"><span>sartoriale</span></span></h1>
+      <div class="hero-foot">
+        <p data-lines>Identità, siti e prodotti digitali per cantine, studi e manifatture. Pochi progetti all'anno, seguiti dalla prima bozza all'ultimo pixel.</p>
+        <a class="ul" href="#diario">Lo studio</a>
+      </div>
+    </div>
+    <p class="scroll-cue" aria-hidden="true">Scorri per esplorare</p>
+  </section>
+
+  <section class="lavori" id="lavori" aria-labelledby="lavori-t">
+    <h2 id="lavori-t" class="giant giant--ink"><span class="row"><span>Lavori</span></span></h2>
+    <div class="grid">
+      <a class="work w1" href="#caso-selvara" data-case="0" data-speed="0"><figure><img src="img/selvara-rosso.webp" alt="" width="1200" height="1500" loading="lazy"></figure><span class="cap"><b>Tenuta Selvàra</b><span>Identità e sito · 2026</span></span></a>
+      <div class="intro">
+        <p class="kick"><span aria-hidden="true">+</span> Progetti in evidenza</p>
+        <p data-lines>Tre lavori recenti, scelti perché raccontano bene il nostro metodo: capire il mestiere del cliente prima di disegnare.</p>
+      </div>
+      <a class="work w2" href="#caso-velaro" data-case="1" data-speed="-.18"><figure><img src="img/velaro-casa.webp" alt="" width="896" height="1184" loading="lazy"></figure><span class="cap"><b>Studio Vélaro</b><span>Portfolio · 2026</span></span></a>
+      <figure class="still s1" data-speed=".25"><img src="img/selvara-cantina.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+      <a class="work w3" href="#caso-tarvo" data-case="2" data-speed="-.1"><figure><img src="img/tarvo-fresatura.webp" alt="" width="1184" height="896" loading="lazy"></figure><span class="cap"><b>Officine Tarvo</b><span>Marchio e catalogo · 2025</span></span></a>
+      <figure class="still s2" data-speed="-.3"><img src="img/velaro-terme.webp" alt="" width="896" height="1184" loading="lazy"></figure>
+    </div>
+    <p class="all"><a class="ul" href="#caso-selvara" data-case="0">Apri il primo caso studio</a></p>
+  </section>
+
+  <section class="reel" id="reel" aria-labelledby="reel-t">
+    <div class="reel-pin">
+      <p class="kick kick--light"><span aria-hidden="true">+</span> Lavori in movimento</p>
+      <h2 id="reel-t" class="reel-t"><span class="rw rw-l">Show</span><span class="reel-frame" aria-hidden="true"><img src="img/selvara-cantina.webp" alt="" loading="lazy"><img src="img/tarvo-rettifica.webp" alt="" loading="lazy"><img src="img/velaro-terme.webp" alt="" loading="lazy"><img src="img/selvara-riserva.webp" alt="" loading="lazy"><img src="img/tarvo-hero.webp" alt="" loading="lazy"><img src="img/velaro-biblioteca.webp" alt="" loading="lazy"></span><span class="rw rw-r">reel</span></h2>
+      <p class="reel-n">Le immagini scorrono con la pagina: fermati e guardale una a una.</p>
+    </div>
+  </section>
+
+  <section class="diario" id="diario" aria-labelledby="diario-t">
+    <figure class="fl f1" data-speed="-.35"><img src="img/velaro-loft.webp" alt="" loading="lazy" width="896" height="1184"></figure>
+    <figure class="fl f2" data-speed=".2"><img src="img/tarvo-collaudo.webp" alt="" loading="lazy" width="1184" height="896"></figure>
+    <figure class="fl f3" data-speed="-.15"><img src="img/selvara-bianco.webp" alt="" loading="lazy" width="1200" height="1500"></figure>
+    <figure class="fl f4" data-speed=".4"><img src="img/velaro-biblioteca.webp" alt="" loading="lazy" width="896" height="1184"></figure>
+    <p class="kick"><span aria-hidden="true">+</span> Dal diario</p>
+    <h2 id="diario-t" class="mid"><span class="row"><span>Note</span></span><span class="row"><span>dallo studio</span></span></h2>
+    <p class="diario-p">Cosa impariamo progetto dopo progetto, scritto quando abbiamo qualcosa da dire.</p>
+    <ul class="notes">
+      <li><a href="#diario"><span class="n-d">Ott 2026</span><span class="n-t">Perché un'etichetta di vino è già un sito</span><span class="n-a" aria-hidden="true">→</span></a></li>
+      <li><a href="#diario"><span class="n-d">Set 2026</span><span class="n-t">Fotografare il metallo senza annoiare</span><span class="n-a" aria-hidden="true">→</span></a></li>
+      <li><a href="#diario"><span class="n-d">Lug 2026</span><span class="n-t">Il portfolio di un architetto non è un catalogo</span><span class="n-a" aria-hidden="true">→</span></a></li>
+    </ul>
+  </section>
+</main>
+
+<footer class="foot" id="contatti">
+  <div class="foot-top">
+    <h2 class="mid mid--light"><span class="row"><span>La nostra</span></span><span class="row"><span>storia</span></span></h2>
+    <div class="orb" aria-hidden="true"><i class="orb-s"></i><svg viewBox="0 0 400 200"><ellipse cx="200" cy="100" rx="190" ry="34"/><circle class="moon" r="6" cx="390" cy="100"/></svg></div>
+  </div>
+  <p class="foot-p">Nebbia nasce ad Alba nel 2019: due designer e uno sviluppatore che lavorano con chi produce cose vere.</p>
+  <div class="foot-cols">
+    <p>Studio<br>Alba (CN), Langhe</p>
+    <p><a class="ul" href="#lavori">Lavori</a><br><a class="ul" href="#reel">Showreel</a><br><a class="ul" href="#diario">Diario</a></p>
+    <p>Instagram<br>LinkedIn<br>Behance</p>
+    <p>Concept di 21studio:<br>marchio, progetti e testi sono inventati.<br><a class="ul" href="../../servizi/siti-web.html">← Torna a Siti web</a></p>
+  </div>
+</footer>
+
+<!-- caso studio: "pagina" in sovrimpressione -->
+<article class="case" data-case-view role="dialog" aria-modal="true" aria-labelledby="case-t" hidden>
+  <button class="case-close" type="button" data-case-close><span aria-hidden="true">←</span> Tutti i lavori</button>
+  <div class="case-scroll" data-case-scroll>
+    <header class="case-hero"><div class="case-hero-img"><img data-c-hero alt=""></div></header>
+    <div class="case-body">
+      <h2 id="case-t" class="giant giant--ink case-t" data-c-title></h2>
+      <dl class="case-meta"><div><dt>Cliente</dt><dd data-c-client></dd></div><div><dt>Servizi</dt><dd data-c-serv></dd></div><div><dt>Anno</dt><dd data-c-year></dd></div></dl>
+      <p class="case-lead" data-c-lead></p>
+      <div class="case-imgs" data-c-imgs></div>
+      <p class="case-text" data-c-text></p>
+    </div>
+    <button class="case-next" type="button" data-case-next><span class="kick">Prossimo progetto</span><span class="case-next-t" data-c-next></span></button>
+  </div>
+</article>
+<div class="veil" aria-hidden="true"></div>
+</body>
+</html>

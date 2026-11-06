@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Piano di mantenimento — 21studio</title>
-<meta name="description" content="Il sistema resta tuo. La manutenzione è una scelta, non una licenza per accendere quello che hai già pagato.">
+<title>Support · 21studio</title>
+<meta name="description" content="The system stays yours. Support is a choice, never a fee to keep running what you already own. From €49/month + VAT, server included.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -145,6 +145,32 @@ h3{font-size:clamp(1.08rem,1.3vw,1.2rem);font-weight:600;letter-spacing:-.022em;
 .mh-links a{color:var(--mh-fg-2);text-decoration:none;font-size:12.5px;font-weight:450;letter-spacing:-.01em;
   white-space:nowrap;transition:color .25s ease}
 .mh-links a:hover{color:var(--mh-fg)}
+/* voce Servizi con tendina (desktop: hover e focus-within, nessun JS) */
+.mh-sv{position:relative;display:flex}
+.mh-links .mh-sv-a{display:inline-flex;align-items:center;gap:6px}
+.mh-sv-a svg{width:8px;height:8px;opacity:.7;transition:transform .35s var(--mh-out)}
+.mh-sv:hover .mh-sv-a,.mh-sv:focus-within .mh-sv-a,.mh-links .mh-sv-a[aria-current]{color:var(--mh-fg)}
+.mh-sv:hover .mh-sv-a svg,.mh-sv:focus-within .mh-sv-a svg{transform:rotate(180deg)}
+.mh-dd{position:absolute;top:100%;left:50%;padding-top:26px;transform:translate(-50%,8px);opacity:0;visibility:hidden;
+  transition:opacity .2s ease,transform .4s var(--mh-out),visibility 0s linear .2s}
+.mh-sv:hover .mh-dd,.mh-sv:focus-within .mh-dd{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+.mh-dd-in{width:352px;padding:8px;background:var(--mh-bg);border:1px solid var(--mh-line);border-radius:24px;
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.mh-links .mh-dd a{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 12px;padding:12px 14px;border-radius:16px;
+  color:var(--mh-fg);white-space:normal;transition:background-color .2s ease}
+.mh-dd a:hover,.mh-dd a:focus-visible{background:rgba(255,255,255,.07)}
+.mh-dd b{font-size:14px;font-weight:600;letter-spacing:-.015em}
+.mh-dd span{grid-column:1;font-size:12.5px;line-height:1.4;color:var(--mh-fg-2)}
+.mh-dd i{grid-row:1/3;grid-column:2;font-style:normal;color:var(--mh-fg-2);transform:translateX(-4px);opacity:0;
+  transition:transform .3s var(--mh-out),opacity .2s ease}
+.mh-dd a:hover i,.mh-dd a:focus-visible i{transform:none;opacity:1}
+.mh-links .mh-dd a.mh-dd-tutti{display:block;margin-top:4px;padding:12px 14px 10px;border-top:1px solid var(--mh-line);border-radius:0 0 16px 16px;
+  font-size:12.5px;color:var(--mh-fg-2)}
+.mh-menu nav .mh-sub{display:flex;flex-direction:column;padding:0 0 10px 2px}
+.mh-menu nav .mh-sub a{min-height:44px;border-top:0;font-family:var(--sans);font-size:16px;font-weight:500;letter-spacing:-.015em;color:var(--mh-fg-2)}
+.mh-menu nav .mh-sub a::before{content:"";width:12px;height:1px;margin-right:12px;background:var(--mh-line-2)}
+.ft-seg{color:rgba(255,255,255,.4)}
+
 
 .mh-dx{justify-self:end;display:flex;align-items:center;gap:8px}
 
@@ -269,6 +295,10 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
   background:var(--fill);color:#1A1C17;border-radius:999px;padding:3px 10px}
 .liv .tl{margin-top:.2rem}
 .costo{margin-top:auto;padding-top:1rem;border-top:1px solid var(--hair);font-size:.86rem;line-height:1.5;color:var(--ink-3)}
+.costo .pr{display:block;margin-bottom:.35rem;font-size:2rem;font-weight:600;letter-spacing:-.02em;color:var(--ink)}
+.costo .pr small{font-size:.9rem;font-weight:400;color:var(--ink-3);margin-left:.15em}
+.liv-nota{margin-top:clamp(20px,2.4vw,28px);text-align:center;font-size:.95rem;line-height:1.6;color:var(--ink-3)}
+.liv-nota b{color:var(--ink)}
 .nota{width:min(760px,100%);margin-inline:auto}
 .nota h2{text-align:center;margin:1rem auto 0;max-width:22ch}
 .nota .ps{margin-top:clamp(24px,3vw,36px);display:flex;flex-direction:column;gap:1rem}
@@ -277,51 +307,100 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
 @media(max-width:880px){.livelli{grid-template-columns:1fr}}
 
 </style>
+<!-- lingue: scritto da _nav.py -->
+<link rel="canonical" href="https://21studio.io/piano-di-mantenimento.html">
+<link rel="alternate" hreflang="en" href="https://21studio.io/piano-di-mantenimento.html">
+<link rel="alternate" hreflang="it" href="https://21studio.io/it/piano-di-mantenimento.html">
+<link rel="alternate" hreflang="x-default" href="https://21studio.io/piano-di-mantenimento.html">
+<!-- /lingue -->
 </head>
 <body>
 
 <header class="mh" id="mh">
+  <link rel="stylesheet" href="css/megamenu.css">
   <div class="mh-shell">
     <div class="mh-bar">
-      <a href="index.html" class="mh-brand wm" aria-label="21studio, torna alla home">21STUDIO</a>
-      <nav class="mh-links" aria-label="Sezioni">
-        <a href="index.html#metodo">Come funziona</a>
-        <a href="index.html#trio">Cosa costruiamo</a>
-        <a href="index.html#strumenti">Strumenti</a>
-        <a href="index.html#dove">Dove gira</a>
+      <a href="index.html" class="mh-brand wm" aria-label="21studio home">21STUDIO</a>
+      <nav class="mh-links" aria-label="Sections">
+        <div class="mm" data-mm>
+          <a class="mm-a" href="servizi/agenti/index.html" aria-haspopup="true" aria-expanded="false" aria-controls="mmP">Agents<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+          <div class="mm-p" id="mmP">
+            <div class="mm-in">
+            <div class="mm-sx">
+            <ul class="mm-ag">
+              <li><a href="servizi/agenti/coordinatore.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span><b>C</b></span><span class="mm-t"><b>Coordinator</b><span>Every request reaches the right agent.</span></span></a></li>
+              <li><a href="servizi/agenti/offerta-prezzi.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span><b>OP</b></span><span class="mm-t"><b>Offer &amp; Pricing</b><span>It studies your competitors, your offer and your prices, then shows you what to change, with several options side by side.</span></span></a></li>
+              <li><a href="servizi/agenti/trova-clienti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="2"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><b>LF</b></span><span class="mm-t"><b>Lead Finder</b><span>It finds the right companies, writes each one a tailored email, sends it after your yes and follows up with those who don&#x27;t reply.</span></span></a></li>
+              <li><a href="servizi/agenti/ricerca-fornitori.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="2"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><b>SP</b></span><span class="mm-t"><b>Supplier &amp; Partner Finder</b><span>It delivers a list of suppliers, manufacturers or influencers that fit, each one checked, with the right person to contact.</span></span></a></li>
+              <li><a href="servizi/agenti/social.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>S</b></span><span class="mm-t"><b>Social</b><span>Every week: carousels, posts and reel scripts in your voice, already reviewed.</span></span></a></li>
+              <li><a href="servizi/agenti/video-reel.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>VR</b></span><span class="mm-t"><b>Video &amp; Reels</b><span>From your footage and a reel you like: a finished reel with cuts, captions and voice-over, checked before delivery.</span></span></a></li>
+              <li><a href="servizi/agenti/dm-instagram.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>ID</b></span><span class="mm-t"><b>Instagram DM</b><span>Anyone who comments a keyword under your post instantly gets your private message with the link.</span></span></a></li>
+              <li><a href="servizi/agenti/annunci-concorrenti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="4"><svg viewBox="0 0 24 24"><path d="M3 10.5v3a1 1 0 0 0 1 1h2.5l5.5 4v-13l-5.5 4H4a1 1 0 0 0-1 1z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.5 6a8.4 8.4 0 0 1 0 12"/></svg></span><b>CA</b></span><span class="mm-t"><b>Competitor Ads</b><span>Every week: your competitors&#x27; new ads, the ones they keep paying for, and the ideas worth making your own.</span></span></a></li>
+              <li><a href="servizi/agenti/siti-landing.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="5"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="13" rx="1.6"/><path d="M8.5 20.5h7M12 17.5v3"/></svg></span><b>WL</b></span><span class="mm-t"><b>Websites &amp; Landing Pages</b><span>A website or landing page built on the best examples in your industry, designed to bring you enquiries.</span></span></a></li>
+              <li><a href="servizi/agenti/e-commerce.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="5"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="13" rx="1.6"/><path d="M8.5 20.5h7M12 17.5v3"/></svg></span><b>E</b></span><span class="mm-t"><b>E-commerce</b><span>Your online store on Shopify or WooCommerce: built, fast, and better every week.</span></span></a></li>
+              <li><a href="servizi/agenti/documenti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="8"><svg viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9.5 12.5h5M9.5 16h3.5"/></svg></span><b>D</b></span><span class="mm-t"><b>Documents</b><span>Invoices, quotes and contracts drafted in minutes.</span></span></a></li>
+              <li><a href="servizi/agenti/automazioni.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="9"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4.3 7.7L12 12l7.7-4.3"/><path d="M12 12v8.6"/></svg></span><b>A</b></span><span class="mm-t"><b>Automations</b><span>Your apps talk to each other.</span></span></a></li>
+            </ul>
+            <a class="mm-tutti" href="servizi/agenti/index.html">Browse all agents <span aria-hidden="true">&nearr;</span></a>
+            </div>
+            <div class="mm-dx">
+              <a class="mm-feat" href="index.html#pricing">
+                <span class="mm-k">Featured</span>
+                <b>Your whole company, in one pack</b>
+                <span class="mm-d">All 16 available agents, installed and working as one team.</span>
+                <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+                <span class="mm-pr">&euro;2,490 <small>once + VAT</small></span>
+                <span class="mm-go">See the pack <span aria-hidden="true">&nearr;</span></span>
+              </a>
+              <a class="mm-mese" href="abbonamento.html">
+                <span class="mm-k">Prefer monthly?</span>
+                <b>Plans from &euro;79/month</b>
+                <span class="mm-d">AI credits included.</span>
+                <span class="mm-fr" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            </div>
+          </div>
+        </div>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="index.html#custom">Custom</a>
+        <a href="contatti.html">Contact</a>
       </nav>
       <div class="mh-dx">
+        <div class="mh-lang" role="group" aria-label="Language"><span aria-current="true">EN</span><a href="it/piano-di-mantenimento.html" hreflang="it" lang="it" aria-label="Italiano">IT</a></div>
         <a class="mh-cta" href="contatti.html">
-          <span class="mh-cta-t">Prenota una call</span>
+          <span class="mh-cta-t">Book a call</span>
           <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
         </a>
-        <button class="mh-tog" id="mhTog" type="button" aria-expanded="false" aria-controls="mhMenu" aria-label="Apri il menu">
+        <button class="mh-tog" id="mhTog" type="button" aria-expanded="false" aria-controls="mhMenu" aria-label="Open menu">
           <span aria-hidden="true"></span>
         </button>
       </div>
     </div>
     <div class="mh-menu" id="mhMenu" hidden>
-      <nav aria-label="Sezioni (menu)">
-        <a href="index.html#metodo">Come funziona</a>
-        <a href="index.html#trio">Cosa costruiamo</a>
-        <a href="index.html#strumenti">Strumenti</a>
-        <a href="index.html#dove">Dove gira</a>
+      <nav aria-label="Sections (menu)">
+        <a href="servizi/agenti/index.html">Agents</a>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="index.html#custom">Custom</a>
+        <a href="contatti.html">Contact</a>
       </nav>
+      <div class="mh-lang mh-lang-m" role="group" aria-label="Language"><span aria-current="true">EN</span><a href="it/piano-di-mantenimento.html" hreflang="it" lang="it" aria-label="Italiano">IT</a></div>
       <a class="mh-cta mh-cta-big" href="contatti.html">
-        <span class="mh-cta-t">Prenota una call</span>
+        <span class="mh-cta-t">Book a call</span>
         <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
       </a>
     </div>
   </div>
+  <script src="js/megamenu.js" defer></script>
 </header>
 
 <main id="top">
 
 <section class="ph">
   <div class="wrap">
-    <span class="lab">Passo 04 &middot; opzionale</span>
-    <h1>Il sistema resta tuo. La manutenzione è una <span class="em">scelta</span>.</h1>
-    <p class="lead">Se non ci paghi più niente, il sistema continua a funzionare: non serve una licenza per accendere quello che è già tuo. Il piano serve solo a farlo crescere mano a mano che l'azienda cambia.</p>
+    <span class="lab">Step 04 &middot; optional</span>
+    <h1>The system stays yours. Support is a <span class="em">choice</span>.</h1>
+    <p class="lead">Stop paying us and the system stays yours. On your own machine it runs for &euro;0/month. Support exists for one thing: growing the system as your business changes.</p>
   </div>
 </section>
 
@@ -329,36 +408,37 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
   <div class="wrap">
     <div class="livelli">
       <article class="card liv">
-        <div class="testa-liv"><span class="lab">Base</span></div>
-        <h3>Mantenimento essenziale</h3>
-        <ul class="tl"><li>Monitoraggio del sistema in produzione</li><li>Correzioni e aggiornamenti minori</li><li>Supporto su richiesta</li></ul>
-        <p class="costo">Il prezzo te lo diciamo in call, come numero fisso. Nessun conteggio a ore.</p>
+        <div class="testa-liv"><span class="lab">Basic</span></div>
+        <h3>Essential support</h3>
+        <ul class="tl"><li>We keep an eye on the live system</li><li>Fixes and small updates</li><li>Support when you need it</li><li>Hosting on our server included</li></ul>
+        <p class="costo"><b class="pr">&euro;49<small>/month + VAT</small></b>Server included. No hourly billing.</p>
       </article>
       <article class="card liv top">
-        <div class="testa-liv"><span class="chip">Growth</span></div>
-        <h3>Il sistema cresce con te</h3>
-        <ul class="tl"><li>Tutto quello che c'è nel piano Base</li><li>Nuovi processi aggiunti nel tempo</li><li>Revisione periodica di quello che il sistema produce</li></ul>
-        <p class="costo">Il prezzo te lo diciamo in call, come numero fisso. Nessun conteggio a ore.</p>
+        <div class="testa-liv"><span class="chip">Plus</span></div>
+        <h3>A system that grows with you</h3>
+        <ul class="tl"><li>Everything in Basic</li><li>New processes added over time</li><li>Regular review of what the system produces</li></ul>
+        <p class="costo"><b class="pr">&euro;149<small>/month + VAT</small></b>Server included. No hourly billing.</p>
       </article>
       <article class="card liv">
-        <div class="testa-liv"><span class="lab">Full</span></div>
-        <h3>Estensione continua</h3>
-        <ul class="tl"><li>Tutto quello che c'è nel piano Growth</li><li>Nuovi agenti e processi con priorità dedicata</li><li>Il secondo cervello esteso il più possibile</li></ul>
-        <p class="costo">Il prezzo te lo diciamo in call, come numero fisso. Nessun conteggio a ore.</p>
+        <div class="testa-liv"><span class="lab">Pro</span></div>
+        <h3>Always expanding</h3>
+        <ul class="tl"><li>Everything in Plus</li><li>New agents and processes, with priority</li><li>Your company brain, extended as far as you need</li></ul>
+        <p class="costo"><b class="pr">&euro;349<small>/month + VAT</small></b>Server included. No hourly billing.</p>
       </article>
     </div>
+    <p class="liv-nota"><b>No minimum term, cancel anytime.</b> On your own computer or server, without Support: <b>&euro;0/month</b>, the agents keep running.</p>
   </div>
 </section>
 
 <section class="band nera" data-scuro>
   <div class="wrap">
     <div class="nota">
-      <span class="lab">Nessun vincolo</span>
-      <h2>Perché non è un abbonamento a cui sei legato</h2>
+      <span class="lab">No lock-in</span>
+      <h2>Why it never ties you down</h2>
       <div class="ps">
-        <p>Il sistema te lo consegniamo finito: configurazione, dati e documentazione sono tuoi, per iscritto. Il giorno che smetti di pagare il mantenimento, continua a girare esattamente com'è.</p>
-        <p>Quello che compri qui non è il diritto di usarlo. È il tempo per farlo cambiare insieme alla tua azienda: processi nuovi, reparti nuovi, correzioni quando il mercato si muove.</p>
-        <p>Puoi entrarci dopo mesi, uscirne, e rientrarci. Non c'è un vincolo di durata.</p>
+        <p>We hand the system over finished: setup, data and documentation are yours, in writing. The day you stop paying for Support, it keeps running exactly as it is.</p>
+        <p>What you pay for here isn't the right to use it. It's our time to change it with your business: new processes, new departments, fixes when the market moves.</p>
+        <p>Join after months, leave, come back. No minimum term, cancel anytime. If you stop, the system stays yours.</p>
       </div>
     </div>
   </div>
@@ -366,10 +446,10 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
 
 <section class="band fine">
   <div class="wrap">
-    <span class="lab">Il primo passo</span>
-    <h2>Prima di tutto questo, però, mezz'ora.</h2>
-    <p class="body">Il mantenimento è il quarto passo. Si parte guardando la tua azienda reparto per reparto.</p>
-    <div class="bs"><a class="b su" href="contatti.html"><i>Prenota una call</i><s>&rarr;</s></a></div>
+    <span class="lab">First step</span>
+    <h2>Before all this: thirty minutes.</h2>
+    <p class="body">Support is step four. We start by looking at your business, department by department.</p>
+    <div class="bs"><a class="b su" href="contatti.html"><i>Book a call</i><s>&rarr;</s></a></div>
   </div>
 </section>
 
@@ -380,40 +460,32 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
     <div class="ft-card">
       <div class="ft-top">
         <div class="ft-brand">
-          <a href="index.html" class="wm" aria-label="21studio, torna alla home">21STUDIO</a>
-          <p>Reparti AI su misura per PMI italiane.</p>
+          <a href="index.html" class="wm" aria-label="21studio home">21STUDIO</a>
+          <p>An AI agent for every department. Built around your business, yours to keep.</p>
           <a href="mailto:info@21studio.io">info@21studio.io</a>
         </div>
-        <nav class="ft-col" aria-label="Sito">
-          <h3>Sito</h3>
+        <nav class="ft-col" aria-label="Site">
+          <h3>Site</h3>
           <ul>
-            <li><a href="index.html#metodo">Come funziona</a></li>
-            <li><a href="index.html#trio">Cosa costruiamo</a></li>
-            <li><a href="index.html#strumenti">Strumenti</a></li>
-            <li><a href="index.html#dove">Dove gira</a></li>
+            <li><a href="servizi/agenti/index.html">Agents</a></li>
+            <li><a href="index.html#how-it-works">How it works</a></li>
+            <li><a href="index.html#custom">Custom</a></li>
+            <li><a href="contatti.html">Contact</a></li>
           </ul>
         </nav>
-        <nav class="ft-col" aria-label="Offerta">
-          <h3>Offerta</h3>
+        <nav class="ft-col" aria-label="Contact">
+          <h3>Talk to us</h3>
           <ul>
-            <li><a href="agenti-fissi.html">Agenti Fissi</a></li>
-            <li><a href="piano-di-mantenimento.html">Piano di mantenimento</a></li>
-          </ul>
-        </nav>
-        <nav class="ft-col" aria-label="Contatti">
-          <h3>Contatti</h3>
-          <ul>
-            <li><a href="contatti.html">Prenota una call</a></li>
+            <li><a href="contatti.html">Book a call</a></li>
             <li><a href="mailto:info@21studio.io">info@21studio.io</a></li>
           </ul>
         </nav>
       </div>
-      <!-- TODO: aggiungere i link a Privacy e Termini quando le pagine esisteranno -->
       <div class="ft-bot">
-        <a class="ft-ig" href="https://instagram.com/21studio.io" target="_blank" rel="noopener" aria-label="Instagram di 21studio">
+        <a class="ft-ig" href="https://instagram.com/21studio.io" target="_blank" rel="noopener" aria-label="21studio on Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg>
         </a>
-        <small>&copy; 2026 21studio. Tutti i diritti riservati.</small>
+        <small>&copy; 2026 21studio</small>
       </div>
     </div>
   </div>
@@ -453,7 +525,7 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
     clearTimeout(chiudiTimer);
     menu.hidden=false;
     tog.setAttribute('aria-expanded','true');
-    tog.setAttribute('aria-label','Chiudi il menu');
+    tog.setAttribute('aria-label','Close menu');
     requestAnimationFrame(function(){ mh.classList.add('is-open') });
     var primo=menu.querySelector('a');
     if(primo) primo.focus({preventScroll:true});
@@ -462,7 +534,7 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
     if(tog.getAttribute('aria-expanded')!=='true') return;
     mh.classList.remove('is-open');
     tog.setAttribute('aria-expanded','false');
-    tog.setAttribute('aria-label','Apri il menu');
+    tog.setAttribute('aria-label','Open menu');
     chiudiTimer=setTimeout(function(){ menu.hidden=true }, RID?0:450);
     if(rimettiFocus) tog.focus({preventScroll:true});
   }

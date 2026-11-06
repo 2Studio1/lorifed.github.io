@@ -1,0 +1,30 @@
+/* analisi.css: home #first-agent (campo sito -> report.html) e #facts (numeri veri + card "lo usiamo noi").
+   Riusa .ds-* e .fx-* di home-orbit.css; qui solo il campo vero e la card nuova. */
+
+/* ---- A. campo sito ---- */
+#first-agent .ds-card>p:first-child{font-size:15px}
+.fa-field{display:flex;align-items:center;gap:10px;margin-top:12px;padding:6px 6px 6px 12px;border-radius:14px;
+  border:1px solid var(--ox-line-2);background:#FBFBF8;transition:border-color .2s,box-shadow .2s}
+.fa-field:focus-within{border-color:rgba(110,125,60,.55);box-shadow:0 0 0 4px rgba(183,193,126,.28)}
+.fa-field svg{flex:none;width:18px;height:18px;fill:none;stroke:var(--ox-t3);stroke-width:1.6}
+.fa-field input{flex:1;min-width:0;height:40px;border:0;background:none;font:inherit;font-size:15px;color:var(--ox-t1);outline:none}
+.fa-field input::placeholder{color:#8A8E83}
+.fa-field .b{flex:none;border:0;cursor:pointer;font-family:inherit}
+#first-agent .fa-err{min-height:1.2em;margin-top:8px;font-size:13px;color:#A23B2A}
+#first-agent .fa-err:empty{display:none}
+@media(max-width:480px){
+  .fa-field{flex-wrap:wrap;padding:8px}
+  .fa-field input{flex-basis:calc(100% - 30px)}
+  .fa-field .b{width:100%;justify-content:center}
+}
+
+/* ---- B. fatti ---- */
+.fx-note{margin-top:14px;text-align:center;font-size:12.5px;color:var(--ox-t3)}
+.fx-own{display:grid;grid-template-columns:minmax(0,1.4fr) auto;gap:20px 40px;align-items:center;margin-top:14px;
+  padding:clamp(24px,3vw,36px)}
+.fx-own h3{font-family:var(--disp);font-size:clamp(1.35rem,2vw,1.75rem);font-weight:600;letter-spacing:-.03em;line-height:1.15}
+.fx-own p{margin-top:10px;max-width:58ch;font-size:15px;line-height:1.6;color:var(--ox-t2)}
+.fx-own ul{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 0;padding:0;list-style:none}
+.fx-own li{padding:5px 12px;border-radius:999px;background:var(--ox-tint);font-size:13px;color:var(--ox-olive)}
+@media(max-width:760px){.fx-own{grid-template-columns:minmax(0,1fr)}.fx-own .b{justify-self:start}}
+#facts .fx-cards[hidden]{display:none}

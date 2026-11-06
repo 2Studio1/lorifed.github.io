@@ -1,0 +1,649 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ordito · Il sistema operativo AI della fabbrica · Concept di 21studio</title>
+<meta name="description" content="Concept dimostrativo di 21studio: sito per un software AI che coordina le linee di produzione. Marchio inventato, non un cliente reale.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#07090A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --ink:#0C1416; --ink-2:#4B5558; --mute:#6B7275; --paper:#F2F1ED; --card:#E6E6E1; --line:rgba(12,20,22,.1);
+  --night:#07090A; --deep:#0F2226; --amb:#FFB000; --amb-2:#FFC94D; --ice:#B8F2FF;
+  --sans:"Inter Tight",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.39,.575,.565,1); --expo:cubic-bezier(.19,1,.22,1); --out:cubic-bezier(.16,1,.3,1);
+  --pad:clamp(20px,4.6vw,72px); --wrap:min(1300px,100% - 2*var(--pad));
+}
+*{box-sizing:border-box}
+html{background:var(--night);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0;padding:0}
+ul,ol{list-style:none}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--amb);outline-offset:3px}
+.wrap{width:var(--wrap);margin-inline:auto}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.h1{font-size:clamp(40px,5.7vw,84px);line-height:.98;letter-spacing:-.035em;font-weight:400}
+.h2{font-size:clamp(36px,4.9vw,72px);line-height:1;letter-spacing:-.035em;font-weight:400}
+.lead{font-size:clamp(17px,1.35vw,20px);line-height:1.45;color:var(--ink-2)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.kick{color:var(--mute);font-size:18px;margin-bottom:18px}
+
+/* barra concept */
+.cbar{position:relative;z-index:60;background:#000;color:#CFD3D4;font-size:12.5px}
+.cbar div{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:7px var(--pad)}
+.cbar a{text-decoration:underline;text-underline-offset:3px}
+
+/* nav a pillola */
+.nav{position:fixed;left:50%;top:46px;z-index:50;transform:translateX(-50%);width:min(940px,calc(100% - 2*var(--pad)));display:flex;align-items:center;gap:24px;padding:10px 10px 10px 18px;border-radius:10px;background:rgba(120,124,126,.38);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);color:#fff;transition:background .4s var(--ease),top .4s var(--ease)}
+.nav.dark{background:rgba(12,20,22,.72)}
+.nav .brand{display:flex;align-items:center;gap:9px;font-size:20px;letter-spacing:-.02em;font-weight:500}
+.nav .brand svg{width:24px;height:24px}
+.nav ul{display:flex;gap:22px;font-size:14.5px;margin-right:auto}
+.nav ul a{opacity:.86;transition:opacity .2s}
+.nav ul a:hover{opacity:1}
+.b{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:13px 16px;border-radius:6px;border:0;cursor:pointer;line-height:1.1;transition:background .3s var(--ease),color .3s var(--ease),transform .3s var(--ease)}
+.b:active{transform:scale(.97)}
+.b-a{background:var(--amb);color:#1A1200}
+.b-a:hover{background:var(--amb-2)}
+.b-w{background:#fff;color:var(--ink)}
+.b-w:hover{background:#E9E9E6}
+.b-d{background:var(--ink);color:#fff}
+.b-d:hover{background:#22302F}
+.b-g{background:rgba(255,255,255,.12);color:#fff}
+.b-g:hover{background:rgba(255,255,255,.2)}
+.b .ar{transition:transform .35s var(--expo)}
+.b:hover .ar{transform:translateX(4px)}
+
+/* HERO: sequenza bloccata guidata dallo scroll */
+.hero{position:relative;height:470vh;background:var(--night)}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;color:#fff}
+.sky{position:absolute;inset:0;background:linear-gradient(180deg,#3B3346 0%,#8E5B4A 30%,#E59A4C 47%,#2A1A10 56%,#0B0806 72%)}
+.sky::after{content:"";position:absolute;left:0;right:0;top:52%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,200,120,.7),transparent);filter:blur(1px)}
+.dark{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 60%,#0D1517 0%,#050707 70%);opacity:0}
+#pc{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hud{position:absolute;inset:0;pointer-events:none;opacity:0}
+.hud .tag{position:absolute;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;color:var(--ice);border:1px solid rgba(184,242,255,.6);padding:5px 7px;background:rgba(5,10,12,.55);white-space:nowrap}
+.hud .tag.w{color:var(--amb);border-color:rgba(255,176,0,.7)}
+.hud .tag::before{content:"";position:absolute;left:-1px;top:100%;width:1px;height:38px;background:currentColor;opacity:.6}
+.lines{position:absolute;left:0;right:0;bottom:12vh;text-align:center;padding:0 var(--pad)}
+.lines [data-l]{font-weight:400;position:absolute;left:var(--pad);right:var(--pad);bottom:0;font-size:clamp(34px,5.7vw,84px);line-height:1;letter-spacing:-.035em;max-width:16ch;margin:0 auto}
+.lines .wd{display:inline-block;opacity:0;filter:blur(10px);transform:translateY(.25em)}
+.lines .hl{color:var(--amb)}
+.tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:calc(100vw/12);pointer-events:none}
+.tiles i{border:1px solid rgba(255,255,255,.07);background:#050707;opacity:0}
+.cue{position:absolute;left:50%;bottom:28px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:.75}
+.cue span{width:1px;height:42px;background:linear-gradient(#fff,transparent);animation:cue 2s var(--ease) infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* pannello chiaro con la tacca */
+.sheet{position:relative;z-index:2;background:var(--paper);margin-top:-6vh;border-radius:26px 26px 0 0}
+.sheet::before{content:"";position:absolute;left:50%;top:-1px;transform:translateX(-50%);width:min(380px,50vw);height:22px;background:var(--night);clip-path:path('M0 0 H380 C 350 0 345 22 320 22 H60 C 35 22 30 0 0 0 Z');-webkit-clip-path:path('M0 0 H380 C 350 0 345 22 320 22 H60 C 35 22 30 0 0 0 Z')}
+
+/* integrazioni */
+.intg{padding:16vh 0 12vh;text-align:center}
+.intg .h2{max-width:14ch;margin:0 auto 64px}
+.cells{display:grid;grid-template-columns:repeat(6,1fr);position:relative;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.cells li{position:relative;aspect-ratio:1.5;display:grid;place-items:center;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--ink)}
+.cells li::before,.cells li::after{content:"+";position:absolute;font-family:var(--mono);font-size:13px;color:var(--ink-2);line-height:1}
+.cells li::before{left:-5px;top:-8px}
+.cells li::after{right:-5px;bottom:-8px}
+.cells li small{display:block;font-size:11px;color:var(--mute);margin-top:6px;letter-spacing:.12em}
+
+/* piani */
+.plans{padding:10vh 0 16vh}
+.plans header{text-align:center;margin-bottom:56px}
+.plans header .h2{max-width:16ch;margin:0 auto 18px}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tier{background:var(--card);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:16px;transition:transform .5s var(--expo),background .3s}
+.tier:hover{transform:translateY(-6px);background:#DEDED8}
+.tier .mono{color:var(--ink-2)}
+.tier h3{font-size:24px;letter-spacing:-.02em;font-weight:400}
+.tier p{color:var(--ink-2);font-size:15px}
+.tier svg{width:100%;height:auto;border-radius:10px;background:var(--deep)}
+.tier .pr{display:flex;align-items:baseline;gap:8px;margin-top:auto}
+.tier .pr b{font-size:40px;font-weight:400;letter-spacing:-.03em}
+.tier .pr span{color:var(--ink-2);font-size:14px}
+.tier ul{display:grid;gap:8px;font-size:14px}
+.tier li{display:flex;gap:10px}
+.tier li::before{content:"";flex:none;width:7px;height:7px;margin-top:7px;background:var(--amb)}
+.tier.pop{background:var(--ink);color:#fff}
+.tier.pop p,.tier.pop .mono,.tier.pop .pr span{color:#A5AEB0}
+.tier.pop:hover{background:#15211F}
+
+/* calcolatore */
+.calc{padding:6vh 0 18vh}
+.calc header{text-align:center;margin-bottom:56px}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.inputs{display:grid;grid-template-columns:1fr 1fr;gap:28px 30px}
+.inputs h3{grid-column:1/-1;font-size:26px;font-weight:400;letter-spacing:-.02em}
+.fld{display:flex;flex-direction:column;gap:8px}
+.fld label{font-size:14px;color:var(--ink-2)}
+.fld output{font-size:22px;letter-spacing:-.02em}
+.fld.full{grid-column:1/-1}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:22px;background:transparent;cursor:pointer}
+input[type=range]::-webkit-slider-runnable-track{height:3px;background:linear-gradient(90deg,var(--ink) var(--v,50%),#CFCFCA var(--v,50%));border-radius:2px}
+input[type=range]::-moz-range-track{height:3px;background:#CFCFCA}
+input[type=range]::-moz-range-progress{height:3px;background:var(--ink)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;margin-top:-7.5px;border-radius:50%;background:var(--paper);border:4px solid var(--ink);transition:transform .2s var(--ease)}
+input[type=range]:active::-webkit-slider-thumb{transform:scale(1.25)}
+input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--paper);border:4px solid var(--ink)}
+.res{position:relative;background:var(--deep);color:#fff;border-radius:18px;padding:30px;clip-path:polygon(0 0,58% 0,62% 28px,100% 28px,100% 100%,0 100%);padding-top:44px}
+.res .mono{color:#9FC3C9}
+.res .big{font-size:clamp(46px,5vw,72px);letter-spacing:-.04em;line-height:1;margin:10px 0 6px}
+.res .pct{color:var(--amb)}
+.res dl{display:grid;grid-template-columns:1fr auto;gap:10px 20px;margin:26px 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.12);font-size:15px}
+.res dt{color:#B7C6C9}
+.res dd{font-variant-numeric:tabular-nums}
+.res form{background:rgba(255,255,255,.06);border-radius:12px;padding:20px;display:grid;grid-template-columns:1fr auto;gap:14px;align-items:end}
+.res form p{grid-column:1/-1;color:#B7C6C9;font-size:14px}
+.res input[type=email]{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.3);padding:10px 0;color:#fff;font-size:16px;width:100%}
+.res input[type=email]:focus{outline:0;border-color:var(--amb)}
+.res .ok{grid-column:1/-1;font-size:13.5px;color:var(--amb);min-height:1.3em}
+
+/* presentazione + split appiccicoso */
+.os{padding:8vh 0 10vh;text-align:center}
+.os .h2{max-width:13ch;margin:0 auto 26px}
+.os .lead{max-width:56ch;margin:0 auto}
+.split{display:grid;grid-template-columns:5fr 7fr;gap:6vw;padding-bottom:16vh}
+.feats li{min-height:70vh;display:flex;flex-direction:column;justify-content:center;gap:14px;color:#BFC3C3;transition:color .5s var(--ease)}
+.feats li.on{color:var(--ink)}
+.feats li .mono{color:inherit}
+.feats h3{font-size:clamp(26px,2.4vw,36px);font-weight:400;letter-spacing:-.03em}
+.feats p{max-width:38ch;font-size:17px}
+.panel{position:sticky;top:12vh;height:76vh;border-radius:18px;background:#0A1416;color:#DDE6E8;overflow:hidden;font-family:var(--mono);font-size:11px}
+.panel .bar{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);letter-spacing:.1em;text-transform:uppercase}
+.panel .bar i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#46E39A;margin-right:8px;box-shadow:0 0 0 0 rgba(70,227,154,.6)}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(70,227,154,0)}100%{box-shadow:0 0 0 0 rgba(70,227,154,0)}}
+.view{position:absolute;inset:48px 0 0;padding:18px;opacity:0;transform:translateY(16px) scale(.985);transition:opacity .6s var(--ease),transform .8s var(--expo);pointer-events:none}
+.view.on{opacity:1;transform:none;pointer-events:auto}
+.view svg{width:100%;height:100%}
+.v-title{position:absolute;left:18px;top:18px;letter-spacing:.12em;text-transform:uppercase;color:#8FA9AE}
+/* vista 1: nastro con pezzi e riquadri di rilevamento */
+.belt .pz{animation:move 9s linear infinite}
+@keyframes move{from{transform:translateX(-120px)}to{transform:translateX(760px)}}
+/* vista 2: grafico */
+.chart path.ln{stroke-dasharray:1400;stroke-dashoffset:1400}
+.view.on .chart path.ln{animation:draw 2.6s var(--out) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.chart .warn{opacity:0}
+.view.on .chart .warn{animation:fade .5s 2s forwards}
+@keyframes fade{to{opacity:1}}
+/* vista 3: squadre */
+.tasks{display:grid;gap:10px;margin-top:34px}
+.task{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:14px;opacity:0;transform:translateX(24px)}
+.view.on .task{animation:tin .7s var(--expo) forwards}
+.view.on .task:nth-child(2){animation-delay:.12s}.view.on .task:nth-child(3){animation-delay:.24s}.view.on .task:nth-child(4){animation-delay:.36s}
+@keyframes tin{to{opacity:1;transform:none}}
+.task b{font-family:var(--sans);font-weight:400;font-size:15px;color:#fff;letter-spacing:-.01em}
+.task .st{padding:4px 8px;border-radius:4px;background:rgba(255,176,0,.14);color:var(--amb)}
+.task .st.g{background:rgba(70,227,154,.12);color:#46E39A}
+.prog{grid-column:1/-1;height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.prog span{display:block;height:100%;background:var(--ice);width:0;transition:width 1.6s var(--out) .4s}
+.view.on .prog span{width:var(--w)}
+/* vista 4: kpi */
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:34px}
+.kpi{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:18px}
+.kpi b{display:block;font-family:var(--sans);font-weight:400;font-size:clamp(34px,3.4vw,52px);letter-spacing:-.04em;color:#fff;margin:8px 0 4px;font-variant-numeric:tabular-nums}
+.kpi em{font-style:normal;color:#46E39A}
+.note{position:absolute;right:18px;top:66px;color:#5F7579;letter-spacing:.1em;text-transform:uppercase}
+
+/* testo che si riempie + carosello a schede */
+.mod{padding:14vh 0 18vh;overflow:hidden}
+.mod .h2{text-align:center;max-width:18ch;margin:0 auto 22px}
+.mod .lead{text-align:center;max-width:60ch;margin:0 auto 60px}
+.ch{color:#C9CCCB;transition:color .4s ease}
+.ch.on{color:var(--ink)}
+.ctrl{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:transparent;padding:9px 12px;border-radius:6px;cursor:pointer;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);transition:all .3s var(--ease)}
+.tabs button[aria-selected=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.arrows{display:flex;gap:6px}
+.arrows button{width:38px;height:38px;border-radius:6px;border:0;background:var(--card);cursor:pointer;transition:background .3s}
+.arrows button:hover{background:#D6D6D0}
+.rail{display:flex;gap:14px;transition:transform .9s var(--expo)}
+.slide{flex:none;width:min(780px,82vw);height:min(62vh,520px);border-radius:18px;position:relative;overflow:hidden;color:#fff;padding:30px;display:flex;flex-direction:column;justify-content:space-between;background:var(--deep)}
+.slide svg.bg{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+.slide>*{position:relative}
+.slide h3{font-size:clamp(28px,2.8vw,40px);font-weight:400;letter-spacing:-.03em;max-width:16ch;line-height:1.05;margin-top:10px}
+.slide p{max-width:44ch;color:#C4D2D4;font-size:15.5px}
+.slide:not(.on){opacity:.55}
+.slide{transition:opacity .6s var(--ease)}
+
+/* dichiarazione */
+.claim{position:relative;background:var(--night);color:#fff;padding:22vh var(--pad);text-align:center;overflow:hidden}
+.claim canvas{position:absolute;inset:0;width:100%;height:100%}
+.claim p{position:relative;font-size:clamp(34px,4.6vw,68px);letter-spacing:-.035em;line-height:1.02;max-width:17ch;margin:0 auto}
+.claim .mono{position:relative;display:block;margin-top:28px;color:#8C9799}
+
+/* contatti + faq */
+.contact{padding:18vh 0 10vh}
+.contact .h2{text-align:center;max-width:20ch;margin:0 auto 64px}
+.contact .h2 em{font-style:normal;color:var(--mute)}
+.cg{display:grid;grid-template-columns:1fr 1.15fr;gap:6vw;align-items:start}
+.cg ul{display:grid;gap:12px;margin:22px 0 40px}
+.cg li{display:flex;gap:12px;align-items:center}
+.cg li::before{content:"";width:9px;height:9px;background:var(--amb)}
+.cform{background:var(--deep);color:#fff;border-radius:18px;padding:30px;display:grid;grid-template-columns:1fr 1fr;gap:22px 24px;box-shadow:0 40px 80px -40px rgba(12,20,22,.5)}
+.cform .f{display:flex;flex-direction:column;gap:4px}
+.cform .full{grid-column:1/-1}
+.cform label{font-size:13px;color:#B7C6C9}
+.cform input,.cform select{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.22);padding:9px 0;color:#fff;font-size:16px;border-radius:0}
+.cform select option{background:var(--deep)}
+.cform input:focus,.cform select:focus{outline:0;border-color:var(--amb)}
+.cform .b{grid-column:1/-1;justify-content:center;padding:16px}
+.cform .ok{grid-column:1/-1;font-size:13.5px;color:var(--amb);min-height:1.3em}
+.faq{display:grid;grid-template-columns:1fr 1.6fr;gap:6vw;padding:12vh 0 16vh;border-top:1px solid var(--line);margin-top:12vh}
+.faq h2{font-size:34px;font-weight:400;letter-spacing:-.03em;margin-bottom:12px}
+.faq .q{border-bottom:1px solid var(--line)}
+.faq .q button{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;gap:20px;padding:22px 0;cursor:pointer;font-size:18px;letter-spacing:-.01em}
+.faq .q button:focus-visible{outline:2px solid var(--amb)}
+.faq .q button span{flex:none;width:14px;height:14px;position:relative;margin-top:6px}
+.faq .q button span::before,.faq .q button span::after{content:"";position:absolute;left:0;right:0;top:6px;height:1.5px;background:var(--ink);transition:transform .35s var(--expo)}
+.faq .q button span::after{transform:rotate(90deg)}
+.faq .q.open button span::after{transform:rotate(0)}
+.faq .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--expo)}
+.faq .q.open .a{grid-template-rows:1fr}
+.faq .a>div{overflow:hidden}
+.faq .a p{padding:0 0 22px;color:var(--ink-2);max-width:60ch}
+
+/* chiusura */
+.final{position:relative;background:var(--deep);color:#fff;text-align:center;padding:22vh var(--pad) 18vh;border-radius:26px 26px 0 0;overflow:hidden}
+.final::before{content:"";position:absolute;left:50%;top:-1px;transform:translateX(-50%);width:min(380px,50vw);height:22px;background:var(--paper);clip-path:path('M0 0 H380 C 350 0 345 22 320 22 H60 C 35 22 30 0 0 0 Z');-webkit-clip-path:path('M0 0 H380 C 350 0 345 22 320 22 H60 C 35 22 30 0 0 0 Z')}
+.final svg{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
+.final .h2{position:relative;max-width:14ch;margin:0 auto 34px}
+.final .b{position:relative}
+footer{background:var(--deep);color:#B7C6C9;padding:0 var(--pad) 40px;font-size:14px}
+footer .in{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;padding-top:50px;border-top:1px solid rgba(255,255,255,.08)}
+footer .brand{display:flex;align-items:center;gap:9px;font-size:22px;color:#fff;letter-spacing:-.02em}
+footer .fh{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#8399A0;margin:0 0 12px;font-weight:400}
+footer .legal{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:50px;font-size:12.5px;color:#8399A0}
+
+[data-r]{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform 1.1s var(--expo)}
+[data-r].in{opacity:1;transform:none}
+
+@media (max-width:980px){
+  .nav ul,.nav .hide-m{display:none}
+  .nav{justify-content:space-between;top:62px}
+  .cells{grid-template-columns:repeat(3,1fr)}
+  .tiers,.cgrid,.cg,.faq{grid-template-columns:1fr}
+  .inputs{grid-template-columns:1fr}
+  .split{grid-template-columns:1fr;gap:0}
+  .panel{position:sticky;top:120px;height:46vh;order:-1;z-index:2}
+  .feats li{min-height:56vh}
+  .cform{grid-template-columns:1fr}
+  .hud .tag:nth-child(2),.hud .tag:nth-child(3){display:none}
+  .lines [data-l]{max-width:12ch}
+  footer .in{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  [data-r]{opacity:1;transform:none}
+  .ch{color:var(--ink)}
+  .hero{height:auto}
+  .stage{position:relative}
+  .lines .wd{opacity:1;filter:none;transform:none}
+  .lines [data-l]:not(:first-child){display:none}
+  .lines [data-l]:first-child{position:relative}
+}
+</style>
+</head>
+<body>
+<div class="cbar" role="note"><div><span>Concept dimostrativo di 21studio · marchio inventato</span><a href="../../servizi/siti-web.html">← Torna a Siti web</a></div></div>
+
+<header class="nav" id="nav">
+  <a class="brand" href="#top" aria-label="Ordito, torna su"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="5" fill="currentColor"/><path d="M6 8h12M6 12h12M6 16h12M9 5v14M15 5v14" stroke="#0C1416" stroke-width="1.6"/></svg>Ordito</a>
+  <ul><li><a href="#piattaforma">Piattaforma</a></li><li><a href="#piani">Piani</a></li><li><a href="#calcolo">Calcola il fermo</a></li><li><a href="#faq">Domande</a></li></ul>
+  <a class="b b-a hide-m" href="#piattaforma">Esplora il prodotto</a>
+  <a class="b b-w" href="#contatti">Chiedi una demo</a>
+</header>
+
+<main id="top">
+  <section class="hero" aria-label="Ordito: il sistema operativo AI della linea di produzione">
+    <div class="stage">
+      <div class="sky" aria-hidden="true"></div>
+      <div class="dark" aria-hidden="true"></div>
+      <canvas id="pc" aria-hidden="true"></canvas>
+      <div class="hud" aria-hidden="true">
+        <span class="tag" style="left:22%;top:30%">PRESSA P2 · 412 colpi/h</span>
+        <span class="tag w" style="left:56%;top:24%">ROBOT R4 · coppia +18%</span>
+        <span class="tag" style="left:70%;top:46%">NASTRO N1 · 0,8 m/s</span>
+        <span class="tag" style="left:12%;top:52%">BAIA B3 · libera</span>
+      </div>
+      <div class="tiles" aria-hidden="true"></div>
+      <div class="lines">
+        <h1 data-l>Abbiamo riprogettato la fabbrica partendo dalla <span class="hl">linea</span>.</h1>
+        <p data-l aria-hidden="true">Un'AI che vede ogni pezzo, ogni macchina, ogni minuto di fermo…</p>
+        <p data-l aria-hidden="true">…e li cuce in un unico <span class="hl">sistema</span> che si regola da solo.</p>
+      </div>
+      <div class="cue mono" aria-hidden="true">Scorri<span></span></div>
+    </div>
+  </section>
+
+  <div class="sheet">
+    <section class="intg wrap" aria-labelledby="intg-h">
+      <h2 class="h2" id="intg-h" data-r>Si collega a quello che hai già in reparto</h2>
+      <ul class="cells" data-stagger>
+        <li>OPC UA<small>PLC</small></li><li>MQTT<small>Sensori</small></li><li>Modbus TCP<small>Macchine</small></li><li>PROFINET<small>Rete</small></li><li>Telecamere IP<small>Visione</small></li><li>ERP<small>Ordini</small></li>
+        <li>MES<small>Produzione</small></li><li>REST API<small>Sviluppo</small></li><li>Webhook<small>Eventi</small></li><li>CSV · SFTP<small>Storico</small></li><li>Bilance<small>Peso</small></li><li>Badge<small>Turni</small></li>
+      </ul>
+    </section>
+
+    <section class="plans wrap" id="piani" aria-labelledby="piani-h">
+      <header data-r><h2 class="h2" id="piani-h">Parti da una linea. Allarga quando vuoi.</h2><p class="lead">Nessun progetto da un anno: si comincia dal collo di bottiglia che ti costa di più, e si aggiunge il resto solo quando i numeri lo giustificano.</p></header>
+      <div class="tiers" data-stagger>
+        <article class="tier">
+          <span class="mono">01 · Avvio rapido</span><h3>Una linea</h3>
+          <svg viewBox="0 0 320 140" aria-hidden="true"><g stroke="#B8F2FF" stroke-opacity=".55" fill="none"><rect x="20" y="62" width="280" height="16" rx="2"/><rect class="m1" x="40" y="44" width="24" height="18"/><rect x="230" y="40" width="34" height="22"/></g><circle cx="150" cy="70" r="26" fill="none" stroke="#FFB000" stroke-dasharray="4 4"><animateTransform attributeName="transform" type="rotate" from="0 150 70" to="360 150 70" dur="12s" repeatCount="indefinite"/></circle><text x="20" y="120" fill="#8FA9AE" font-family="JetBrains Mono" font-size="11" letter-spacing="1">1 LINEA · 4 TELECAMERE</text></svg>
+          <p>Visione AI su una linea, allarmi sui fermi e report del turno. Operativo in dieci giorni lavorativi.</p>
+          <ul><li>Fino a 4 telecamere e 20 sensori</li><li>Cruscotto del turno</li><li>Installazione inclusa</li></ul>
+          <div class="pr"><b>€ 1.200</b><span>/ mese</span></div>
+          <a class="b b-d" href="#contatti">Parti da qui <span class="ar">→</span></a>
+        </article>
+        <article class="tier pop">
+          <span class="mono">02 · Il più scelto</span><h3>Più linee</h3>
+          <svg viewBox="0 0 320 140" aria-hidden="true"><g stroke="#B8F2FF" stroke-opacity=".55" fill="none"><rect x="20" y="30" width="280" height="12" rx="2"/><rect x="20" y="64" width="280" height="12" rx="2"/><rect x="20" y="98" width="280" height="12" rx="2"/></g><g fill="#FFB000"><rect width="14" height="10" y="20"><animate attributeName="x" from="20" to="290" dur="5s" repeatCount="indefinite"/></rect><rect width="14" height="10" y="54"><animate attributeName="x" from="20" to="290" dur="6.5s" repeatCount="indefinite"/></rect><rect width="14" height="10" y="88"><animate attributeName="x" from="20" to="290" dur="4.2s" repeatCount="indefinite"/></rect></g></svg>
+          <p>Fino a cinque linee coordinate: previsione dei guasti, cambi formato pianificati e squadre assegnate in automatico.</p>
+          <ul><li>Manutenzione predittiva</li><li>Pianificazione dei cambi formato</li><li>Integrazione con ERP e MES</li></ul>
+          <div class="pr"><b>€ 3.900</b><span>/ mese</span></div>
+          <a class="b b-a" href="#contatti">Chiedi una demo <span class="ar">→</span></a>
+        </article>
+        <article class="tier">
+          <span class="mono">03 · Gruppo</span><h3>Più stabilimenti</h3>
+          <svg viewBox="0 0 320 140" aria-hidden="true"><g fill="none" stroke="#B8F2FF" stroke-opacity=".55"><rect x="24" y="24" width="70" height="44"/><rect x="226" y="24" width="70" height="44"/><rect x="125" y="78" width="70" height="44"/></g><g stroke="#FFB000" stroke-dasharray="3 5" fill="none"><path d="M94 46 H226"><animate attributeName="stroke-dashoffset" from="16" to="0" dur="1s" repeatCount="indefinite"/></path><path d="M59 68 V100 H125"><animate attributeName="stroke-dashoffset" from="16" to="0" dur="1s" repeatCount="indefinite"/></path><path d="M261 68 V100 H195"><animate attributeName="stroke-dashoffset" from="16" to="0" dur="1s" repeatCount="indefinite"/></path></g></svg>
+          <p>Una torre di controllo per tutti gli stabilimenti, con confronto delle prestazioni e analisi su misura.</p>
+          <ul><li>Linee e sedi illimitate</li><li>Referente dedicato</li><li>Server nel tuo stabilimento, se serve</li></ul>
+          <div class="pr"><b>Su misura</b></div>
+          <a class="b b-d" href="#contatti">Parliamone <span class="ar">→</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="calc wrap" id="calcolo" aria-labelledby="calc-h">
+      <header data-r><p class="kick">Calcolatore del fermo</p><h2 class="h2" id="calc-h">Quanto ti costano le linee ferme?</h2></header>
+      <div class="cgrid">
+        <div class="inputs" data-r>
+          <h3>Descrivi il tuo reparto</h3>
+          <div class="fld"><label for="lin">Linee di produzione</label><output for="lin" id="o-lin">4</output><input type="range" id="lin" min="1" max="20" value="4"></div>
+          <div class="fld"><label for="tur">Turni al giorno</label><output for="tur" id="o-tur">2</output><input type="range" id="tur" min="1" max="3" value="2"></div>
+          <div class="fld"><label for="fer">Ore di fermo imprevisto a settimana, per linea</label><output for="fer" id="o-fer">5</output><input type="range" id="fer" min="1" max="20" value="5"></div>
+          <div class="fld"><label for="cos">Costo di un'ora di fermo</label><output for="cos" id="o-cos">€ 1.400</output><input type="range" id="cos" min="200" max="6000" step="100" value="1400"></div>
+          <div class="fld full"><label for="ser">Quanto pesano scarti e rilavorazioni?</label><output for="ser" id="o-ser">5 · Medio</output><input type="range" id="ser" min="1" max="10" value="5"></div>
+        </div>
+        <div class="res" aria-live="polite" data-r>
+          <span class="mono">Con Ordito il tuo reparto recupera</span>
+          <p class="big"><span id="r-tot">€ 0</span></p>
+          <p>all'anno, circa il <span class="pct" id="r-pct">0%</span> del costo dei fermi di oggi.</p>
+          <dl><dt>Fermi evitati</dt><dd id="r-a">€ 0</dd><dt>Scarti in meno</dt><dd id="r-b">€ 0</dd><dt>Cambi formato più rapidi</dt><dd id="r-c">€ 0</dd></dl>
+          <form id="roi" novalidate>
+            <p>Vuoi l'analisi fatta sul tuo stabilimento? Lascia l'email di lavoro.</p>
+            <div><label class="sr" for="em">Email di lavoro</label><input id="em" type="email" placeholder="nome@azienda.it" autocomplete="email"></div>
+            <button class="b b-a" type="submit">Invia</button>
+            <p class="ok" id="roi-ok" role="status"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="os wrap" id="piattaforma" aria-labelledby="os-h">
+      <p class="kick" data-r>Perché Ordito</p>
+      <h2 class="h2" id="os-h" data-r>Ti presentiamo Ordito OS</h2>
+      <p class="lead" data-r>Ordito usa la visione artificiale e modelli di previsione per trasformare una linea gestita a voce e su fogli Excel in un sistema che sa cosa sta succedendo, cosa succederà e chi deve intervenire.</p>
+    </section>
+    <section class="split wrap" aria-label="Le quattro funzioni">
+      <ol class="feats">
+        <li class="on" data-v="0"><span class="mono">01 · Visione</span><h3>Vede ogni pezzo che passa</h3><p>Telecamere comuni e un modello addestrato sui tuoi prodotti: ogni pezzo è contato, misurato e controllato, e gli scarti si fermano prima dell'imballo.</p></li>
+        <li data-v="1"><span class="mono">02 · Previsione</span><h3>Si accorge dei guasti prima che arrivino</h3><p>Vibrazioni, temperature e assorbimenti letti di continuo. Quando qualcosa devia, sai quale macchina, quale pezzo e quante ore hai.</p></li>
+        <li data-v="2"><span class="mono">03 · Squadre</span><h3>Dice a chi tocca, e quando</h3><p>Interventi, cambi formato e controlli assegnati alla persona giusta, sul telefono, con le istruzioni già pronte.</p></li>
+        <li data-v="3"><span class="mono">04 · Ritorno</span><h3>Si ripaga in mesi, non in anni</h3><p>Abbonamento mensile, niente investimento iniziale in hardware dedicato. I risultati si misurano sul cruscotto dal primo turno.</p></li>
+      </ol>
+      <div class="panel" aria-label="Cruscotto d'esempio di Ordito">
+        <div class="bar"><span><i></i>Stabilimento Nord · Linea 2</span><span id="clock">06:00</span></div>
+        <div class="view on">
+          <span class="v-title">Visione · nastro N1</span>
+          <svg class="belt" viewBox="0 0 640 380" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <defs><pattern id="gr" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#173034"/></pattern></defs>
+            <rect width="640" height="380" fill="url(#gr)"/>
+            <rect x="0" y="160" width="640" height="70" fill="#102528" stroke="#2C4A4F"/>
+                        <g class="pz"><rect x="0" y="172" width="54" height="46" rx="3" fill="#3B5458"/><rect x="-6" y="166" width="66" height="58" fill="none" stroke="#B8F2FF"/><text x="-6" y="158" fill="#B8F2FF" font-size="11" font-family="JetBrains Mono">PZ-2291 · OK 99,2%</text></g>
+            <g class="pz" style="animation-delay:-3s"><rect x="0" y="172" width="54" height="46" rx="3" fill="#3B5458"/><rect x="-6" y="166" width="66" height="58" fill="none" stroke="#FFB000" stroke-width="2"/><text x="-6" y="158" fill="#FFB000" font-size="11" font-family="JetBrains Mono">PZ-2292 · SCARTO</text></g>
+            <g class="pz" style="animation-delay:-6s"><rect x="0" y="172" width="54" height="46" rx="3" fill="#3B5458"/><rect x="-6" y="166" width="66" height="58" fill="none" stroke="#B8F2FF"/><text x="-6" y="158" fill="#B8F2FF" font-size="11" font-family="JetBrains Mono">PZ-2293 · OK 98,7%</text></g>
+            <g font-family="JetBrains Mono" font-size="11" fill="#8FA9AE"><text x="20" y="290">PEZZI / ORA</text><text x="20" y="318" fill="#fff" font-size="24" font-family="Inter Tight" id="pph">1.284</text><text x="240" y="290">SCARTI</text><text x="240" y="318" fill="#FFB000" font-size="24" font-family="Inter Tight">0,9%</text><text x="440" y="290">TELECAMERE</text><text x="440" y="318" fill="#fff" font-size="24" font-family="Inter Tight">4 / 4</text></g>
+          </svg>
+        </div>
+        <div class="view">
+          <span class="v-title">Previsione · motore M4</span>
+          <svg class="chart" viewBox="0 0 640 380" aria-hidden="true">
+            <rect width="640" height="380" fill="url(#gr)"/>
+            <path d="M0 120 H640" stroke="#FFB000" stroke-dasharray="6 6" opacity=".7"/><text x="8" y="112" fill="#FFB000" font-size="10" font-family="JetBrains Mono">SOGLIA VIBRAZIONE</text>
+            <path class="ln" d="M0 300 C 40 290 60 305 90 296 S 150 282 180 290 S 240 300 270 280 S 330 270 360 262 S 420 240 450 214 S 510 170 540 140 S 600 104 640 92" fill="none" stroke="#B8F2FF" stroke-width="2"/>
+            <g class="warn"><circle cx="560" cy="128" r="7" fill="#FFB000"/><circle cx="560" cy="128" r="16" fill="none" stroke="#FFB000" opacity=".5"/>
+            <rect x="330" y="30" width="220" height="64" rx="8" fill="#14282B" stroke="#FFB000"/><text x="344" y="54" fill="#FFB000" font-size="11" font-family="JetBrains Mono">CUSCINETTO M4 · ANOMALIA</text><text x="344" y="78" fill="#fff" font-size="15" font-family="Inter Tight">Guasto previsto tra 36 ore</text></g>
+            <g font-family="JetBrains Mono" font-size="10" fill="#5F7579"><text x="0" y="370">LUN</text><text x="150" y="370">MAR</text><text x="300" y="370">MER</text><text x="450" y="370">GIO</text><text x="600" y="370">VEN</text></g>
+          </svg>
+        </div>
+        <div class="view">
+          <span class="v-title">Squadre · turno B</span>
+          <div class="tasks">
+            <div class="task"><span class="st">Ora</span><b>Cambio cuscinetto M4</b><span>Luca · 14:20</span><div class="prog"><span style="--w:30%"></span></div></div>
+            <div class="task"><span class="st g">Pronto</span><b>Cambio formato L2 · vaschette 500 g</b><span>Sara · 15:00</span><div class="prog"><span style="--w:100%"></span></div></div>
+            <div class="task"><span class="st">In coda</span><b>Pulizia ugelli etichettatrice</b><span>Omar · 16:10</span><div class="prog"><span style="--w:0%"></span></div></div>
+            <div class="task"><span class="st g">Fatto</span><b>Taratura bilancia B1</b><span>Giulia · 13:05</span><div class="prog"><span style="--w:100%"></span></div></div>
+          </div>
+        </div>
+        <div class="view">
+          <span class="v-title">Ritorno · ultimi 90 giorni</span>
+          <div class="kpis">
+            <div class="kpi"><span>Efficienza (OEE)</span><b data-to="81" data-suf="%">0%</b><em>da 62%</em></div>
+            <div class="kpi"><span>Ore di fermo</span><b data-to="-38" data-suf="%">0%</b><em>rispetto a prima</em></div>
+            <div class="kpi"><span>Scarti</span><b data-to="0.9" data-suf="%" data-dec="1">0%</b><em>da 2,4%</em></div>
+            <div class="kpi"><span>Rientro dell'abbonamento</span><b data-to="7" data-suf=" mesi">0</b><em>stimato</em></div>
+          </div>
+        </div>
+        <span class="note">Dati d'esempio</span>
+      </div>
+    </section>
+
+    <section class="mod" aria-labelledby="mod-h">
+      <div class="wrap">
+        <h2 class="h2" id="mod-h" data-chars>Una piattaforma modulare. Possibilità senza fine.</h2>
+        <p class="lead">Ogni modulo si accende quando serve: dal ricevimento merci alla spedizione, su una linea o su tutto il gruppo.</p>
+        <div class="ctrl">
+          <div class="tabs" role="tablist" aria-label="Moduli">
+            <button role="tab" aria-selected="true" data-i="0">Ricevimento</button><button role="tab" aria-selected="false" data-i="1">In linea</button><button role="tab" aria-selected="false" data-i="2">Collaudo</button><button role="tab" aria-selected="false" data-i="3">Tra le sedi</button>
+          </div>
+          <div class="arrows"><button type="button" aria-label="Modulo precedente" data-d="-1">←</button><button type="button" aria-label="Modulo successivo" data-d="1">→</button></div>
+        </div>
+        <div class="rail">
+          <article class="slide on"><svg class="bg" viewBox="0 0 780 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#B8F2FF" stroke-opacity=".25" fill="none"><rect x="430" y="80" width="120" height="90"/><rect x="570" y="80" width="120" height="90"/><rect x="430" y="190" width="120" height="90"/><rect x="570" y="190" width="120" height="90" stroke="#FFB000" stroke-opacity=".9"/></g><text x="570" y="300" fill="#FFB000" font-family="JetBrains Mono" font-size="11">PALLET 0447 · VERIFICATO</text></svg><span class="mono">Al ricevimento</span><div><h3>Merci in ingresso controllate senza fogli</h3><p>Le telecamere leggono etichette e colli, confrontano l'ordine e segnalano le differenze al magazziniere.</p></div></article>
+          <article class="slide"><svg class="bg" viewBox="0 0 780 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#B8F2FF" stroke-opacity=".25" fill="none"><rect x="380" y="220" width="380" height="40"/><rect x="420" y="190" width="40" height="30"/><rect x="540" y="186" width="44" height="34"/><rect x="660" y="190" width="40" height="30"/></g><path d="M420 160 v-40 h120" stroke="#FFB000" fill="none"/><text x="420" y="110" fill="#FFB000" font-family="JetBrains Mono" font-size="11">VELOCITÀ OTTIMALE · 0,82 m/s</text></svg><span class="mono">In linea</span><div><h3>La linea che si regola da sola</h3><p>Velocità, ritmo dei robot e pause sono calcolati sul collo di bottiglia del momento, non su una tabella di due anni fa.</p></div></article>
+          <article class="slide"><svg class="bg" viewBox="0 0 780 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="580" cy="220" r="120" fill="none" stroke="#B8F2FF" stroke-opacity=".25"/><circle cx="580" cy="220" r="70" fill="none" stroke="#B8F2FF" stroke-opacity=".25"/><path d="M460 220h240M580 100v240" stroke="#B8F2FF" stroke-opacity=".2"/><circle cx="612" cy="190" r="6" fill="#FFB000"/><text x="626" y="186" fill="#FFB000" font-family="JetBrains Mono" font-size="11">Δ 0,04 mm</text></svg><span class="mono">In collaudo</span><div><h3>Ogni pezzo misurato, non uno su cento</h3><p>Il controllo visivo lavora al ritmo della linea e salva la foto di ogni pezzo, per i clienti che chiedono la tracciabilità.</p></div></article>
+          <article class="slide"><svg class="bg" viewBox="0 0 780 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#B8F2FF" fill-opacity=".5"><circle cx="460" cy="160" r="5"/><circle cx="640" cy="120" r="5"/><circle cx="700" cy="300" r="5"/><circle cx="520" cy="360" r="5"/></g><g stroke="#FFB000" stroke-opacity=".7" fill="none" stroke-dasharray="3 5"><path d="M460 160 L640 120 L700 300 L520 360 Z"/></g></svg><span class="mono">Tra le sedi</span><div><h3>Una torre di controllo per tutto il gruppo</h3><p>Confronti le prestazioni delle sedi con gli stessi indicatori e sposti le commesse dove c'è capacità libera.</p></div></article>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="claim" aria-label="Il principio">
+    <canvas id="weave" aria-hidden="true"></canvas>
+    <p data-r>Una fabbrica non ha bisogno di più schermi. Ha bisogno di un filo che tenga insieme tutto.</p>
+    <span class="mono" data-r>Ordito · dal latino ordiri, intrecciare</span>
+  </section>
+
+  <div style="background:var(--paper)">
+    <section class="contact wrap" id="contatti" aria-labelledby="ct-h">
+      <h2 class="h2" id="ct-h" data-r>Scrivici, ti richiamiamo <em>in giornata, quando preferisci.</em></h2>
+      <div class="cg">
+        <div data-r>
+          <p class="lead">Compila il modulo e organizziamo una chiamata per capire da quale linea partire.</p>
+          <ul><li>Demo di 30 minuti sulla tua linea</li><li>Sopralluogo in stabilimento</li><li>Stima del rientro sui tuoi numeri</li></ul>
+        </div>
+        <form class="cform" id="cf" novalidate data-r>
+          <div class="f"><label for="c1">Nome e cognome</label><input id="c1" autocomplete="name"></div>
+          <div class="f"><label for="c2">Ruolo</label><input id="c2" autocomplete="organization-title"></div>
+          <div class="f"><label for="c3">Telefono</label><input id="c3" type="tel" autocomplete="tel"></div>
+          <div class="f"><label for="c4">Email di lavoro</label><input id="c4" type="email" autocomplete="email"></div>
+          <div class="f full"><label for="c5">Azienda</label><input id="c5" autocomplete="organization"></div>
+          <div class="f full"><label for="c6">Da dove vuoi partire?</label><select id="c6"><option>Visione e controllo qualità</option><option>Manutenzione predittiva</option><option>Pianificazione delle squadre</option><option>Non lo so ancora</option></select></div>
+          <button class="b b-a" type="submit">Invia la richiesta <span class="ar">→</span></button>
+          <p class="ok" id="cf-ok" role="status"></p>
+        </form>
+      </div>
+      <div class="faq" id="faq">
+        <div><h2>Domande</h2><p class="lead">Le risposte alle domande che ci fanno prima di partire.</p></div>
+        <div>
+          <div class="q open"><button type="button" aria-expanded="true">Servono telecamere o sensori nuovi?<span aria-hidden="true"></span></button><div class="a"><div><p>Di solito no: Ordito legge i PLC e le telecamere IP che hai già. Se una linea non ne ha, le installiamo noi nel piano Avvio rapido.</p></div></div></div>
+          <div class="q"><button type="button" aria-expanded="false">In cosa è diverso da un MES?<span aria-hidden="true"></span></button><div class="a"><div><p>Il MES registra cosa è successo. Ordito guarda la linea in tempo reale, prevede cosa succederà e assegna il lavoro alle persone. Si collega al MES, non lo sostituisce.</p></div></div></div>
+          <div class="q"><button type="button" aria-expanded="false">Dove finiscono i dati?<span aria-hidden="true"></span></button><div class="a"><div><p>Su server in Europa oppure su un server dentro lo stabilimento, a tua scelta. Le immagini dei pezzi restano di tua proprietà.</p></div></div></div>
+          <div class="q"><button type="button" aria-expanded="false">Quanto ci vuole per partire?<span aria-hidden="true"></span></button><div class="a"><div><p>Dieci giorni lavorativi per una linea: sopralluogo, collegamento, addestramento del modello sui tuoi pezzi e primo cruscotto.</p></div></div></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="final" aria-labelledby="fin-h">
+    <svg viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true"><g fill="none" stroke="#B8F2FF" stroke-opacity=".12"><path d="M0 420 C 300 380 500 460 720 400 S 1100 320 1440 380"/><path d="M0 460 C 300 420 520 500 720 440 S 1120 360 1440 420"/><path d="M0 500 C 320 460 540 540 720 480 S 1140 400 1440 460"/></g></svg>
+    <h2 class="h2" id="fin-h" data-r>La fabbrica di domani parte da una linea.</h2>
+    <a class="b b-a" href="#contatti" data-r>Prenota la demo <span class="ar">→</span></a>
+  </section>
+</main>
+<footer>
+  <div class="in">
+    <div><span class="brand"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="5" fill="#FFB000"/><path d="M6 8h12M6 12h12M6 16h12M9 5v14M15 5v14" stroke="#0C1416" stroke-width="1.6"/></svg>Ordito</span><p style="margin-top:14px;max-width:32ch">Il sistema operativo AI della linea di produzione.</p></div>
+    <div><h3 class="fh">Prodotto</h3><p><a href="#piattaforma">Piattaforma</a><br><a href="#piani">Piani</a><br><a href="#calcolo">Calcolatore</a></p></div>
+    <div><h3 class="fh">Azienda</h3><p><a href="#faq">Domande</a><br><a href="#contatti">Contatti</a></p></div>
+    <div><h3 class="fh">Nota</h3><p>I moduli sono dimostrativi: nessun dato viene inviato.</p></div>
+  </div>
+  <div class="legal"><span>Ordito è un marchio inventato da 21studio per mostrare un sito d'esempio. Numeri e cruscotti sono illustrativi.</span><a href="../../servizi/siti-web.html">← Torna a Siti web</a></div>
+</footer>
+
+<script src="js/hero.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile = matchMedia('(max-width:980px)').matches;
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const eur = n => '€ ' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+  // parole delle tre frasi dell'hero
+  $$('[data-l]').forEach(p => {
+    const walk = n => [...n.childNodes].map(c => c.nodeType === 3 ? c.textContent.split(/(\s+)/).map(w => w.trim() ? `<span class="wd">${w}</span>` : w).join('') : `<span class="wd ${c.className}">${c.textContent}</span>`).join('');
+    p.innerHTML = walk(p);
+  });
+  // caselle nere della transizione
+  const tl = $('.tiles'); for (let i = 0; i < 12 * 9; i++) tl.appendChild(document.createElement('i'));
+
+  // particelle
+  let H = null;
+  try { H = window.OrditoHero && OrditoHero($('#pc'), { count: mobile ? 11000 : 24000, size: mobile ? 1.15 : 1 }); } catch (e) { H = null; }
+  if (H) { if (RM) H.frame(3); else new IntersectionObserver(([e]) => e.isIntersecting ? H.start() : H.stop()).observe($('.hero')); }
+
+  // calcolatore (stima illustrativa, tutto in locale)
+  const ids = ['lin', 'tur', 'fer', 'cos', 'ser'], v = {};
+  const lab = { ser: x => x + ' · ' + (x < 4 ? 'Basso' : x < 8 ? 'Medio' : 'Alto'), cos: x => eur(x) };
+  const shown = { tot: 0, a: 0, b: 0, c: 0 };
+  function calc() {
+    ids.forEach(k => { const el = $('#' + k); v[k] = +el.value; el.style.setProperty('--v', (el.value - el.min) / (el.max - el.min) * 100 + '%'); $('#o-' + k).textContent = lab[k] ? lab[k](v[k]) : v[k]; });
+    const base = v.lin * v.fer * 48 * v.cos * (0.75 + v.tur * .125); // costo annuo dei fermi
+    const a = base * .32, b = base * .02 * v.ser, c = v.lin * v.tur * 2600;
+    const to = { tot: a + b + c, a, b, c };
+    gsap.to(shown, { ...to, duration: RM ? 0 : .6, ease: 'power3.out', overwrite: true, onUpdate: () => {
+      $('#r-tot').textContent = eur(shown.tot); $('#r-a').textContent = eur(shown.a); $('#r-b').textContent = eur(shown.b); $('#r-c').textContent = eur(shown.c); } });
+    $('#r-pct').textContent = Math.round(to.tot / base * 100) + '%';
+  }
+  const ready = () => { ids.forEach(k => $('#' + k).addEventListener('input', calc)); calc(); };
+
+  // moduli non inviati
+  $('#roi').addEventListener('submit', e => { e.preventDefault(); $('#roi-ok').textContent = 'Concept: nessun dato inviato. In un sito vero qui partirebbe la richiesta di analisi.'; });
+  $('#cf').addEventListener('submit', e => { e.preventDefault(); $('#cf-ok').textContent = 'Concept: nessun dato inviato. In un sito vero qui arriverebbe la conferma.'; });
+
+  // FAQ a fisarmonica
+  $$('.faq .q button').forEach(b => b.addEventListener('click', () => { const q = b.parentElement, o = !q.classList.contains('open'); q.classList.toggle('open', o); b.setAttribute('aria-expanded', o); }));
+
+  // carosello moduli
+  const slides = $$('.slide'), tabs = $$('.tabs button'), rail = $('.rail'); let cur = 0;
+  function go(i) { cur = (i + slides.length) % slides.length; const x = slides[cur].offsetLeft - slides[0].offsetLeft;
+    rail.style.transform = `translateX(${-x}px)`; slides.forEach((s, k) => s.classList.toggle('on', k === cur)); tabs.forEach((t, k) => t.setAttribute('aria-selected', k === cur)); }
+  tabs.forEach(t => t.addEventListener('click', () => go(+t.dataset.i)));
+  $$('.arrows button').forEach(b => b.addEventListener('click', () => go(cur + +b.dataset.d)));
+  let sx = 0; rail.addEventListener('touchstart', e => sx = e.touches[0].clientX, { passive: true });
+  rail.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1)); });
+
+  // cruscotto: vista attiva in base alla funzione al centro dello schermo
+  const views = $$('.view'), feats = $$('.feats li');
+  function setView(i) {
+    feats.forEach((f, k) => f.classList.toggle('on', k === i));
+    views.forEach((w, k) => w.classList.toggle('on', k === i));
+    if (i === 3) $$('.kpi b').forEach(b => { const o = { n: 0 }, to = +b.dataset.to, d = +(b.dataset.dec || 0);
+      gsap.to(o, { n: to, duration: RM ? 0 : 1.4, ease: 'power3.out', onUpdate: () => b.textContent = o.n.toFixed(d).replace('.', ',') + b.dataset.suf }); });
+  }
+  const fio = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && setView(+e.target.dataset.v)), { rootMargin: '-45% 0px -45% 0px' });
+  feats.forEach(f => fio.observe(f));
+  let mins = 360; setInterval(() => { mins = (mins + 1) % 1440; $('#clock').textContent = String(mins / 60 | 0).padStart(2, '0') + ':' + String(mins % 60).padStart(2, '0'); }, 1500);
+
+  // trama di fili nella dichiarazione
+  const wv = $('#weave');
+  function weave(t) { const g = wv.getContext('2d'), w = wv.width = wv.clientWidth, h = wv.height = wv.clientHeight; g.clearRect(0, 0, w, h);
+    for (let i = 0; i < 26; i++) { g.beginPath(); g.strokeStyle = i % 7 === 3 ? 'rgba(255,176,0,.35)' : 'rgba(184,242,255,.09)';
+      for (let x = 0; x <= w; x += 12) { const y = h * (i + .5) / 26 + Math.sin(x * .006 + i * .7 + t) * 14 * Math.sin(i + t * .3); x ? g.lineTo(x, y) : g.moveTo(x, y); } g.stroke(); } }
+  weave(0);
+
+  // ingressi
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
+  $$('[data-r]').forEach(el => io.observe(el));
+
+  // lettere del titolo che si riempiono
+  const ht = $('[data-chars]'); ht.setAttribute('aria-label', ht.textContent);
+  ht.innerHTML = ht.textContent.split(' ').map(w => `<span style="display:inline-block" aria-hidden="true">${[...w].map(c => `<span class="ch">${c}</span>`).join('')}</span>`).join(' ');
+  const chars = $$('.ch', ht);
+
+  if (!window.gsap) { $$('.wd').forEach(w => w.style.opacity = 1); return; }
+  ready();
+  if (RM) { chars.forEach(c => c.classList.add('on')); $$('[data-stagger]>*').forEach(x => x.style.opacity = 1); return; }
+
+  gsap.registerPlugin(ScrollTrigger);
+  const lenis = new Lenis({ duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+  lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+  $$('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const t = $(a.getAttribute('href')); if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -20, duration: 1.4 }); } }));
+
+  // HERO: una timeline lunga quanto 5 schermate
+  const st = { p: 0, rot: 0, tilt: 0 };
+  const L = $$('[data-l]').map(p => $$('.wd', p));
+  const words = (ws, at, dur) => ws.forEach((w, i) => tlh.to(w, { opacity: 1, filter: 'blur(0px)', y: 0, duration: dur, ease: 'power2.out' }, at + i * .03));
+  const out = (ws, at) => tlh.to(ws, { opacity: 0, filter: 'blur(8px)', y: '-.2em', duration: .25, stagger: .01, ease: 'power1.in' }, at);
+  const tlh = gsap.timeline({ scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom bottom', scrub: .8 }, defaults: { ease: 'none' } });
+  const push = () => H && H.set(st);
+  gsap.set(L[0], { opacity: 1, filter: 'blur(0px)', y: 0 }); // la prima frase è già lì
+  gsap.from(L[0], { opacity: 0, filter: 'blur(10px)', y: '.25em', duration: 1, stagger: .05, ease: 'power3.out', delay: .2 });
+  tlh.to(st, { p: 1, tilt: .62, rot: .5, duration: 1.4, ease: 'power2.inOut', onUpdate: push }, .5)
+     .to('.sky', { opacity: 0, duration: 1 }, .55).to('.dark', { opacity: 1, duration: 1 }, .55);
+  out(L[0], .45);
+  tlh.to('.hud', { opacity: 1, duration: .3 }, 1.6).to('.hud', { opacity: 0, duration: .3 }, 2.5);
+  words(L[1], 1.55, .3); out(L[1], 2.45);
+  tlh.to(st, { p: 2, rot: .9, duration: 1.3, ease: 'power2.inOut', onUpdate: push }, 2.5);
+  words(L[2], 3.0, .3);
+  tlh.to('.tiles i', { opacity: 1, duration: .2, stagger: { each: .006, from: 'center', grid: [9, 12] } }, 4.1);
+  tlh.to(L[2], { opacity: 0, duration: .2 }, 4.2);
+  tlh.to('.cue', { opacity: 0, duration: .2 }, .2);
+
+  // nav: più scura sopra le sezioni chiare
+  ScrollTrigger.create({ trigger: '.sheet', start: 'top 80px', end: 'bottom 80px', toggleClass: { targets: '#nav', className: 'dark' } });
+
+  // griglie e card che entrano a cascata
+  $$('[data-stagger]').forEach(g => gsap.from(g.children, { opacity: 0, y: 30, duration: .9, stagger: .06, ease: 'expo.out', scrollTrigger: { trigger: g, start: 'top 85%' } }));
+  // titolo che si riempie lettera per lettera
+  ScrollTrigger.create({ trigger: ht, start: 'top 85%', end: 'bottom 45%', scrub: true, onUpdate: s => { const k = Math.round(s.progress * chars.length); chars.forEach((c, i) => c.classList.toggle('on', i < k)); } });
+  // dichiarazione: i fili ondeggiano mentre è visibile
+  let wraf = 0; new IntersectionObserver(([e]) => { cancelAnimationFrame(wraf); if (e.isIntersecting) { const l = t => { weave(t / 1400); wraf = requestAnimationFrame(l); }; wraf = requestAnimationFrame(l); } }).observe(wv);
+})();
+</script>
+</body>
+</html>

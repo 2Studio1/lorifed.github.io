@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your agent report · 21studio</title>
+<meta name="description" content="Enter your website and get a free report: which of our 26 agents fit your business, where you lose time, a 90-day plan and a price for each step.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0B0C0A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&family=Inter:wght@400..700&family=Inter+Tight:wght@700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="servizi/servizi.css">
+<style>
+/* report.html: pagina scura, una colonna (pattern: pagina report di Orbit, colori 21studio) */
+.rp{background:var(--nero);color:#fff;padding:clamp(140px,14vw,184px) 0 clamp(72px,8vw,112px);position:relative}
+.rp-col{position:relative;width:min(480px,90vw);margin-inline:auto}
+.rp h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.2rem,4.6vw,3.1rem);line-height:1.02;letter-spacing:-.04em;margin-top:1rem}
+.rp-lead{margin-top:1rem;font-size:1rem;line-height:1.55;color:rgba(255,255,255,.68)}
+.rp .lab{color:#B7C17E}
+.rp-site{display:inline-flex;align-items:center;gap:10px;max-width:100%;margin-top:1.6rem;padding:7px 14px 7px 8px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);font-size:14.5px}
+.rp-site img,.rp-site .rp-ico{flex:none;width:22px;height:22px;border-radius:6px;background:#fff}
+.rp-site .rp-ico{display:grid;place-items:center;background:rgba(255,255,255,.1)}
+.rp-site .rp-ico svg{width:14px;height:14px;fill:none;stroke:rgba(255,255,255,.7);stroke-width:1.7}
+.rp-site b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rp-site a{color:rgba(255,255,255,.55);font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.rp-site a:hover{color:#fff}
+.rp-get{margin:1.8rem 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.rp-get li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45;color:rgba(255,255,255,.86)}
+.rp-get li::before{content:"";flex:none;width:18px;height:18px;margin-top:1px;border-radius:50%;
+  background:#B7C17E url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B0C0A' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat}
+.rp-form{margin-top:2rem;display:grid;gap:12px}
+.rp-form label.f i{font-style:normal;color:rgba(255,255,255,.4)}
+.rp-form label.f{display:grid;gap:6px;font-size:13px;color:rgba(255,255,255,.6)}
+.rp-form input[type=text],.rp-form input[type=email]{height:50px;padding:0 14px;border-radius:12px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.04);color:#fff;font:inherit;font-size:15px;transition:border-color .2s,box-shadow .2s}
+.rp-form input::placeholder{color:rgba(255,255,255,.38)}
+.rp-form input:focus{outline:none;border-color:#B7C17E;box-shadow:0 0 0 4px rgba(183,193,126,.18)}
+.rp-form input[aria-invalid=true]{border-color:#E0806E}
+.rp-ok{display:flex;gap:10px;align-items:flex-start;font-size:13px;line-height:1.5;color:rgba(255,255,255,.6)}
+.rp-ok input{width:16px;height:16px;flex:none;margin-top:2px;accent-color:#B7C17E}
+.rp-form .b{width:100%;min-height:52px;border:0;cursor:pointer;font-family:inherit;font-size:15px;
+  background:linear-gradient(180deg,#FFFFFF,#E9E9E4);color:#0D0D0D;box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgba(0,0,0,.5)}
+.rp-form .b:hover{filter:brightness(1.04)}
+.rp-err{font-size:13.5px;color:#F0A08F}
+.rp-err:empty{display:none}
+.rp-small{margin-top:1.1rem;font-size:12.5px;line-height:1.5;color:rgba(255,255,255,.45)}
+.rp-done{margin-top:2rem;padding:24px;border-radius:20px;border:1px solid rgba(183,193,126,.35);background:rgba(183,193,126,.08)}
+.rp-done h2{font-size:clamp(1.4rem,2.4vw,1.7rem);color:#fff}
+.rp-done p{margin-top:.7rem;font-size:15px;line-height:1.55;color:rgba(255,255,255,.72)}
+.rp-done p b{color:#fff;font-weight:600;word-break:break-all}
+.rp-done .bs{justify-content:flex-start;margin-top:1.4rem}
+.rp-done .b.suv{background:transparent;color:#fff;border-color:rgba(255,255,255,.24)}
+.rp-done .b.suv:hover{background:rgba(255,255,255,.06)}
+</style>
+<!-- lingue: scritto da _nav.py -->
+<link rel="canonical" href="https://21studio.io/report.html">
+<link rel="alternate" hreflang="en" href="https://21studio.io/report.html">
+<link rel="alternate" hreflang="it" href="https://21studio.io/it/report.html">
+<link rel="alternate" hreflang="x-default" href="https://21studio.io/report.html">
+<!-- /lingue -->
+</head>
+<body>
+<header class="mh" id="mh">
+  <link rel="stylesheet" href="css/megamenu.css">
+  <div class="mh-shell">
+    <div class="mh-bar">
+      <a href="index.html" class="mh-brand wm" aria-label="21studio home">21STUDIO</a>
+      <nav class="mh-links" aria-label="Sections">
+        <div class="mm" data-mm>
+          <a class="mm-a" href="servizi/agenti/index.html" aria-haspopup="true" aria-expanded="false" aria-controls="mmP">Agents<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+          <div class="mm-p" id="mmP">
+            <div class="mm-in">
+            <div class="mm-sx">
+            <ul class="mm-ag">
+              <li><a href="servizi/agenti/coordinatore.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span><b>C</b></span><span class="mm-t"><b>Coordinator</b><span>Every request reaches the right agent.</span></span></a></li>
+              <li><a href="servizi/agenti/offerta-prezzi.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span><b>OP</b></span><span class="mm-t"><b>Offer &amp; Pricing</b><span>It studies your competitors, your offer and your prices, then shows you what to change, with several options side by side.</span></span></a></li>
+              <li><a href="servizi/agenti/trova-clienti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="2"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><b>LF</b></span><span class="mm-t"><b>Lead Finder</b><span>It finds the right companies, writes each one a tailored email, sends it after your yes and follows up with those who don&#x27;t reply.</span></span></a></li>
+              <li><a href="servizi/agenti/ricerca-fornitori.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="2"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><b>SP</b></span><span class="mm-t"><b>Supplier &amp; Partner Finder</b><span>It delivers a list of suppliers, manufacturers or influencers that fit, each one checked, with the right person to contact.</span></span></a></li>
+              <li><a href="servizi/agenti/social.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>S</b></span><span class="mm-t"><b>Social</b><span>Every week: carousels, posts and reel scripts in your voice, already reviewed.</span></span></a></li>
+              <li><a href="servizi/agenti/video-reel.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>VR</b></span><span class="mm-t"><b>Video &amp; Reels</b><span>From your footage and a reel you like: a finished reel with cuts, captions and voice-over, checked before delivery.</span></span></a></li>
+              <li><a href="servizi/agenti/dm-instagram.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>ID</b></span><span class="mm-t"><b>Instagram DM</b><span>Anyone who comments a keyword under your post instantly gets your private message with the link.</span></span></a></li>
+              <li><a href="servizi/agenti/annunci-concorrenti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="4"><svg viewBox="0 0 24 24"><path d="M3 10.5v3a1 1 0 0 0 1 1h2.5l5.5 4v-13l-5.5 4H4a1 1 0 0 0-1 1z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.5 6a8.4 8.4 0 0 1 0 12"/></svg></span><b>CA</b></span><span class="mm-t"><b>Competitor Ads</b><span>Every week: your competitors&#x27; new ads, the ones they keep paying for, and the ideas worth making your own.</span></span></a></li>
+              <li><a href="servizi/agenti/siti-landing.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="5"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="13" rx="1.6"/><path d="M8.5 20.5h7M12 17.5v3"/></svg></span><b>WL</b></span><span class="mm-t"><b>Websites &amp; Landing Pages</b><span>A website or landing page built on the best examples in your industry, designed to bring you enquiries.</span></span></a></li>
+              <li><a href="servizi/agenti/e-commerce.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="5"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="13" rx="1.6"/><path d="M8.5 20.5h7M12 17.5v3"/></svg></span><b>E</b></span><span class="mm-t"><b>E-commerce</b><span>Your online store on Shopify or WooCommerce: built, fast, and better every week.</span></span></a></li>
+              <li><a href="servizi/agenti/documenti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="8"><svg viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9.5 12.5h5M9.5 16h3.5"/></svg></span><b>D</b></span><span class="mm-t"><b>Documents</b><span>Invoices, quotes and contracts drafted in minutes.</span></span></a></li>
+              <li><a href="servizi/agenti/automazioni.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="9"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4.3 7.7L12 12l7.7-4.3"/><path d="M12 12v8.6"/></svg></span><b>A</b></span><span class="mm-t"><b>Automations</b><span>Your apps talk to each other.</span></span></a></li>
+            </ul>
+            <a class="mm-tutti" href="servizi/agenti/index.html">Browse all agents <span aria-hidden="true">&nearr;</span></a>
+            </div>
+            <div class="mm-dx">
+              <a class="mm-feat" href="index.html#pricing">
+                <span class="mm-k">Featured</span>
+                <b>Your whole company, in one pack</b>
+                <span class="mm-d">All 16 available agents, installed and working as one team.</span>
+                <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+                <span class="mm-pr">&euro;2,490 <small>once + VAT</small></span>
+                <span class="mm-go">See the pack <span aria-hidden="true">&nearr;</span></span>
+              </a>
+              <a class="mm-mese" href="abbonamento.html">
+                <span class="mm-k">Prefer monthly?</span>
+                <b>Plans from &euro;79/month</b>
+                <span class="mm-d">AI credits included.</span>
+                <span class="mm-fr" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            </div>
+          </div>
+        </div>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="index.html#custom">Custom</a>
+        <a href="contatti.html">Contact</a>
+      </nav>
+      <div class="mh-dx">
+        <div class="mh-lang" role="group" aria-label="Language"><span aria-current="true">EN</span><a href="it/report.html" hreflang="it" lang="it" aria-label="Italiano">IT</a></div>
+        <a class="mh-cta" href="contatti.html">
+          <span class="mh-cta-t">Book a call</span>
+          <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+        </a>
+        <button class="mh-tog" id="mhTog" type="button" aria-expanded="false" aria-controls="mhMenu" aria-label="Open menu">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <div class="mh-menu" id="mhMenu" hidden>
+      <nav aria-label="Sections (menu)">
+        <a href="servizi/agenti/index.html">Agents</a>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="index.html#custom">Custom</a>
+        <a href="contatti.html">Contact</a>
+      </nav>
+      <div class="mh-lang mh-lang-m" role="group" aria-label="Language"><span aria-current="true">EN</span><a href="it/report.html" hreflang="it" lang="it" aria-label="Italiano">IT</a></div>
+      <a class="mh-cta mh-cta-big" href="contatti.html">
+        <span class="mh-cta-t">Book a call</span>
+        <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+      </a>
+    </div>
+  </div>
+  <script src="js/megamenu.js" defer></script>
+</header>
+
+<main id="top">
+<section class="rp" data-scuro aria-labelledby="rpT">
+  <div class="rp-col">
+    <span class="lab">Free report</span>
+    <h1 id="rpT">Your agent report, built from your website.</h1>
+    <p class="rp-lead">Our team reads your site and writes back with a plan. No account, no card.</p>
+
+    <div class="rp-site" id="rpChip" hidden>
+      <span class="rp-ico" id="rpIco"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.9 5.6 3.9 9s-1.3 6.4-3.9 9c-2.6-2.6-3.9-5.6-3.9-9S9.4 5.6 12 3z"/></svg></span>
+      <b id="rpHost"></b>
+      <a href="#rpSite" id="rpChange">change</a>
+    </div>
+
+    <ul class="rp-get" aria-label="What you get">
+      <li>Which of our 26 agents fit your business</li>
+      <li>Where you lose time today</li>
+      <li>A 90-day plan, step by step</li>
+      <li>A price for each step</li>
+    </ul>
+
+    <form class="rp-form" id="rpForm" novalidate>
+      <label class="f" id="rpSiteRow" hidden>Your website
+        <input type="text" id="rpSite" name="site" inputmode="url" autocomplete="url" autocapitalize="off" spellcheck="false" placeholder="yourbusiness.com">
+      </label>
+      <label class="f">Work email
+        <input type="email" id="rpEmail" name="email" autocomplete="email" placeholder="you@yourbusiness.com" required>
+      </label>
+      <label class="f"><span>Name <i>(optional)</i></span>
+        <input type="text" id="rpNome" name="name" autocomplete="name" placeholder="Your name">
+      </label>
+      <label class="rp-ok"><input type="checkbox" id="rpOk" required>
+        <span>I agree to the processing of my data so you can send me the report. No newsletters, no lists.</span></label>
+      <p class="rp-err" id="rpErr" role="alert"></p>
+      <button class="b" type="submit"><i>Get my free report</i></button>
+    </form>
+
+    <div class="rp-done" id="rpDone" hidden tabindex="-1">
+      <h2>Thanks. Your request is in.</h2>
+      <p>We&rsquo;ll send your report to <b id="rpDoneEmail"></b> within 24 working hours. A person on our team prepares it, so it fits your business.</p>
+      <div class="bs">
+        <a class="b suv" href="servizi/agenti/index.html"><i>See the agents</i><s>&rarr;</s></a>
+      </div>
+    </div>
+
+    <p class="rp-small" id="rpSmall">The report is free. You only pay if you decide to install an agent, once, at a fixed price.</p>
+  </div>
+</section>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-card">
+      <div class="ft-top">
+        <div class="ft-brand">
+          <a href="index.html" class="wm" aria-label="21studio home">21STUDIO</a>
+          <p>An AI agent for every department. Built around your business, yours to keep.</p>
+          <a href="mailto:info@21studio.io">info@21studio.io</a>
+        </div>
+        <nav class="ft-col" aria-label="Site">
+          <h3>Site</h3>
+          <ul>
+            <li><a href="servizi/agenti/index.html">Agents</a></li>
+            <li><a href="index.html#how-it-works">How it works</a></li>
+            <li><a href="index.html#custom">Custom</a></li>
+            <li><a href="contatti.html">Contact</a></li>
+          </ul>
+        </nav>
+        <nav class="ft-col" aria-label="Contact">
+          <h3>Talk to us</h3>
+          <ul>
+            <li><a href="contatti.html">Book a call</a></li>
+            <li><a href="mailto:info@21studio.io">info@21studio.io</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="ft-bot">
+        <a class="ft-ig" href="https://instagram.com/21studio.io" target="_blank" rel="noopener" aria-label="21studio on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <small>&copy; 2026 21studio</small>
+      </div>
+    </div>
+  </div>
+  <span class="ft-big wm" aria-hidden="true">21STUDIO</span>
+</footer>
+
+<script src="servizi/servizi.js"></script>
+<script src="js/analisi.js"></script>
+<script>
+/* shortcut: indirizzo copiato da CONFIG di contatti.html; se cambia la', va aggiornato anche qui */
+var CONFIG = { ENDPOINT: 'https://script.google.com/macros/s/AKfycbwvZmN4pDdJT-BgURPGF16nSZQ00MFxsesp6frowS91j8dtU08DSyGzVIJJtRb3fXvbNQ/exec' };
+(function(){
+  var $ = function(id){ return document.getElementById(id); };
+  var host = window.__sito(new URLSearchParams(location.search).get('site'));
+  function chip(h){
+    $('rpHost').textContent = h; $('rpChip').hidden = false; $('rpSiteRow').hidden = true;
+    var img = new Image(); img.alt = ''; img.width = img.height = 22;
+    img.onload = function(){ if (img.naturalWidth > 1) $('rpIco').replaceWith(img); };
+    img.src = 'https://www.google.com/s2/favicons?sz=64&domain=' + encodeURIComponent(h);
+  }
+  if (host) chip(host); else $('rpSiteRow').hidden = false;
+  $('rpChange').addEventListener('click', function(e){
+    e.preventDefault(); $('rpChip').hidden = true; $('rpSiteRow').hidden = false;
+    $('rpSite').value = host || ''; $('rpSite').focus();
+  });
+
+  function bad(id, msg){ $('rpErr').textContent = msg; $(id).setAttribute('aria-invalid', 'true'); $(id).focus(); }
+  ['rpSite','rpEmail'].forEach(function(id){ $(id).addEventListener('input', function(){ $(id).removeAttribute('aria-invalid'); $('rpErr').textContent = ''; }); });
+
+  $('rpForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var h = $('rpSiteRow').hidden ? host : window.__sito($('rpSite').value);
+    var email = $('rpEmail').value.trim(), nome = $('rpNome').value.trim();
+    if (!h) return bad('rpSite', 'Enter a website like yourbusiness.com');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return bad('rpEmail', 'Enter a valid email, like you@yourbusiness.com');
+    if (!$('rpOk').checked) { $('rpErr').textContent = 'Tick the box so we can send you the report.'; $('rpOk').focus(); return; }
+    /* stesso formato e stesso invio del modulo di contatti.html */
+    var dati = {
+      tipo:'richiesta-report', quando_inviato:new Date().toISOString(),
+      nome:nome, azienda:'', email:email, telefono:'', sito:h,
+      dimensione:'', fatturato:'', fascia:'', aree:'', dove:'', quando:'', agente:'',
+      racconto:'[Report richiesto]\nSito: ' + h, pagina:location.href
+    };
+    if (CONFIG.ENDPOINT) fetch(CONFIG.ENDPOINT, { method:'POST', mode:'no-cors', keepalive:true,
+      headers:{ 'Content-Type':'text/plain;charset=utf-8' }, body:JSON.stringify(dati) }).catch(function(){});
+    $('rpDoneEmail').textContent = email;
+    $('rpForm').hidden = true; $('rpSmall').hidden = true; $('rpDone').hidden = false; $('rpDone').focus();
+  });
+})();
+</script>
+</body>
+</html>

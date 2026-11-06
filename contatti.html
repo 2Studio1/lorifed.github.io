@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Prenota una call — 21studio</title>
-<meta name="description" content="Mezz'ora per capire se ha senso. Scegli lo slot, raccontaci l'azienda: in call mappiamo i processi manuali reparto per reparto.">
+<title>Book a call · 21studio</title>
+<meta name="description" content="Thirty minutes to see if it makes sense. Pick a slot, tell us about your business: on the call we map the manual work, department by department.">
 <meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -145,6 +145,32 @@ h3{font-size:clamp(1.08rem,1.3vw,1.2rem);font-weight:600;letter-spacing:-.022em;
 .mh-links a{color:var(--mh-fg-2);text-decoration:none;font-size:12.5px;font-weight:450;letter-spacing:-.01em;
   white-space:nowrap;transition:color .25s ease}
 .mh-links a:hover{color:var(--mh-fg)}
+/* voce Servizi con tendina (desktop: hover e focus-within, nessun JS) */
+.mh-sv{position:relative;display:flex}
+.mh-links .mh-sv-a{display:inline-flex;align-items:center;gap:6px}
+.mh-sv-a svg{width:8px;height:8px;opacity:.7;transition:transform .35s var(--mh-out)}
+.mh-sv:hover .mh-sv-a,.mh-sv:focus-within .mh-sv-a,.mh-links .mh-sv-a[aria-current]{color:var(--mh-fg)}
+.mh-sv:hover .mh-sv-a svg,.mh-sv:focus-within .mh-sv-a svg{transform:rotate(180deg)}
+.mh-dd{position:absolute;top:100%;left:50%;padding-top:26px;transform:translate(-50%,8px);opacity:0;visibility:hidden;
+  transition:opacity .2s ease,transform .4s var(--mh-out),visibility 0s linear .2s}
+.mh-sv:hover .mh-dd,.mh-sv:focus-within .mh-dd{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+.mh-dd-in{width:352px;padding:8px;background:var(--mh-bg);border:1px solid var(--mh-line);border-radius:24px;
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.mh-links .mh-dd a{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 12px;padding:12px 14px;border-radius:16px;
+  color:var(--mh-fg);white-space:normal;transition:background-color .2s ease}
+.mh-dd a:hover,.mh-dd a:focus-visible{background:rgba(255,255,255,.07)}
+.mh-dd b{font-size:14px;font-weight:600;letter-spacing:-.015em}
+.mh-dd span{grid-column:1;font-size:12.5px;line-height:1.4;color:var(--mh-fg-2)}
+.mh-dd i{grid-row:1/3;grid-column:2;font-style:normal;color:var(--mh-fg-2);transform:translateX(-4px);opacity:0;
+  transition:transform .3s var(--mh-out),opacity .2s ease}
+.mh-dd a:hover i,.mh-dd a:focus-visible i{transform:none;opacity:1}
+.mh-links .mh-dd a.mh-dd-tutti{display:block;margin-top:4px;padding:12px 14px 10px;border-top:1px solid var(--mh-line);border-radius:0 0 16px 16px;
+  font-size:12.5px;color:var(--mh-fg-2)}
+.mh-menu nav .mh-sub{display:flex;flex-direction:column;padding:0 0 10px 2px}
+.mh-menu nav .mh-sub a{min-height:44px;border-top:0;font-family:var(--sans);font-size:16px;font-weight:500;letter-spacing:-.015em;color:var(--mh-fg-2)}
+.mh-menu nav .mh-sub a::before{content:"";width:12px;height:1px;margin-right:12px;background:var(--mh-line-2)}
+.ft-seg{color:rgba(255,255,255,.4)}
+
 
 .mh-dx{justify-self:end;display:flex;align-items:center;gap:8px}
 
@@ -277,62 +303,9 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
 .btn:hover:not(:disabled){filter:brightness(1.18)}
 .btn:active:not(:disabled){transform:scale(.98)}
 
-/* ---- questionario ---- */
-.qbox{max-width:860px;margin:0 auto;background:var(--panel);border:1px solid rgba(26,28,23,.10);border-radius:var(--r-l);
-  padding:clamp(22px,3vw,40px);box-shadow:var(--alza)}
-.qtop{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
-  border:1px solid rgba(92,106,50,.28);border-radius:16px;background:rgba(183,193,126,.12);
-  padding:clamp(12px,1.4vw,16px) clamp(14px,1.6vw,20px);margin-bottom:clamp(20px,2.4vw,28px)}
-.qtop-t{color:var(--muted);font-size:.95rem;line-height:1.4}
-.qtog{display:flex;gap:4px;flex:none;border:1px solid var(--line);border-radius:999px;background:#fff;padding:4px}
-.qtog button{cursor:pointer;border:0;border-radius:999px;background:none;color:var(--muted);font-family:var(--sans);
-  font-size:.88rem;font-weight:600;letter-spacing:-.01em;padding:.5rem 1rem;transition:background .3s,color .3s}
-.qtog button:hover{color:var(--text)}
-.qtog button.on{background:#1A1C17;color:#fff}
-.qbar{height:3px;border-radius:3px;background:rgba(26,28,23,.08);overflow:hidden;margin-bottom:clamp(20px,2.6vw,32px)}
-.qbar i{display:block;height:100%;width:0;border-radius:3px;background:var(--accent);transition:width .5s cubic-bezier(.22,1,.36,1)}
-.qstep{display:none}
-.qstep.on{display:block;animation:qin .45s cubic-bezier(.22,1,.36,1)}
-@keyframes qin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.qn{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--acc)}
-.qstep h2{margin:.7rem 0 .4rem;font-size:clamp(1.5rem,2.4vw,2rem)}
-.qsub{margin:0 0 clamp(18px,2.2vw,26px);color:var(--muted);font-size:.96rem;line-height:1.55}
-.qh{margin:clamp(22px,2.6vw,32px) 0 .8rem;font-size:1.05rem;font-weight:600;letter-spacing:-.022em}
-.qstep .qsub+.qh{margin-top:0}
-.qopts{display:flex;flex-direction:column;gap:9px}
-.qopts.due{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
-.qopt{display:flex;align-items:flex-start;gap:.8rem;width:100%;text-align:left;cursor:pointer;
-  border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);font-family:var(--sans);font-size:1rem;
-  padding:clamp(13px,1.5vw,17px) clamp(15px,1.7vw,20px);transition:border-color .25s,background .25s}
-.qopt:hover{border-color:var(--line-2);background:var(--panel-2)}
-.qopt.on{border-color:var(--accent);background:rgba(183,193,126,.16)}
-.qopt b{display:block;font-weight:600;font-size:.99rem;letter-spacing:-.02em}
-.qopt i{display:block;font-style:normal;margin-top:.22rem;font-size:.86rem;color:var(--muted);line-height:1.45}
-.qtick{flex:none;width:18px;height:18px;border-radius:6px;border:1px solid var(--line-2);margin-top:.12rem;
-  display:grid;place-items:center;transition:.25s;background:#fff}
-.qopt.on .qtick{background:var(--accent);border-color:var(--accent)}
-.qtick s{display:none;text-decoration:none;color:#fff;font-size:11px;line-height:1}
-.qopt.on .qtick s{display:block}
-.qta{width:100%;min-height:150px;resize:vertical;line-height:1.55;background:#fff;border:1px solid var(--line-2);border-radius:12px;
-  color:var(--text);font-family:var(--sans);font-size:1rem;padding:1rem 1.1rem;transition:border-color .2s,box-shadow .2s}
-.qta:focus{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px rgba(183,193,126,.35)}
-.qcount{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;letter-spacing:.06em;
-  text-transform:uppercase;color:var(--faint);margin-top:.6rem}
-.qnav{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:clamp(24px,3vw,36px)}
-.qback{background:none;border:0;cursor:pointer;color:var(--muted);font-family:var(--sans);font-size:.95rem;font-weight:500;padding:.6rem 0;transition:color .25s}
-.qback:hover{color:var(--text)}
-.qnext:disabled{opacity:.35;cursor:not-allowed}
-.qerr{margin:.9rem 0 0;font-size:.88rem;color:#A3402A;min-height:1.2em}
-.qout{text-align:center}
-.qfascia{margin:.9rem 0 .2rem!important;font-size:clamp(1.8rem,3.4vw,2.6rem)!important}
-.qcifra{font-family:var(--disp);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:650;letter-spacing:-.04em;color:var(--accent);margin:.3rem 0 .1rem}
-.qnota{color:var(--muted);font-size:.94rem;max-width:56ch;margin:1rem auto 0;line-height:1.6}
-.qincl{text-align:left;margin:clamp(24px,3vw,34px) 0 0;border:1px solid var(--line);border-radius:16px;background:var(--panel-2);padding:clamp(18px,2.2vw,26px)}
-.qincl h3{margin:0 0 1rem}
-.qincl ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:.75rem}
-.qincl li{display:flex;gap:.8rem;color:var(--muted);font-size:.94rem;line-height:1.5}
-.qincl li s{flex:none;text-decoration:none;color:var(--accent)}
-@media(max-width:620px){.qopts.due{grid-template-columns:1fr}.qtop{flex-direction:column;align-items:stretch}.qtog{justify-content:center}}
+/* ---- "You picked" (?servizio) ---- */
+.qagente{margin:0 0 1.2rem;padding:12px 16px;border-radius:14px;background:rgba(183,193,126,.22);color:var(--ink);font-size:.95rem;line-height:1.45}
+.qagente a{color:var(--acc);border-bottom:1px solid currentColor;margin-left:.4rem;white-space:nowrap}
 
 /* ---- prenotazione ---- */
 .griglia{display:grid;grid-template-columns:1fr 340px;gap:clamp(22px,3vw,40px);align-items:start}
@@ -394,169 +367,107 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
 .fattoP:last-child{margin-bottom:0}
 
 </style>
+<link rel="stylesheet" href="css/prenota.css">
+<!-- lingue: scritto da _nav.py -->
+<link rel="canonical" href="https://21studio.io/contatti.html">
+<link rel="alternate" hreflang="en" href="https://21studio.io/contatti.html">
+<link rel="alternate" hreflang="it" href="https://21studio.io/it/contatti.html">
+<link rel="alternate" hreflang="x-default" href="https://21studio.io/contatti.html">
+<!-- /lingue -->
 </head>
 <body>
 
 <header class="mh" id="mh">
+  <link rel="stylesheet" href="css/megamenu.css">
   <div class="mh-shell">
     <div class="mh-bar">
-      <a href="index.html" class="mh-brand wm" aria-label="21studio, torna alla home">21STUDIO</a>
-      <nav class="mh-links" aria-label="Sezioni">
-        <a href="index.html#metodo">Come funziona</a>
-        <a href="index.html#trio">Cosa costruiamo</a>
-        <a href="index.html#strumenti">Strumenti</a>
-        <a href="index.html#dove">Dove gira</a>
+      <a href="index.html" class="mh-brand wm" aria-label="21studio home">21STUDIO</a>
+      <nav class="mh-links" aria-label="Sections">
+        <div class="mm" data-mm>
+          <a class="mm-a" href="servizi/agenti/index.html" aria-haspopup="true" aria-expanded="false" aria-controls="mmP">Agents<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+          <div class="mm-p" id="mmP">
+            <div class="mm-in">
+            <div class="mm-sx">
+            <ul class="mm-ag">
+              <li><a href="servizi/agenti/coordinatore.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span><b>C</b></span><span class="mm-t"><b>Coordinator</b><span>Every request reaches the right agent.</span></span></a></li>
+              <li><a href="servizi/agenti/offerta-prezzi.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span><b>OP</b></span><span class="mm-t"><b>Offer &amp; Pricing</b><span>It studies your competitors, your offer and your prices, then shows you what to change, with several options side by side.</span></span></a></li>
+              <li><a href="servizi/agenti/trova-clienti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="2"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><b>LF</b></span><span class="mm-t"><b>Lead Finder</b><span>It finds the right companies, writes each one a tailored email, sends it after your yes and follows up with those who don&#x27;t reply.</span></span></a></li>
+              <li><a href="servizi/agenti/ricerca-fornitori.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="2"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><b>SP</b></span><span class="mm-t"><b>Supplier &amp; Partner Finder</b><span>It delivers a list of suppliers, manufacturers or influencers that fit, each one checked, with the right person to contact.</span></span></a></li>
+              <li><a href="servizi/agenti/social.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>S</b></span><span class="mm-t"><b>Social</b><span>Every week: carousels, posts and reel scripts in your voice, already reviewed.</span></span></a></li>
+              <li><a href="servizi/agenti/video-reel.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>VR</b></span><span class="mm-t"><b>Video &amp; Reels</b><span>From your footage and a reel you like: a finished reel with cuts, captions and voice-over, checked before delivery.</span></span></a></li>
+              <li><a href="servizi/agenti/dm-instagram.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>ID</b></span><span class="mm-t"><b>Instagram DM</b><span>Anyone who comments a keyword under your post instantly gets your private message with the link.</span></span></a></li>
+              <li><a href="servizi/agenti/annunci-concorrenti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="4"><svg viewBox="0 0 24 24"><path d="M3 10.5v3a1 1 0 0 0 1 1h2.5l5.5 4v-13l-5.5 4H4a1 1 0 0 0-1 1z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.5 6a8.4 8.4 0 0 1 0 12"/></svg></span><b>CA</b></span><span class="mm-t"><b>Competitor Ads</b><span>Every week: your competitors&#x27; new ads, the ones they keep paying for, and the ideas worth making your own.</span></span></a></li>
+              <li><a href="servizi/agenti/siti-landing.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="5"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="13" rx="1.6"/><path d="M8.5 20.5h7M12 17.5v3"/></svg></span><b>WL</b></span><span class="mm-t"><b>Websites &amp; Landing Pages</b><span>A website or landing page built on the best examples in your industry, designed to bring you enquiries.</span></span></a></li>
+              <li><a href="servizi/agenti/e-commerce.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="5"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="13" rx="1.6"/><path d="M8.5 20.5h7M12 17.5v3"/></svg></span><b>E</b></span><span class="mm-t"><b>E-commerce</b><span>Your online store on Shopify or WooCommerce: built, fast, and better every week.</span></span></a></li>
+              <li><a href="servizi/agenti/documenti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="8"><svg viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9.5 12.5h5M9.5 16h3.5"/></svg></span><b>D</b></span><span class="mm-t"><b>Documents</b><span>Invoices, quotes and contracts drafted in minutes.</span></span></a></li>
+              <li><a href="servizi/agenti/automazioni.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="9"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4.3 7.7L12 12l7.7-4.3"/><path d="M12 12v8.6"/></svg></span><b>A</b></span><span class="mm-t"><b>Automations</b><span>Your apps talk to each other.</span></span></a></li>
+            </ul>
+            <a class="mm-tutti" href="servizi/agenti/index.html">Browse all agents <span aria-hidden="true">&nearr;</span></a>
+            </div>
+            <div class="mm-dx">
+              <a class="mm-feat" href="index.html#pricing">
+                <span class="mm-k">Featured</span>
+                <b>Your whole company, in one pack</b>
+                <span class="mm-d">All 16 available agents, installed and working as one team.</span>
+                <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+                <span class="mm-pr">&euro;2,490 <small>once + VAT</small></span>
+                <span class="mm-go">See the pack <span aria-hidden="true">&nearr;</span></span>
+              </a>
+              <a class="mm-mese" href="abbonamento.html">
+                <span class="mm-k">Prefer monthly?</span>
+                <b>Plans from &euro;79/month</b>
+                <span class="mm-d">AI credits included.</span>
+                <span class="mm-fr" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            </div>
+          </div>
+        </div>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="index.html#custom">Custom</a>
+        <a href="contatti.html">Contact</a>
       </nav>
       <div class="mh-dx">
+        <div class="mh-lang" role="group" aria-label="Language"><span aria-current="true">EN</span><a href="it/contatti.html" hreflang="it" lang="it" aria-label="Italiano">IT</a></div>
         <a class="mh-cta" href="contatti.html">
-          <span class="mh-cta-t">Prenota una call</span>
+          <span class="mh-cta-t">Book a call</span>
           <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
         </a>
-        <button class="mh-tog" id="mhTog" type="button" aria-expanded="false" aria-controls="mhMenu" aria-label="Apri il menu">
+        <button class="mh-tog" id="mhTog" type="button" aria-expanded="false" aria-controls="mhMenu" aria-label="Open menu">
           <span aria-hidden="true"></span>
         </button>
       </div>
     </div>
     <div class="mh-menu" id="mhMenu" hidden>
-      <nav aria-label="Sezioni (menu)">
-        <a href="index.html#metodo">Come funziona</a>
-        <a href="index.html#trio">Cosa costruiamo</a>
-        <a href="index.html#strumenti">Strumenti</a>
-        <a href="index.html#dove">Dove gira</a>
+      <nav aria-label="Sections (menu)">
+        <a href="servizi/agenti/index.html">Agents</a>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="index.html#custom">Custom</a>
+        <a href="contatti.html">Contact</a>
       </nav>
+      <div class="mh-lang mh-lang-m" role="group" aria-label="Language"><span aria-current="true">EN</span><a href="it/contatti.html" hreflang="it" lang="it" aria-label="Italiano">IT</a></div>
       <a class="mh-cta mh-cta-big" href="contatti.html">
-        <span class="mh-cta-t">Prenota una call</span>
+        <span class="mh-cta-t">Book a call</span>
         <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
       </a>
     </div>
   </div>
+  <script src="js/megamenu.js" defer></script>
 </header>
 
 <main id="top">
 
 <section class="ph">
   <div class="wrap">
-    <span class="lab">Il primo passo</span>
-    <h1>Vediamo se ha <span class="em">senso</span>.</h1>
-    <p class="lead">Sei domande, due minuti. Poi scegli lo slot. In call la guardiamo reparto per reparto: se ci sono i presupposti te lo diciamo, e se non ci sono te lo diciamo lo stesso &mdash; la mappa resta tua in ogni caso.</p>
+    <span class="lab" data-it="Il primo passo">First step</span>
+    <h1 data-it="Vediamo se ha &lt;span class=&quot;em&quot;&gt;senso&lt;/span&gt;.">Let&#39;s see if it <span class="em">fits</span>.</h1>
+    <p class="lead" id="phLead">Three quick questions. We show you which agents fit your business, then you pick a time. If it fits, we say so on the call. If it doesn&#39;t, we say that too.</p>
   </div>
 </section>
 
 <section class="band soft" id="filtro">
   <div class="wrap">
-    <div class="qbox">
-      <div class="qtop">
-        <span class="qtop-t">Da come rispondi capiamo su che scala costruire.</span>
-        <div class="qtog" id="qTog">
-          <button type="button" class="on" data-v="Gestito">Gestito da noi</button>
-          <button type="button" data-v="In casa">Sul tuo server</button>
-        </div>
-      </div>
-      <div class="qbar"><i id="qfill"></i></div>
-
-      <!-- 1 -->
-      <div class="qstep on" data-s="0">
-        <span class="qn">Passo 1 di 6</span>
-        <h2>Quanto siete in azienda?</h2>
-        <p class="qsub">Ci serve per capire su che scala ragionare.</p>
-        <div class="qopts" data-k="dimensione" data-multi="0">
-          <button type="button" class="qopt" data-v="Solo io"><span class="qtick"><s>&#10003;</s></span><span><b>Solo io</b><i>Porto avanti tutto da solo</i></span></button>
-          <button type="button" class="qopt" data-v="2-5"><span class="qtick"><s>&#10003;</s></span><span><b>2 &ndash; 5 persone</b><i>Una squadra piccola</i></span></button>
-          <button type="button" class="qopt" data-v="6-15"><span class="qtick"><s>&#10003;</s></span><span><b>6 &ndash; 15 persone</b><i>Ci sono gi&agrave; dei ruoli separati</i></span></button>
-          <button type="button" class="qopt" data-v="16-50"><span class="qtick"><s>&#10003;</s></span><span><b>16 &ndash; 50 persone</b><i>Reparti veri, processi da coordinare</i></span></button>
-          <button type="button" class="qopt" data-v="50+"><span class="qtick"><s>&#10003;</s></span><span><b>Pi&ugrave; di 50</b><i>Struttura articolata</i></span></button>
-        </div>
-      </div>
-
-      <!-- 2 -->
-      <div class="qstep" data-s="1">
-        <span class="qn">Passo 2 di 6</span>
-        <h2>Raccontaci l&#39;azienda e cosa ti pesa.</h2>
-        <p class="qsub">Cosa fate, e qual &egrave; il lavoro manuale che oggi ti costa pi&ugrave; tempo o pi&ugrave; soldi. Pi&ugrave; sei concreto, pi&ugrave; la call parte avanti &mdash; questa &egrave; la risposta che leggiamo per prima.</p>
-        <textarea class="qta" id="qRacconto" maxlength="2000" placeholder="Es. Vendiamo arredo su misura. Ogni preventivo lo riscrivo a mano partendo dalle misure che mi manda il cliente, ci metto un&#39;ora, e chi non risponde entro qualche giorno non lo ricontatta nessuno."></textarea>
-        <div class="qcount"><span id="qMin">servono ancora 40 caratteri</span><span id="qLen">0 / 2000</span></div>
-      </div>
-
-      <!-- 3 -->
-      <div class="qstep" data-s="2">
-        <span class="qn">Passo 3 di 6</span>
-        <h2>Numeri.</h2>
-        <p class="qsub">Servono a capire se il ritorno regge la spesa. Restano fra noi.</p>
-        <h3 class="qh">Fatturato mensile</h3>
-        <div class="qopts due" data-k="fatturato" data-multi="0">
-          <button type="button" class="qopt" data-v="<10k"><span class="qtick"><s>&#10003;</s></span><span><b>Sotto 10k</b></span></button>
-          <button type="button" class="qopt" data-v="10-50k"><span class="qtick"><s>&#10003;</s></span><span><b>10k &ndash; 50k</b></span></button>
-          <button type="button" class="qopt" data-v="50-200k"><span class="qtick"><s>&#10003;</s></span><span><b>50k &ndash; 200k</b></span></button>
-          <button type="button" class="qopt" data-v=">200k"><span class="qtick"><s>&#10003;</s></span><span><b>Oltre 200k</b></span></button>
-          <button type="button" class="qopt" data-v="n.d."><span class="qtick"><s>&#10003;</s></span><span><b>Preferisco non dirlo</b></span></button>
-        </div>
-      </div>
-
-      <!-- 4 -->
-      <div class="qstep" data-s="3">
-        <span class="qn">Passo 4 di 6</span>
-        <h2>Quali aree ti pesano di pi&ugrave;?</h2>
-        <p class="qsub">Scegli tutte quelle che ti riguardano. Pi&ugrave; aree significa pi&ugrave; reparti da costruire.</p>
-        <div class="qopts due" data-k="aree" data-multi="1">
-          <button type="button" class="qopt" data-v="Vendite"><span class="qtick"><s>&#10003;</s></span><span><b>Vendite e preventivi</b></span></button>
-          <button type="button" class="qopt" data-v="Marketing"><span class="qtick"><s>&#10003;</s></span><span><b>Marketing e campagne</b></span></button>
-          <button type="button" class="qopt" data-v="Contenuti"><span class="qtick"><s>&#10003;</s></span><span><b>Contenuti e social</b></span></button>
-          <button type="button" class="qopt" data-v="Assistenza"><span class="qtick"><s>&#10003;</s></span><span><b>Assistenza clienti</b></span></button>
-          <button type="button" class="qopt" data-v="Delivery"><span class="qtick"><s>&#10003;</s></span><span><b>Consegna e progetti</b></span></button>
-          <button type="button" class="qopt" data-v="Intelligence"><span class="qtick"><s>&#10003;</s></span><span><b>Ricerca e mercato</b></span></button>
-          <button type="button" class="qopt" data-v="Backoffice"><span class="qtick"><s>&#10003;</s></span><span><b>Back office e numeri</b></span></button>
-          <button type="button" class="qopt" data-v="Non so"><span class="qtick"><s>&#10003;</s></span><span><b>Non lo so, guardiamolo insieme</b></span></button>
-        </div>
-      </div>
-
-      <!-- 5 -->
-      <div class="qstep" data-s="4">
-        <span class="qn">Passo 5 di 6</span>
-        <h2>Quando vorresti partire?</h2>
-        <p class="qsub">Due posti al mese: ci serve per capire se sei il prossimo o uno dei successivi.</p>
-        <div class="qopts" data-k="quando" data-multi="0">
-          <button type="button" class="qopt" data-v="Subito"><span class="qtick"><s>&#10003;</s></span><span><b>Il prima possibile</b><i>Il problema ce l&#39;ho adesso</i></span></button>
-          <button type="button" class="qopt" data-v="3 mesi"><span class="qtick"><s>&#10003;</s></span><span><b>Entro tre mesi</b><i>Sto organizzando</i></span></button>
-          <button type="button" class="qopt" data-v="Guardo"><span class="qtick"><s>&#10003;</s></span><span><b>Sto solo guardando</b><i>Nessuna fretta</i></span></button>
-        </div>
-      </div>
-
-      <!-- 6 -->
-      <div class="qstep" data-s="5">
-        <span class="qn">Passo 6 di 6</span>
-        <h2>Chi sei.</h2>
-        <p class="qsub">Serve per confermarti lo slot e mandarti i documenti dopo la call.</p>
-        <div class="campi" style="margin-top:1.2rem">
-          <div class="campo"><label for="qNome">Nome e cognome *</label><input type="text" id="qNome" required></div>
-          <div class="campo"><label for="qAzienda">Azienda *</label><input type="text" id="qAzienda" required></div>
-          <div class="campo"><label for="qEmail">Email *</label><input type="email" id="qEmail" required></div>
-          <div class="campo"><label for="qTel">Telefono</label><input type="tel" id="qTel"></div>
-          <div class="campo largo"><label for="qSito">Sito o profilo</label><input type="text" id="qSito" placeholder="iltuosito.it"></div>
-          <label class="consenso"><input type="checkbox" id="qOk" required>
-            Acconsento al trattamento dei dati per essere ricontattato. Niente newsletter, niente liste.</label>
-        </div>
-      </div>
-
-      <!-- esito -->
-      <div class="qstep qout" data-s="6">
-        <span class="kicker">La tua fascia</span>
-        <h2 class="qfascia" id="qFascia"></h2>
-        <p class="qcifra" id="qCifra"></p>
-        <p class="qnota" id="qNota"></p>
-        <div class="qincl">
-          <h3>Cosa comprende</h3>
-          <ul id="qIncl"></ul>
-        </div>
-        <p class="qnota">La call &egrave; gratuita e dura mezz&#39;ora. Se dopo averla fatta non ha senso, te lo diciamo l&igrave; &mdash; e i documenti restano tuoi comunque.</p>
-      </div>
-
-      <div class="qnav">
-        <button type="button" class="qback" id="qBack" hidden>&larr; Indietro</button>
-        <span></span>
-        <button type="button" class="btn qnext" id="qNext" disabled>Continua &rarr;</button>
-      </div>
-      <p class="qerr" id="qErr"></p>
-    </div>
+    <p class="qagente" id="qAgente" hidden></p>
   </div>
 </section>
 
@@ -565,52 +476,59 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
     <div style="display:flex;flex-direction:column;gap:22px">
 
       <div class="scheda">
-        <div class="passo"><b>01</b><span>Scegli quando</span><i class="fuso" id="fuso"></i></div>
+        <div class="passo"><b>01</b><span data-it="Scegli quando">Pick a time</span><i class="fuso" id="fuso"></i></div>
         <div class="mesi">
-          <button type="button" id="prev" aria-label="Mese precedente">&#8249;</button>
+          <button type="button" id="prev" aria-label="Previous month">&#8249;</button>
           <b id="mese"></b>
-          <button type="button" id="next" aria-label="Mese successivo">&#8250;</button>
+          <button type="button" id="next" aria-label="Next month">&#8250;</button>
         </div>
         <div class="gg" id="gg"></div>
         <div class="ore" id="ore" hidden>
           <div class="ore-t" id="oreT"></div>
           <div class="slot" id="slot"></div>
         </div>
-        <p class="scelto" id="scelto">Le call durano <b>30 minuti</b> e si fanno su Google Meet.</p>
+        <p class="scelto" id="scelto" data-it="Le call durano &lt;b&gt;30 minuti&lt;/b&gt; e si fanno su Google Meet.">Calls take <b>30 minutes</b>, on Google Meet.</p>
       </div>
 
       <div class="scheda fatto" id="fatto" hidden>
-        <span class="kicker">Call confermata</span>
+        <span class="kicker" data-it="Call confermata">Call confirmed</span>
         <h2 class="fattoT" id="fattoT"></h2>
-        <p class="fattoP">Ti abbiamo mandato la mail di conferma, con l&#39;invito da aggiungere al calendario.
-          Se non la vedi entro qualche minuto, guarda nello spam.</p>
-        <p class="fattoP">Nella mail trovi anche il link di Google Meet: basta cliccarlo all&#39;ora giusta.
-          Per spostare o disdire, rispondi a quella mail.</p>
+        <p class="fattoP" data-it="Ti abbiamo mandato la mail di conferma, con l’invito da aggiungere al calendario. Se non la vedi entro qualche minuto, guarda nello spam.">We&#39;ve sent you a confirmation email with a calendar invite.
+          Not there in a few minutes? Check your spam.</p>
+        <p class="fattoP" data-it="Nella mail trovi anche il link di Google Meet: basta cliccarlo all’ora giusta. Per spostare o disdire, rispondi a quella mail.">The email has your Google Meet link: just click it at the time.
+          To move or cancel, reply to that email.</p>
       </div>
 
       <div class="scheda">
-        <div class="passo"><b>02</b><span>Raccontaci l&#39;azienda</span></div>
+        <div class="passo"><b>02</b><span data-it="Raccontaci l’azienda">Tell us about your business</span></div>
         <form class="campi" id="modulo" novalidate>
-          <div class="campo"><label for="nome">Nome e cognome *</label><input type="text" id="nome" required></div>
-          <div class="campo"><label for="azienda">Azienda *</label><input type="text" id="azienda" required></div>
+          <div class="campo"><label for="nome" data-it="Nome e cognome *">Full name *</label><input type="text" id="nome" required></div>
+          <div class="campo"><label for="azienda" data-it="Azienda *">Company *</label><input type="text" id="azienda" required></div>
           <div class="campo"><label for="email">Email *</label><input type="email" id="email" required></div>
-          <div class="campo"><label for="tel">Telefono</label><input type="tel" id="tel"></div>
-          <div class="campo"><label for="sito">Sito</label><input type="text" id="sito" placeholder="iltuosito.it"></div>
-          <div class="campo"><label for="persone">Quante persone siete</label>
-            <select id="persone"><option>Solo io</option><option>2 &ndash; 5</option><option>6 &ndash; 15</option><option>16 &ndash; 50</option><option>Pi&ugrave; di 50</option></select></div>
-          <div class="campo largo"><label for="reparto">Da dove partiresti</label>
+          <div class="campo"><label for="tel" data-it="Telefono">Phone</label><input type="tel" id="tel"></div>
+          <div class="campo"><label for="sito" id="sitoL" data-it="Sito">Website</label><input type="text" id="sito" placeholder="yoursite.com"></div>
+          <!-- form breve per ?servizio=contenuti|siti|agenti (review/18 A1): questi campi si vedono solo lì -->
+          <div class="campo largo" data-sv="contenuti" hidden><label for="svProfilo">Link al profilo Instagram</label><input type="text" id="svProfilo" placeholder="instagram.com/tuaazienda"></div>
+          <div class="campo largo" data-sv="contenuti" hidden><label for="svRitmo">Quanto pubblicate oggi</label>
+            <select id="svRitmo"><option>Quasi mai</option><option>Una volta a settimana o meno</option><option>Due o tre volte a settimana</option><option>Quasi ogni giorno</option></select></div>
+          <div class="campo largo" data-sv="siti" hidden><label for="svOnline">Quando vorresti andare online</label>
+            <select id="svOnline"><option>Entro un mese</option><option>Entro tre mesi</option><option>Non ho ancora una data</option></select></div>
+          <div class="campo largo" data-sv="agenti" hidden><label for="svSpec">Which agent interests you</label><select id="svSpec"></select></div>
+          <div class="campo" data-su-misura><label for="persone">How many people are you</label>
+            <select id="persone"><option>Just me</option><option>2 &ndash; 5</option><option>6 &ndash; 15</option><option>16 &ndash; 50</option><option>More than 50</option></select></div>
+          <div class="campo largo" data-su-misura><label for="reparto">Where would you start</label>
             <select id="reparto">
-              <option>Assistenza clienti</option><option>Vendite e preventivi</option>
-              <option>Marketing e contenuti</option><option>Operations e inserimento dati</option>
-              <option>Amministrazione e report</option><option>Non lo so ancora, guardiamolo insieme</option>
+              <option>Customer support</option><option>Sales and quotes</option>
+              <option>Marketing and content</option><option>Operations and data entry</option>
+              <option>Admin and reports</option><option>Not sure yet, let&#39;s look together</option>
             </select></div>
-          <div class="campo largo"><label for="pesa">Qual &egrave; il lavoro manuale che ti pesa di pi&ugrave; *</label>
-            <textarea id="pesa" required placeholder="Es. ogni preventivo lo riscrivo a mano, e poi nessuno ricontatta chi non risponde."></textarea></div>
-          <div class="campo largo"><label for="tool">Che strumenti usate gi&agrave;</label>
-            <input type="text" id="tool" placeholder="Gmail, WhatsApp, un gestionale, Drive&hellip;"></div>
+          <div class="campo largo"><label for="pesa" id="pesaL">Which manual work slows you down most *</label>
+            <textarea id="pesa" required placeholder="E.g. I rewrite every quote by hand, and nobody follows up when a client goes quiet."></textarea></div>
+          <div class="campo largo" data-su-misura><label for="tool">Tools you already use</label>
+            <input type="text" id="tool" placeholder="Gmail, WhatsApp, your CRM, Drive&hellip;"></div>
           <label class="consenso"><input type="checkbox" id="ok" required>
-            Acconsento al trattamento dei dati per essere ricontattato. Niente newsletter, niente liste.</label>
-          <div class="invia"><button type="submit" class="btn">Conferma la call &rarr;</button></div>
+            <span data-it="Acconsento al trattamento dei dati per essere ricontattato. Niente newsletter, niente liste.">I agree to the processing of my data so you can get back to me. No newsletters, no lists.</span></label>
+          <div class="invia"><button type="submit" class="btn" data-it="Conferma la call &rarr;">Confirm the call &rarr;</button></div>
           <p class="avviso" id="avviso"></p>
         </form>
       </div>
@@ -619,20 +537,20 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
 
     <aside class="lato">
       <div class="blocco">
-        <h3>Cosa succede dopo</h3>
+        <h3 data-it="Cosa succede dopo">What happens next</h3>
         <ul>
-          <li><b>01</b><span>Ricevi subito la mail di conferma, con il link della videocall e l&#39;invito per il calendario.</span></li>
-          <li><b>02</b><span>In mezz&#39;ora mappiamo i processi manuali, reparto per reparto.</span></li>
-          <li><b>03</b><span>Entro 48 ore ti mandiamo tre documenti: la mappa, il conto in euro, quali reparti accendere. Restano tuoi anche se ci salutiamo l&igrave;.</span></li>
+          <li><b>01</b><span data-it="Ricevi subito la mail di conferma, con il link della videocall e l’invito per il calendario.">A confirmation email lands right away, with the video call link and a calendar invite.</span></li>
+          <li><b>02</b><span id="dopo2">In thirty minutes we map the manual work, department by department.</span></li>
+          <li><b>03</b><span id="dopo3">Within 48 hours you get three documents: the map, the numbers in euros, which departments to switch on first. They stay yours, whatever you decide.</span></li>
         </ul>
       </div>
       <div class="blocco">
-        <h3>Gratuita davvero</h3>
-        <p>Nessuna carta, nessun impegno, nessuna proposta a sorpresa. Se non ha senso te lo diciamo in call, non dopo tre settimane.</p>
+        <h3 data-it="Gratuita davvero">Truly free</h3>
+        <p data-it="Nessuna carta, nessun impegno, nessuna proposta a sorpresa. Se non ha senso te lo diciamo in call, non dopo tre settimane.">No card, no commitment, no surprise pitch. If it doesn&#39;t fit, we tell you on the call, not three weeks later.</p>
       </div>
       <div class="blocco">
-        <h3>Preferisci scrivere</h3>
-        <p><a href="mailto:info@21studio.io">info@21studio.io</a><br>Rispondiamo entro un giorno lavorativo.</p>
+        <h3 data-it="Preferisci scrivere?">Rather write?</h3>
+        <p><a href="mailto:info@21studio.io">info@21studio.io</a><br><span data-it="Rispondiamo entro un giorno lavorativo.">We reply within one working day.</span></p>
       </div>
     </aside>
   </div>
@@ -645,40 +563,32 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
     <div class="ft-card">
       <div class="ft-top">
         <div class="ft-brand">
-          <a href="index.html" class="wm" aria-label="21studio, torna alla home">21STUDIO</a>
-          <p>Reparti AI su misura per PMI italiane.</p>
+          <a href="index.html" class="wm" aria-label="21studio home">21STUDIO</a>
+          <p>An AI agent for every department. Built around your business, yours to keep.</p>
           <a href="mailto:info@21studio.io">info@21studio.io</a>
         </div>
-        <nav class="ft-col" aria-label="Sito">
-          <h3>Sito</h3>
+        <nav class="ft-col" aria-label="Site">
+          <h3>Site</h3>
           <ul>
-            <li><a href="index.html#metodo">Come funziona</a></li>
-            <li><a href="index.html#trio">Cosa costruiamo</a></li>
-            <li><a href="index.html#strumenti">Strumenti</a></li>
-            <li><a href="index.html#dove">Dove gira</a></li>
+            <li><a href="servizi/agenti/index.html">Agents</a></li>
+            <li><a href="index.html#how-it-works">How it works</a></li>
+            <li><a href="index.html#custom">Custom</a></li>
+            <li><a href="contatti.html">Contact</a></li>
           </ul>
         </nav>
-        <nav class="ft-col" aria-label="Offerta">
-          <h3>Offerta</h3>
+        <nav class="ft-col" aria-label="Contact">
+          <h3>Talk to us</h3>
           <ul>
-            <li><a href="agenti-fissi.html">Agenti Fissi</a></li>
-            <li><a href="piano-di-mantenimento.html">Piano di mantenimento</a></li>
-          </ul>
-        </nav>
-        <nav class="ft-col" aria-label="Contatti">
-          <h3>Contatti</h3>
-          <ul>
-            <li><a href="contatti.html">Prenota una call</a></li>
+            <li><a href="contatti.html">Book a call</a></li>
             <li><a href="mailto:info@21studio.io">info@21studio.io</a></li>
           </ul>
         </nav>
       </div>
-      <!-- TODO: aggiungere i link a Privacy e Termini quando le pagine esisteranno -->
       <div class="ft-bot">
-        <a class="ft-ig" href="https://instagram.com/21studio.io" target="_blank" rel="noopener" aria-label="Instagram di 21studio">
+        <a class="ft-ig" href="https://instagram.com/21studio.io" target="_blank" rel="noopener" aria-label="21studio on Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg>
         </a>
-        <small>&copy; 2026 21studio. Tutti i diritti riservati.</small>
+        <small>&copy; 2026 21studio</small>
       </div>
     </div>
   </div>
@@ -718,7 +628,7 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
     clearTimeout(chiudiTimer);
     menu.hidden=false;
     tog.setAttribute('aria-expanded','true');
-    tog.setAttribute('aria-label','Chiudi il menu');
+    tog.setAttribute('aria-label','Close menu');
     requestAnimationFrame(function(){ mh.classList.add('is-open') });
     var primo=menu.querySelector('a');
     if(primo) primo.focus({preventScroll:true});
@@ -727,7 +637,7 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
     if(tog.getAttribute('aria-expanded')!=='true') return;
     mh.classList.remove('is-open');
     tog.setAttribute('aria-expanded','false');
-    tog.setAttribute('aria-label','Apri il menu');
+    tog.setAttribute('aria-label','Open menu');
     chiudiTimer=setTimeout(function(){ menu.hidden=true }, RID?0:450);
     if(rimettiFocus) tog.focus({preventScroll:true});
   }
@@ -746,329 +656,72 @@ footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-ra
   matchMedia('(min-width: 901px)').addEventListener('change',function(m){ if(m.matches) chiudi(false) });
 })();
 </script>
+<script src="js/calendario.js"></script>
 <script>
-(function(){
-  var MESI=['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
-  var DOW=['lun','mar','mer','gio','ven','sab','dom'];
-  var ORE=(function(){var a=[],m=14*60+30;for(;m<=19*60;m+=30){a.push(('0'+Math.floor(m/60)).slice(-2)+':'+('0'+m%60).slice(-2))}return a})();
-  var oggi=new Date(); oggi.setHours(0,0,0,0);
-  var limite=new Date(oggi.getTime()+60*86400000);
-  var vista=new Date(oggi.getFullYear(),oggi.getMonth(),1);
-  var giorno=null, ora=null;
-  var gg=document.getElementById('gg'), mese=document.getElementById('mese');
-  var prev=document.getElementById('prev'), next=document.getElementById('next');
-  var ore=document.getElementById('ore'), oreT=document.getElementById('oreT'), slot=document.getElementById('slot');
-  var scelto=document.getElementById('scelto'), avviso=document.getElementById('avviso');
-  try{ document.getElementById('fuso').textContent=Intl.DateTimeFormat().resolvedOptions().timeZone.replace('_',' '); }catch(e){}
-
-  function libero(d){ var w=d.getDay(); return w!==0 && w!==6 && d>oggi && d<limite }
-
-  function disegna(){
-    mese.textContent=MESI[vista.getMonth()]+' '+vista.getFullYear();
-    prev.disabled = vista<=new Date(oggi.getFullYear(),oggi.getMonth(),1);
-    next.disabled = vista>=new Date(limite.getFullYear(),limite.getMonth(),1);
-    gg.innerHTML='';
-    DOW.forEach(function(d){ var s=document.createElement('div'); s.className='dow'; s.textContent=d; gg.appendChild(s) });
-    var primo=new Date(vista.getFullYear(),vista.getMonth(),1);
-    var salta=(primo.getDay()+6)%7;
-    for(var i=0;i<salta;i++){ var v=document.createElement('div'); v.className='vuoto'; gg.appendChild(v) }
-    var ultimo=new Date(vista.getFullYear(),vista.getMonth()+1,0).getDate();
-    for(var n=1;n<=ultimo;n++){
-      var d=new Date(vista.getFullYear(),vista.getMonth(),n);
-      var b=document.createElement('button'); b.type='button'; b.textContent=n;
-      if(!libero(d)) b.disabled=true;
-      if(giorno && d.getTime()===giorno.getTime()) b.className='on';
-      b.addEventListener('click',(function(dd){return function(){ giorno=dd; ora=null; disegna(); mostraOre() }})(d));
-      gg.appendChild(b);
-    }
-  }
-  function mostraOre(){
-    if(!giorno){ ore.hidden=true; return }
-    ore.hidden=false;
-    oreT.textContent=giorno.getDate()+' '+MESI[giorno.getMonth()]+' \u00b7 scegli un orario';
-    slot.innerHTML='';
-    ORE.forEach(function(h){
-      var b=document.createElement('button'); b.type='button'; b.textContent=h;
-      if(ora===h) b.className='on';
-      b.addEventListener('click',function(){ ora=h; mostraOre() });
-      slot.appendChild(b);
-    });
-    riepilogo();
-  }
-  function riepilogo(){
-    if(giorno&&ora) scelto.innerHTML='Hai scelto <b>'+giorno.getDate()+' '+MESI[giorno.getMonth()]+', ore '+ora+'</b>. Trenta minuti, su Google Meet.';
-    else scelto.innerHTML='Le call durano <b>30 minuti</b> e si fanno su Google Meet.';
-  }
-  prev.addEventListener('click',function(){ vista=new Date(vista.getFullYear(),vista.getMonth()-1,1); disegna() });
-  next.addEventListener('click',function(){ vista=new Date(vista.getFullYear(),vista.getMonth()+1,1); disegna() });
-  disegna();
-
-  document.getElementById('modulo').addEventListener('submit',function(e){
-    e.preventDefault();
-    var v=function(id){ return (document.getElementById(id).value||'').trim() };
-    if(!giorno||!ora){ avviso.textContent='Scegli prima il giorno e l’orario qui sopra.'; return }
-    if(!v('nome')||!v('azienda')||!v('email')||!v('pesa')||!document.getElementById('ok').checked){
-      avviso.textContent='Mancano i campi con l’asterisco, o il consenso.'; return }
-
-    var quando=giorno.getDate()+' '+MESI[giorno.getMonth()]+' '+giorno.getFullYear()+', ore '+ora;
-    var due=function(n){ return (n<10?'0':'')+n };
-    var iso=giorno.getFullYear()+'-'+due(giorno.getMonth()+1)+'-'+due(giorno.getDate())+'T'+ora+':00';
-
-    var q=(window.__candidatura?window.__candidatura():{})||{};
-    var dati={
-      tipo:'prenotazione', slot:quando, slotISO:iso,
-      quando_inviato:new Date().toISOString(),
-      nome:v('nome'), azienda:v('azienda'), email:v('email'),
-      telefono:v('tel'), sito:v('sito'),
-      dimensione:q.dimensione||v('persone'), fatturato:q.fatturato||'',
-      fascia:q.fascia||'',
-      aree:q.aree||v('reparto'), dove:q.dove||'', quando:q.quando||'',
-      racconto:(q.racconto||v('pesa'))+(v('tool')?('\n\nStrumenti in uso: '+v('tool')):''),
-      pagina:location.href
-    };
-
-    var bottone=document.querySelector('#modulo .invia .btn');
-    if(bottone){ bottone.disabled=true; bottone.textContent='Fatto'; }
-    avviso.textContent='';
-
-    /* parte in sottofondo: la conferma a schermo non aspetta il server */
-    if(window.CONFIG && CONFIG.ENDPOINT){
-      var corpo=JSON.stringify(dati), spedito=false;
-      try{
-        if(navigator.sendBeacon){
-          spedito=navigator.sendBeacon(CONFIG.ENDPOINT,
-            new Blob([corpo],{type:'text/plain;charset=utf-8'}));
-        }
-      }catch(_e){}
-      if(!spedito){
-        try{
-          fetch(CONFIG.ENDPOINT,{method:'POST',mode:'no-cors',keepalive:true,
-            headers:{'Content-Type':'text/plain;charset=utf-8'},
-            body:corpo}).catch(function(){});
-        }catch(_e2){}
-      }
-    }
-
-    var f=document.getElementById('fatto');
-    if(f){
-      document.getElementById('fattoT').textContent='Ci vediamo il '+quando+'.';
-      [].slice.call(document.querySelectorAll('#prenota .scheda')).forEach(function(x){
-        if(x.id!=='fatto') x.hidden=true;
-      });
-      f.hidden=false;
-      f.scrollIntoView({behavior:'smooth',block:'start'});
-    }
-  });
-})();
+/* Agenti disponibili, per ?servizio=agenti. Elenco generato da _agenti/build.py */
+/* agenti:start */
+var AGENTI={"coordinatore": {"nome": "Coordinator", "prezzo": 490}, "consigliere": {"nome": "Advisor", "prezzo": 149}, "riassunti": {"nome": "Summaries", "prezzo": 149}, "offerta-prezzi": {"nome": "Offer & Pricing", "prezzo": 249}, "trova-clienti": {"nome": "Lead Finder", "prezzo": 490}, "ricerca-fornitori": {"nome": "Supplier & Partner Finder", "prezzo": 249}, "social": {"nome": "Social", "prezzo": 249}, "video-reel": {"nome": "Video & Reels", "prezzo": 249}, "dm-instagram": {"nome": "Instagram DM", "prezzo": 149}, "report-instagram": {"nome": "Instagram Report", "prezzo": 149}, "annunci-concorrenti": {"nome": "Competitor Ads", "prezzo": 249}, "siti-landing": {"nome": "Websites & Landing Pages", "prezzo": 249}, "funnel-conversioni": {"nome": "Funnels & Conversion", "prezzo": 249}, "e-commerce": {"nome": "E-commerce", "prezzo": 490}, "documenti": {"nome": "Documents", "prezzo": 249}, "automazioni": {"nome": "Automations", "prezzo": 249}};
+window.__AGENTI=AGENTI;
+/* agenti:end */
 </script>
 <script>
-/* =================================================================
-   QUESTIONARIO DI CANDIDATURA
-   Tutto quello che si cambia sta qui sotto. Il resto non si tocca.
-   ================================================================= */
-var CONFIG = {
-
-  /* Dove finiscono le risposte.
-     Incolla qui l'indirizzo della tua Google Apps Script (vedi salva-candidature.gs).
-     Finche' e' vuoto, il questionario funziona ma non salva niente. */
-  ENDPOINT: 'https://script.google.com/macros/s/AKfycbwvZmN4pDdJT-BgURPGF16nSZQ00MFxsesp6frowS91j8dtU08DSyGzVIJJtRb3fXvbNQ/exec',
-
-  /* >>> I NUMERI. Sostituisci questi e basta. <<<
-     min/max sono gli estremi del range mostrato in fondo.
-     canone: la riga sotto al prezzo. Lascia '' per non mostrarla. */
-  FASCE: {
-    A: { nome:'Un reparto',       min:900,  max:1800,  canone:'' },
-    B: { nome:'Più reparti',      min:1800, max:3500,  canone:'' },
-    C: { nome:'Sistema completo', min:3500, max:7000,  canone:'' }
-  },
-
-  /* Cosa comprende, per fascia. */
-  INCLUSO: {
-    A: ['Un reparto costruito sui tuoi processi',
-        'Gli agenti di quel reparto, addestrati sui tuoi dati',
-        'Il cervello con offerta, listino, tono di voce e regole',
-        'Il sistema da cui guardi e approvi',
-        'Consegna e passaggio di consegne in diretta'],
-    B: ['Più reparti, accesi in ordine di ritorno',
-        'Gli agenti di ogni reparto, addestrati sui tuoi dati',
-        'Il cervello condiviso fra tutti i reparti',
-        'Il sistema da cui guardi, approvi e comandi',
-        'Collegamento agli strumenti che già usate',
-        'Consegna e passaggio di consegne in diretta'],
-    C: ['Tutti i reparti che ti servono, costruiti su misura',
-        'Gli agenti di ogni reparto, addestrati sui tuoi dati',
-        'Il cervello condiviso, con le tue procedure dentro',
-        'Il sistema completo, da qualsiasi dispositivo',
-        'Collegamento agli strumenti che già usate',
-        'Consegna, passaggio di consegne e taratura sul lavoro vero']
-  }
-};
-
+/* Servizio scelto da Contenuti AI, Siti web o da una pagina agente (?servizio=…&piano=…):
+   form breve coerente col servizio al posto del questionario del sistema su misura (review/18 A1) */
 (function(){
-  var box=document.querySelector('.qbox'); if(!box) return;
-  var passi=[].slice.call(box.querySelectorAll('.qstep')),
-      fill=document.getElementById('qfill'),
-      bNext=document.getElementById('qNext'),
-      bBack=document.getElementById('qBack'),
-      err=document.getElementById('qErr'),
-      ta=document.getElementById('qRacconto'),
-      cur=0, R={}, ESITO=null, TOT=6, partito=false;
+  var AG={}; Object.keys(window.__AGENTI||{}).forEach(function(k){ AG[k]=window.__AGENTI[k].nome });
+  var SERVIZI={
+    contenuti:{nome:'Contenuti AI',torna:'servizi/contenuti-ai.html#piani',piani:{presenza:'Presenza',ritmo:'Ritmo',regia:'Regia'},
+      lead:'Scegli lo slot e raccontaci il profilo in due righe. In mezz’ora guardiamo cosa pubblicate oggi e quale piano ha senso.',
+      pesa:'Cosa vorresti ottenere dai contenuti *', ph:'Es. pubblichiamo a strappi e vorremmo uscire ogni settimana con reel sui nostri prodotti.',
+      dopo2:'In mezz’ora guardiamo il tuo profilo e cosa pubblicate oggi.',
+      dopo3:'Se ha senso, ti mandiamo un preventivo scritto con piano e calendario prima di iniziare.'},
+    siti:{nome:'Siti web',torna:'servizi/siti-web.html#formati',piani:{landing:'Landing page',sito:'Sito completo',ecommerce:'E-commerce','sito-ottimizzazione':'Sito che migliora'},
+      lead:'Scegli lo slot e lasciaci il link del tuo sito, se ce l’hai. Ti portiamo l’analisi gratuita: cosa non va e cosa ti fa perdere contatti.',
+      sito:'Sito attuale', pesa:'Cosa deve fare il sito nuovo *', ph:'Es. oggi le richieste di preventivo arrivano solo per telefono: vorremmo un modulo con il disegno allegato.',
+      dopo2:'In mezz’ora ti mostriamo l’analisi: velocità, conversioni e dove perdi contatti. Se il sito non c’è, partiamo dai migliori del tuo settore.',
+      dopo3:'Se ha senso, ti mandiamo un preventivo scritto con formato, tempi e prezzo prima di iniziare.'},
+    agenti:{nome:'Agenti',torna:'servizi/agenti/index.html',piani:AG,
+      lead:'Pick a slot and tell us which agent interests you. In thirty minutes we see if it does what you need.',
+      pesa:'What should it do for you *', ph:'E.g. we need the week’s carousels drafted in our voice.',
+      dopo2:'In thirty minutes we check the agent does what you need, on your tools.',
+      dopo3:'If it fits, we install it and tune it to your business. If not, we tell you.'}
+  };
+  var ALIAS={'contenuti-ai':'contenuti','siti-web':'siti','specialisti':'agenti'};
+  var q=new URLSearchParams(location.search), sv=q.get('servizio'), pi=q.get('piano');
+  if(sv && ALIAS[sv]) sv=ALIAS[sv];
+  if(window.__agente || !sv || !Object.prototype.hasOwnProperty.call(SERVIZI,sv)) return;   /* solo valori noti */
+  var s=SERVIZI[sv], p=pi && Object.prototype.hasOwnProperty.call(s.piani,pi) ? s.piani[pi] : '';
+  window.__servizio={slug:sv+(p?'-'+pi:''),nome:s.nome+(p?' · '+p:'')};
+  var $=function(id){ return document.getElementById(id) };
 
-  /* --- selezione delle opzioni --- */
-  box.querySelectorAll('.qopts').forEach(function(g){
-    var k=g.dataset.k, multi=g.dataset.multi==='1';
-    g.querySelectorAll('.qopt').forEach(function(b){
-      b.addEventListener('click',function(){
-        if(multi){
-          b.classList.toggle('on');
-          R[k]=[].slice.call(g.querySelectorAll('.qopt.on')).map(function(x){return x.dataset.v});
-          if(!R[k].length) delete R[k];
-        } else {
-          g.querySelectorAll('.qopt').forEach(function(x){x.classList.remove('on')});
-          b.classList.add('on'); R[k]=b.dataset.v;
-        }
-        err.textContent=''; stato();
-      });
-    });
-  });
-
-  /* --- l'interruttore in cima: gestito o su macchina sua --- */
-  (function(){
-    var t=document.getElementById('qTog'); if(!t) return;
-    R.dove='Gestito';
-    t.querySelectorAll('button').forEach(function(b){
-      b.addEventListener('click',function(){
-        t.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});
-        b.classList.add('on'); R.dove=b.dataset.v;
-      });
-    });
-  })();
-
-  /* --- il racconto --- */
-  if(ta) ta.addEventListener('input',function(){
-    var n=ta.value.trim().length;
-    document.getElementById('qLen').textContent=n+' / 2000';
-    document.getElementById('qMin').textContent = n>=40 ? '' : ('servono ancora '+(40-n)+' caratteri');
-    R.racconto=ta.value.trim(); stato();
-  });
-  ['qNome','qAzienda','qEmail','qTel','qSito'].forEach(function(id){
-    var e=document.getElementById(id); if(e) e.addEventListener('input',stato);
-  });
-  var ok=document.getElementById('qOk'); if(ok) ok.addEventListener('change',stato);
-
-  /* --- si puo' andare avanti? --- */
-  function valido(i){
-    if(i===0) return !!R.dimensione;
-    if(i===1) return (R.racconto||'').length>=40;
-    if(i===2) return !!R.fatturato;
-    if(i===3) return !!(R.aree&&R.aree.length);
-    if(i===4) return !!R.quando;
-    if(i===5){
-      var v=function(id){return (document.getElementById(id).value||'').trim()};
-      return v('qNome') && v('qAzienda') && /.+@.+\..+/.test(v('qEmail')) && document.getElementById('qOk').checked;
-    }
-    return true;
+  /* via il questionario, dentro il form breve */
+  $('filtro').hidden=true; $('prenota').hidden=false;
+  [].forEach.call(document.querySelectorAll('#modulo [data-su-misura]'),function(c){ c.hidden=true });
+  [].forEach.call(document.querySelectorAll('#modulo [data-sv="'+sv+'"]'),function(c){ c.hidden=false });
+  if(window.__IT){
+    document.documentElement.lang='it';
+    [].forEach.call(document.querySelectorAll('[data-it]'),function(el){ el.innerHTML=el.dataset.it });   /* testi fissi scritti da noi, mai input utente */
   }
-  function stato(){ bNext.disabled = !valido(cur); }
-
-  /* --- che fascia --- */
-  function calcola(){
-    var aree=(R.aree||[]).filter(function(a){return a!=='Non so'}).length;
-    var f='A';
-    if(aree>=2) f='B';
-    if(aree>=4) f='C';
-    if(R.dimensione==='16-50'||R.dimensione==='50+'){ if(f==='A') f='B'; else f='C'; }
-    if(R.dimensione==='Solo io' && f==='C') f='B';
-    return f;
-  }
-  function euro(n){ return n.toLocaleString('it-IT'); }
-
-  function mostraEsito(){
-    var f=calcola(); ESITO=f;
-    var d=CONFIG.FASCE[f];
-    document.getElementById('qFascia').textContent=d.nome;
-    var c=document.getElementById('qCifra');
-    if(d.min&&d.max){ c.textContent='da '+euro(d.min)+' a '+euro(d.max)+' €'; c.style.display=''; }
-    else { c.style.display='none'; }
-    var nota=document.getElementById('qNota');
-    var testo;
-    if(d.min&&d.max){
-      testo = 'Setup una tantum. A questo si aggiunge un canone mensile, che dipende da dove lo fai girare: '
-            + 'lo vediamo in call. Il numero esatto lo chiudiamo dopo aver guardato la tua azienda reparto per reparto.';
-      if(R.dove==='In casa') testo += ' Installazione sulla tua macchina inclusa.';
-    } else {
-      testo = 'La cifra la chiudiamo in call, dopo aver guardato la tua azienda reparto per reparto. '
-            + 'Esce insieme agli altri due documenti, e resta tua anche se ci salutiamo l\u00ec.';
-    }
-    nota.textContent=testo;
-    var ul=document.getElementById('qIncl'); ul.innerHTML='';
-    (CONFIG.INCLUSO[f]||[]).forEach(function(t){
-      var li=document.createElement('li');
-      li.innerHTML='<s>&#10003;</s><span>'+t+'</span>'; ul.appendChild(li);
-    });
+  $('phLead').textContent=s.lead;
+  $('pesaL').textContent=s.pesa; $('pesa').placeholder=s.ph;
+  if(s.sito) $('sitoL').textContent=s.sito;
+  $('dopo2').textContent=s.dopo2; $('dopo3').textContent=s.dopo3;
+  if(sv==='agenti'){
+    var sel=$('svSpec');
+    Object.keys(AG).forEach(function(k){ var o=document.createElement('option'); o.value=AG[k]; o.textContent=AG[k]; if(k===pi) o.selected=true; sel.appendChild(o) });
+    var o=document.createElement('option'); o.value='Not sure yet'; o.textContent='Not sure yet'; if(!p) o.selected=true; sel.appendChild(o);
   }
 
-  /* --- invio --- */
-  function raccogli(){
-    var v=function(id){var e=document.getElementById(id);return e?(e.value||'').trim():''};
-    return {
-      tipo:'candidatura',
-      quando_inviato:new Date().toISOString(),
-      nome:v('qNome'), azienda:v('qAzienda'), email:v('qEmail'),
-      telefono:v('qTel'), sito:v('qSito'),
-      dimensione:R.dimensione||'', fatturato:R.fatturato||'',
-      aree:(R.aree||[]).join(', '), dove:R.dove||'', quando:R.quando||'',
-      racconto:R.racconto||'', fascia:ESITO||'',
-      pagina:location.href
-    };
-  }
-  function invia(dati){
-    if(!CONFIG.ENDPOINT) return Promise.resolve();
-    return fetch(CONFIG.ENDPOINT,{method:'POST',mode:'no-cors',
-      headers:{'Content-Type':'text/plain;charset=utf-8'},
-      body:JSON.stringify(dati)}).catch(function(){});
-  }
-  window.__candidatura=raccogli;
-  window.__inviaCand=invia;
-
-  /* --- navigazione --- */
-  function vai(i){
-    cur=i;
-    passi.forEach(function(p,n){p.classList.toggle('on',n===i)});
-    fill.style.width=Math.round((Math.min(i,TOT)/TOT)*100)+'%';
-    bBack.hidden = i===0 || i===6;
-    bNext.textContent = i===5 ? 'Vedi la fascia →' : (i===6 ? 'Scegli lo slot →' : 'Continua →');
-    bNext.disabled=false; stato(); err.textContent='';
-    if(partito) box.scrollIntoView({behavior:'smooth',block:'start'});
-  }
-
-  bNext.addEventListener('click',function(){
-    if(cur<6 && !valido(cur)){ err.textContent='Manca ancora qualcosa qui sopra.'; return; }
-    if(cur===5){ mostraEsito(); invia(raccogli()); vai(6); return; }
-    if(cur===6){
-      var pren=document.getElementById('prenota');
-      if(pren){
-        pren.hidden=false;
-        /* porto i dati gia' dati dentro al modulo di prenotazione */
-        [['qNome','nome'],['qAzienda','azienda'],['qEmail','email'],['qTel','tel'],['qSito','sito']]
-          .forEach(function(p){
-            var a=document.getElementById(p[0]), b=document.getElementById(p[1]);
-            if(a&&b&&!b.value) b.value=a.value;
-          });
-        var pesa=document.getElementById('pesa');
-        if(pesa&&!pesa.value) pesa.value=R.racconto||'';
-        var cons=document.getElementById('ok'); if(cons) cons.checked=true;
-        setTimeout(function(){pren.scrollIntoView({behavior:'smooth',block:'start'})},60);
-      }
-      document.getElementById('filtro').style.display='none';
-      return;
-    }
-    vai(cur+1);
-  });
-  bBack.addEventListener('click',function(){ if(cur>0) vai(cur-1); });
-
-  vai(0); partito=true;
+  /* "Hai scelto" sopra al calendario */
+  var box=$('qAgente'); if(!box) return;
+  box.append(window.__IT?'Hai scelto: ':'You picked: ');
+  var b=document.createElement('b'); b.textContent=window.__servizio.nome; box.append(b);
+  var l=document.createElement('a'); l.href=s.torna; l.textContent=window.__IT?'cambia':'change'; box.append(l);
+  document.querySelector('#prenota .griglia > div').prepend(box);
+  box.hidden=false;
 })();
 </script>
+<script src="js/agenti-dati.js" defer></script>
+<script src="js/prenota.js" defer></script>
 </body>
 </html>

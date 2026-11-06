@@ -1,0 +1,1182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- Generata da _agenti/build.py: non modificare a mano. Dati in agenti.json e reparti.json, layout in base.html e template.html -->
+<title>Payment Reminders agent · Coming soon · 21studio</title>
+<meta name="description" content="Flags overdue invoices and writes the right reminder for each customer. Kind the first time, firmer after. Coming soon: leave your email and we&#x27;ll write when it launches.">
+<meta property="og:title" content="Payment Reminders agent · Coming soon · 21studio">
+<meta property="og:description" content="Flags overdue invoices and writes the right reminder for each customer. Kind the first time, firmer after. Coming soon: leave your email and we&#x27;ll write when it launches.">
+<meta property="og:locale" content="en_GB">
+<link rel="canonical" href="https://21studio.io/servizi/agenti/solleciti-pagamenti.html">
+<link rel="alternate" hreflang="en" href="https://21studio.io/servizi/agenti/solleciti-pagamenti.html">
+<link rel="alternate" hreflang="it" href="https://21studio.io/it/servizi/agenti/solleciti-pagamenti.html">
+<link rel="alternate" hreflang="x-default" href="https://21studio.io/servizi/agenti/solleciti-pagamenti.html">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..800&family=Inter:wght@400..700&family=Inter+Tight:wght@700&family=JetBrains+Mono:wght@400;500&family=Caveat:wght@500&display=swap">
+<style>
+
+
+/* ===== base delle pagine interne: valori finali (calcolati) della home ===== */
+:root{
+  --paper:#FFFFFF; --soft:#F5F5F2; --ink:#1A1C17; --ink-2:#4F524A; --ink-3:#686B62;
+  --acc:#5C6A32; --fill:#B7C17E; --hair:rgba(26,28,23,.12); --nero:#0B0C0A;
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:"Geist","Inter",ui-sans-serif,system-ui,sans-serif;
+  --btn-dk:linear-gradient(rgba(255,255,255,.08),rgba(0,0,0,0) 42%),linear-gradient(145deg,#343432,#242422 46%,#11110F);
+  --alza:0 1px 2px rgba(26,28,23,.04),0 14px 34px -22px rgba(26,28,23,.22);
+  --r-l:30px;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{background:var(--paper);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{width:min(1120px,92vw);margin-inline:auto}
+h2{font-family:var(--disp);font-size:clamp(1.85rem,2.8vw,2.5rem);font-weight:650;letter-spacing:-.04em;line-height:1.06}
+h3{font-size:clamp(1.08rem,1.3vw,1.2rem);font-weight:600;letter-spacing:-.022em;line-height:1.24}
+.lab{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--acc)}
+.body{font-size:.94rem;line-height:1.6;color:var(--ink-2)}
+
+/* fasce */
+.band{padding-block:clamp(56px,5vw,72px)}
+.band+.band{border-top:1px solid var(--hair)}
+.band.soft{background:var(--soft)}
+.band.nera{background:var(--nero);color:#fff;border-top:0}
+.band.nera+.band{border-top:0}
+.band.nera .lab{color:#B7C17E}
+.band.nera .body{color:rgba(255,255,255,.68)}
+.centro{width:min(720px,100%);margin-inline:auto;text-align:center}
+.centro h2{margin-top:1rem}
+.centro .body{margin:1rem auto 0;max-width:60ch}
+.testa{margin-bottom:clamp(28px,3vw,40px)}
+
+/* apertura di pagina: tipografica come l'hero della home, senza la lava */
+.ph{position:relative;overflow:hidden;text-align:center;padding:clamp(150px,15vw,196px) 0 clamp(60px,6vw,92px)}
+.ph::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 62% 70% at 50% 118%,rgba(183,193,126,.30),transparent 68%)}
+.ph>*{position:relative}
+.ph h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.5rem,5.4vw,4.6rem);line-height:.96;
+  letter-spacing:-.058em;color:#0D0D0D;max-width:17ch;margin:1.1rem auto 0}
+.ph .lead{margin:1.5rem auto 0;max-width:60ch;font-size:clamp(1.02rem,1.3vw,1.18rem);line-height:1.55;
+  letter-spacing:-.015em;color:#55554F;text-wrap:pretty}
+.ph .em{color:var(--acc)}
+.hnota{margin-top:1.2rem;font-size:13.76px;color:#55584F}
+
+/* bottoni: primario scuro stile mez, secondario chiaro; su nero il primario diventa chiaro */
+.bs{display:flex;flex-wrap:wrap;gap:10px 12px;justify-content:center;align-items:center;margin-top:2rem}
+.b{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:12px;
+  font-size:14px;font-weight:650;letter-spacing:-.012em;line-height:1.5;white-space:nowrap;
+  transition:filter .25s,transform .25s,background-color .25s}
+.b i{font-style:normal;padding:0 4px 0 18px}
+.b s{text-decoration:none;padding:0 18px 0 6px;font-size:15px}
+.b i:only-child{padding:0 20px}
+.b.su{background:var(--btn-dk);border:1px solid rgba(255,255,255,.16);color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 0 0 1px #11110F}
+.b.su:hover{filter:brightness(1.18)}
+.b.suv{background:#fff;border:1px solid rgba(13,13,13,.14);color:#0D0D0D}
+.b.suv:hover{background:var(--soft)}
+.b:active{transform:scale(.98)}
+.nera .b.su{background:linear-gradient(180deg,#FFFFFF,#E9E9E4);color:#0D0D0D;border:1px solid rgba(255,255,255,.7);
+  box-shadow:inset 0 1px 0 #FFFFFF,0 0 0 1px rgba(0,0,0,.5)}
+.nera .b.su:hover{filter:brightness(1.04)}
+
+/* schede: bianche, bordo sottile, ombra leggera (come .vc / .opz della home) */
+.card{background:#fff;border:1px solid rgba(26,28,23,.10);border-radius:var(--r-l);padding:28px;box-shadow:var(--alza)}
+.card.top{border-color:rgba(92,106,50,.4);background:linear-gradient(168deg,rgba(183,193,126,.16),#FFFFFF 70%)}
+.nera .card{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);box-shadow:none}
+.tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.65rem}
+.tl li{display:flex;gap:.7rem;font-size:.94rem;line-height:1.5;color:var(--ink-2)}
+.tl li::before{content:"\2713";flex:none;color:var(--acc)}
+
+/* chiusura, come #fine della home */
+.fine{position:relative;overflow:hidden;padding-block:clamp(72px,7vw,104px);text-align:center}
+.fine::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 58% 60% at 50% 108%,rgba(183,193,126,.22),transparent 66%)}
+.fine>*{position:relative}
+.fine h2{max-width:24ch;margin:1rem auto 0}
+.fine .body{max-width:46ch;margin:1.2rem auto 0}
+.fine .hnota{margin-top:1.4rem}
+
+@media(max-width:860px){
+  .band{padding-block:clamp(48px,11vw,60px)}
+  h2{font-size:clamp(1.75rem,7.6vw,2.1rem)}
+}
+@media(max-width:640px){.ph h1{letter-spacing:-.05em;line-height:1}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---- giro 5: snippet header-mez (pillola fluttuante, sostituisce la barra) ---- */
+/* ================================================================
+   Header a pillola — giro 5 (pattern: mez.systems, stato "scrollato")
+   Misure dal vivo (computed style, 24/10/2026): pillola 1160x68, top 18px,
+   padding 9/10/9/20, bg #262626, bordo 1px rgba(255,255,255,.1),
+   ombra 0 18px 58px -28px rgba(0,0,0,.78); allo scroll si stringe e sale a 12px.
+   CTA a pillola alta 48, bordo 1px, gap 10; sfere 24px sovrapposte di 7px.
+   Testi portati a >=12px (regola del sito: niente testo sotto i 12px).
+   Tutti i selettori sono prefissati .mh / mh- per non toccare il resto.
+   ================================================================ */
+.mh{
+  --mh-bg:#262626; --mh-fg:#F5F5F2; --mh-fg-2:rgba(245,245,242,.72);
+  --mh-line:rgba(255,255,255,.10); --mh-line-2:rgba(255,255,255,.24);
+  --mh-h:68px; --mh-top:18px; --mh-w:1160px;
+  --mh-out:cubic-bezier(.16,1,.3,1);
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding-top:calc(var(--mh-top) + env(safe-area-inset-top,0px));
+  display:flex;justify-content:center;pointer-events:none;
+  font-family:var(--sans,"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);
+  transition:padding-top .52s var(--mh-out)}
+.mh *{box-sizing:border-box}
+.mh-shell{pointer-events:auto;position:relative;width:min(var(--mh-w),calc(100% - 32px));
+  background:var(--mh-bg);color:var(--mh-fg);
+  border:1px solid var(--mh-line);border-radius:calc(var(--mh-h) / 2);
+  box-shadow:0 18px 58px -28px rgba(0,0,0,.78),0 8px 24px -14px rgba(0,0,0,.28);
+  transition:width .62s var(--mh-out),border-radius .3s var(--mh-out),border-color .3s ease}
+.mh-bar{height:calc(var(--mh-h) - 2px);padding:9px 10px 9px 20px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px}
+
+/* logo (giro 6): wordmark come il logo ufficiale - grottesco bold, maiuscolo, tracking stretto.
+   Inter Tight 700 a -0.025em: rapporto larghezza/altezza maiuscole 6.0 contro 6.04 del PNG ufficiale. */
+.wm{font-family:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:700;
+  letter-spacing:-.025em;line-height:1;text-transform:uppercase;white-space:nowrap}
+.mh-brand{justify-self:start;display:inline-flex;align-items:center;color:#fff;text-decoration:none;
+  font-size:20px;padding:4px 2px}
+
+/* link centrali */
+.mh-links{display:flex;align-items:center;gap:30px}
+.mh-links a{color:var(--mh-fg-2);text-decoration:none;font-size:12.5px;font-weight:450;letter-spacing:-.01em;
+  white-space:nowrap;transition:color .25s ease}
+.mh-links a:hover{color:var(--mh-fg)}
+/* voce Servizi con tendina (desktop: hover e focus-within, nessun JS) */
+.mh-sv{position:relative;display:flex}
+.mh-links .mh-sv-a{display:inline-flex;align-items:center;gap:6px}
+.mh-sv-a svg{width:8px;height:8px;opacity:.7;transition:transform .35s var(--mh-out)}
+.mh-sv:hover .mh-sv-a,.mh-sv:focus-within .mh-sv-a,.mh-links .mh-sv-a[aria-current]{color:var(--mh-fg)}
+.mh-sv:hover .mh-sv-a svg,.mh-sv:focus-within .mh-sv-a svg{transform:rotate(180deg)}
+.mh-dd{position:absolute;top:100%;left:50%;padding-top:26px;transform:translate(-50%,8px);opacity:0;visibility:hidden;
+  transition:opacity .2s ease,transform .4s var(--mh-out),visibility 0s linear .2s}
+.mh-sv:hover .mh-dd,.mh-sv:focus-within .mh-dd{opacity:1;visibility:visible;transform:translate(-50%,0);transition-delay:0s}
+.mh-dd-in{width:352px;padding:8px;background:var(--mh-bg);border:1px solid var(--mh-line);border-radius:24px;
+  box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.mh-links .mh-dd a{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 12px;padding:12px 14px;border-radius:16px;
+  color:var(--mh-fg);white-space:normal;transition:background-color .2s ease}
+.mh-dd a:hover,.mh-dd a:focus-visible{background:rgba(255,255,255,.07)}
+.mh-dd b{font-size:14px;font-weight:600;letter-spacing:-.015em}
+.mh-dd span{grid-column:1;font-size:12.5px;line-height:1.4;color:var(--mh-fg-2)}
+.mh-dd i{grid-row:1/3;grid-column:2;font-style:normal;color:var(--mh-fg-2);transform:translateX(-4px);opacity:0;
+  transition:transform .3s var(--mh-out),opacity .2s ease}
+.mh-dd a:hover i,.mh-dd a:focus-visible i{transform:none;opacity:1}
+.mh-links .mh-dd a.mh-dd-tutti{display:block;margin-top:4px;padding:12px 14px 10px;border-top:1px solid var(--mh-line);border-radius:0 0 16px 16px;
+  font-size:12.5px;color:var(--mh-fg-2)}
+.mh-menu nav .mh-sub{display:flex;flex-direction:column;padding:0 0 10px 2px}
+.mh-menu nav .mh-sub a{min-height:44px;border-top:0;font-family:var(--sans);font-size:16px;font-weight:500;letter-spacing:-.015em;color:var(--mh-fg-2)}
+.mh-menu nav .mh-sub a::before{content:"";width:12px;height:1px;margin-right:12px;background:var(--mh-line-2)}
+.ft-seg{color:rgba(255,255,255,.4)}
+
+
+.mh-dx{justify-self:end;display:flex;align-items:center;gap:8px}
+
+/* CTA a pillola con bordo sottile + fila di sfere */
+.mh-cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;height:48px;padding:0 12px 0 20px;
+  border:1px solid var(--mh-line-2);border-radius:999px;color:var(--mh-fg);text-decoration:none;
+  font-size:12.5px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;
+  transition:border-color .25s ease,background-color .25s ease}
+.mh-cta:hover{border-color:rgba(255,255,255,.5);background:rgba(255,255,255,.05)}
+.mh a:focus-visible,.mh button:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-radius:999px}
+
+.mh-orbs{display:flex;align-items:center}
+.mh-orbs i{width:24px;height:24px;flex:none;margin-left:-7px;transition:margin-left .4s var(--mh-out),transform .4s var(--mh-out)}
+.mh-orbs i:first-child{margin-left:0}
+.mh-cta:hover .mh-orbs i:not(:first-child){margin-left:-3px}
+
+/* --- sfera in miniatura: stessa ricetta di .cc-orb (gradienti + grana), toni dei reparti --- */
+.mh-orbs i{
+  --o1:#D7E08F; --o2:#7C8A3C; --o3:#26310F; --o4:#EEF3B8; --o5:#4E6A2A;
+  position:relative;border-radius:50%;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(ellipse 60% 44% at 26% 22%,color-mix(in srgb,var(--o4) 70%,transparent) 0,transparent 70%),
+    radial-gradient(ellipse 54% 60% at 80% 78%,var(--o3) 0,transparent 72%),
+    radial-gradient(ellipse 70% 50% at 60% 52%,var(--o5) 0,transparent 75%),
+    radial-gradient(circle at 42% 40%,var(--o1) 0,var(--o2) 58%,color-mix(in srgb,var(--o2) 60%,var(--o3)) 100%);
+  box-shadow:0 1px 4px rgba(0,0,0,.22),inset -2px -3px 6px rgba(0,0,0,.22)}
+.mh-orbs i::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:60px 60px}
+.mh [data-o="1"]{--o1:#A9BC4A;--o2:#5D7022;--o3:#1B2608;--o4:#DCE88A;--o5:#84A030}  /* oliva lime */
+.mh [data-o="3"]{--o1:#82AA88;--o2:#3F6A4C;--o3:#0E2216;--o4:#C6E3C4;--o5:#5E9470}  /* salvia */
+.mh [data-o="4"]{--o1:#8CC7A6;--o2:#3F8466;--o3:#0D2A1E;--o4:#D2F0DD;--o5:#6DB896}  /* menta */
+.mh [data-o="6"]{--o1:#6FAFA2;--o2:#2F6B62;--o3:#0A1F1C;--o4:#BFE5DA;--o5:#4F978A}  /* eucalipto */
+.mh [data-o="8"]{--o1:#B7C17E;--o2:#3D5A26;--o3:#0A1607;--o4:#E2EBA8;--o5:#7F9A45}  /* verde 21studio */
+
+/* --- allo scroll: si stringe e sale (come mez), resta sempre visibile --- */
+.mh.is-scrolled{--mh-top:12px;--mh-w:1040px}
+/* sopra le fasce nere il bordo si accende per staccare la pillola dal fondo */
+.mh.su-scuro .mh-shell{border-color:rgba(255,255,255,.16)}
+
+/* --- bottone menu (solo mobile) --- */
+.mh-tog{display:none;width:44px;height:44px;flex:none;border:0;border-radius:50%;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.08);color:var(--mh-fg);place-items:center;transition:background-color .25s ease}
+.mh-tog:hover{background:rgba(255,255,255,.14)}
+.mh-tog span{display:block;width:16px;height:1.5px;position:relative}
+.mh-tog span::before,.mh-tog span::after{content:"";position:absolute;left:0;width:16px;height:1.5px;border-radius:2px;background:currentColor;
+  transition:transform .35s var(--mh-out),top .35s var(--mh-out)}
+.mh-tog span::before{top:-3.5px}
+.mh-tog span::after{top:3.5px}
+.mh.is-open .mh-tog span::before{top:0;transform:rotate(45deg)}
+.mh.is-open .mh-tog span::after{top:0;transform:rotate(-45deg)}
+
+/* --- menu a tendina dentro la pillola --- */
+.mh-menu{display:grid;grid-template-rows:0fr;opacity:0;
+  transition:grid-template-rows .45s var(--mh-out),opacity .3s ease}
+.mh-menu[hidden]{display:none}
+.mh-menu>*{min-height:0;overflow:hidden}
+.mh.is-open .mh-menu{grid-template-rows:1fr;opacity:1}
+.mh-menu nav{display:flex;flex-direction:column;padding:6px 20px 0}
+.mh-menu nav a{display:flex;align-items:center;min-height:52px;color:var(--mh-fg);text-decoration:none;
+  font-family:var(--disp,var(--sans,"Inter",sans-serif));font-size:22px;font-weight:600;letter-spacing:-.03em;
+  border-top:1px solid var(--mh-line)}
+.mh-menu nav a:first-child{border-top:0}
+.mh-menu .mh-cta-big{margin:12px 16px 16px;height:52px}
+.mh.is-open .mh-shell{border-radius:26px}
+.mh-bar .mh-cta{transition:opacity .25s ease,border-color .25s ease,background-color .25s ease}
+.mh.is-open .mh-bar .mh-cta{opacity:0;visibility:hidden}   /* nel menu aperto resta solo la CTA grande */
+
+/* ---------- mobile / tablet ---------- */
+@media (max-width:900px){
+  .mh{--mh-h:60px;--mh-top:10px}
+  .mh.is-scrolled{--mh-top:8px;--mh-w:1160px}
+  .mh-bar{grid-template-columns:1fr auto;padding:7px 7px 7px 16px;gap:8px}
+  .mh-links{display:none}
+  .mh-tog{display:grid}
+  .mh-bar .mh-cta{height:44px;padding:0 10px 0 16px;gap:10px}
+}
+@media (max-width:440px){
+  .mh-bar .mh-cta{padding:0 16px}
+  .mh-bar .mh-orbs{display:none}   /* a 390px servono spazio per logo + CTA + menu */
+}
+@media (min-width:901px){ .mh-menu{display:none !important} }
+
+/* le ancore non finiscono sotto la pillola */
+html{scroll-padding-top:100px}
+
+@media (prefers-reduced-motion:reduce){
+  .mh,.mh *,.mh *::before,.mh *::after{transition:none !important}
+}
+
+
+/* footer (giro 6, pattern da pletor.ai): card scura arrotondata + wordmark enorme tagliato dal bordo */
+footer.ft{background:#1c1c1c;color:rgba(255,255,255,.56);border-top:0;padding:clamp(16px,3vw,40px) 0 0;
+  font-size:.9rem;overflow:hidden}
+footer.ft a{color:inherit;text-decoration:none;transition:color .2s ease}
+footer.ft a:hover{color:#fff}
+footer.ft a:focus-visible{outline:2px solid #B7C17E;outline-offset:3px;border-radius:4px}
+.ft-card{background:#262626;border-radius:clamp(28px,4.4vw,64px);padding:clamp(28px,4.4vw,64px)}
+.ft-top{display:grid;grid-template-columns:minmax(0,1.1fr) repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,56px)}
+.ft-brand .wm{display:inline-block;font-size:22px;color:#fff}
+.ft-brand p{margin:1rem 0 .7rem;color:#fff;font-size:1rem;line-height:1.45;max-width:24ch}
+.ft-col h3{margin:0 0 1.1rem;font-size:.78rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.36)}
+.ft-col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.95rem}
+.ft-bot{margin-top:clamp(32px,4vw,48px);padding-top:32px;border-top:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.ft-ig{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:7px;
+  background:rgba(255,255,255,.1);color:rgba(255,255,255,.7)}
+.ft-ig svg{width:18px;height:18px;display:block}
+.ft-bot small{font-size:.86rem}
+.ft-big{display:block;margin:clamp(40px,7vw,110px) 0 0;color:#2a2a2a;font-size:20.5vw;
+  text-align:center;height:.6em;line-height:.8;overflow:hidden;user-select:none;pointer-events:none}
+@media(max-width:860px){.ft-top{grid-template-columns:1fr 1fr}.ft-brand{grid-column:1/-1}}
+@media(max-width:480px){.ft-top{grid-template-columns:1fr}}
+@media(max-width:600px){.mh-brand{font-size:18px}}
+
+
+/* ===== pagine Servizi (generate da _agenti/build.py): solo token della base ===== */
+:root{--ease:cubic-bezier(.16,1,.3,1);--no:#A4502F;--wait-bg:#F4EEDB;--wait:#6A5517;--ok-bg:rgba(183,193,126,.32);--ok:#3B4620}
+.mono{font-family:var(--mono)}
+.indietro{display:inline-flex;gap:.45rem;align-items:center;font-size:13.5px;color:var(--ink-3);transition:color .2s}
+.indietro:hover{color:var(--ink)}
+.indietro span{transition:transform .3s var(--ease)}
+.indietro:hover span{transform:translateX(-3px)}
+
+/* reveal una sola volta, spento con reduced-motion (lo script aggiunge .rv-on solo se serve) */
+.rv-on [data-rv]{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0) * 70ms)}
+.rv-on [data-rv].in{opacity:1;transform:none}
+
+/* chip di stato */
+.st{display:inline-flex;align-items:center;gap:.45rem;font-size:12px;font-weight:600;letter-spacing:-.005em;padding:5px 11px;border-radius:999px;white-space:nowrap}
+.st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.st-ok{background:var(--ok-bg);color:var(--ok)}
+.st-wait{background:var(--wait-bg);color:var(--wait)}
+.st-new{background:var(--soft);color:var(--ink-2);box-shadow:inset 0 0 0 1px var(--hair)}
+.st-no::before{display:none}
+
+/* ---------- apertura pagina agente / Reparto ---------- */
+.ah{position:relative;padding:clamp(128px,12vw,160px) 0 clamp(56px,6vw,88px)}
+.ah::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 55% 70% at 82% 100%,rgba(183,193,126,.26),transparent 70%)}
+.ah>*{position:relative}
+.ah-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,6vw,96px);align-items:start}
+.ah-meta{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-top:1.8rem}
+.ah h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.6rem,5.2vw,4.4rem);line-height:.96;letter-spacing:-.058em;color:#0D0D0D;margin-top:1rem;max-width:14ch}
+.ah .lead{margin-top:1.3rem;max-width:46ch;font-size:clamp(1.04rem,1.35vw,1.2rem);line-height:1.55;letter-spacing:-.015em;color:#55554F;text-wrap:pretty}
+
+/* colonna d'ordine */
+.ordine{background:#fff;border:1px solid rgba(26,28,23,.10);border-radius:var(--r-l);padding:clamp(24px,2.6vw,32px);
+  box-shadow:0 1px 2px rgba(26,28,23,.04),0 40px 80px -48px rgba(26,28,23,.45)}
+.ordine .lab{display:block}
+.prezzo-big{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;margin-top:.9rem}
+.prezzo-big b{font-family:var(--disp);font-size:clamp(2.6rem,4vw,3.4rem);font-weight:650;letter-spacing:-.05em;line-height:1}
+.prezzo-big span{font-size:.92rem;color:var(--ink-3)}
+.somma{margin-top:.5rem;font-size:13.5px;color:var(--ink-3)}
+.ordine .b{width:100%;margin-top:1.4rem}
+.ordine .tl{margin-top:1.3rem;gap:.55rem}
+.ordine .tl li{font-size:.9rem}
+.anteprima{margin-top:1.2rem;padding-top:1rem;border-top:1px dashed var(--hair);font-size:12.5px;line-height:1.5;color:var(--ink-3)}
+.anteprima b{font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--wait);margin-right:.35rem}
+.b.su s{transition:transform .35s var(--ease)}
+.b.su:hover s{transform:translateX(3px)}
+
+/* lista d'attesa */
+.wl label[for]{display:block;margin-top:1.1rem;font-size:13.5px;font-weight:600;color:var(--ink)}
+.wl-row{display:flex;gap:8px;margin-top:.5rem}
+.wl input[type=email]{flex:1;min-width:0;height:48px;padding:0 14px;border:1px solid rgba(26,28,23,.18);border-radius:12px;font:inherit;font-size:15px;color:var(--ink);background:#fff;transition:border-color .2s,box-shadow .2s}
+.wl input[type=email]:focus{outline:none;border-color:var(--acc);box-shadow:0 0 0 4px rgba(183,193,126,.35)}
+.wl .b{width:auto;margin-top:0;flex:none}
+.wl-ok{display:flex;gap:.6rem;align-items:flex-start;margin-top:.9rem;font-size:13px;line-height:1.45;color:var(--ink-2);cursor:pointer}
+.wl-ok input{width:18px;height:18px;margin:1px 0 0;flex:none;accent-color:var(--acc)}
+.seg{color:var(--ink-3);text-decoration:underline dotted;text-underline-offset:3px}
+.wl-nota{margin-top:.8rem;font-size:12.5px;color:var(--ink-3)}
+
+/* ---------- Cosa ricevi: la cartella ---------- */
+.zip-grid{display:grid;grid-template-columns:minmax(0,.75fr) minmax(0,1.25fr);gap:clamp(28px,5vw,80px);align-items:start}
+.zip-grid h2{margin-top:.8rem;color:#fff}
+.zip-grid .body{margin-top:1rem;max-width:40ch}
+.zip{border:1px solid rgba(255,255,255,.12);border-radius:22px;overflow:hidden;background:#141512}
+.zip-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.08);
+  font-family:var(--mono);font-size:12.5px;color:rgba(255,255,255,.8)}
+.zip-top span{color:rgba(255,255,255,.45)}
+.zip ol{list-style:none;margin:0;padding:6px}
+.zip li{display:grid;grid-template-columns:22px minmax(0,.9fr) minmax(0,1.3fr);gap:12px;align-items:baseline;padding:12px;border-radius:12px;transition:background-color .2s}
+.zip li:hover{background:rgba(255,255,255,.05)}
+.zip li::before{content:"\2713";color:#B7C17E;font-size:13px}
+.zip code{font-family:var(--mono);font-size:13px;color:#fff;overflow-wrap:anywhere}
+.zip li span{font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.62)}
+
+/* ---------- Una settimana con: timeline + esempio ---------- */
+.wk-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:start}
+.wk{list-style:none;margin:clamp(24px,3vw,36px) 0 0;padding:0;position:relative}
+.wk::before,.wk::after{content:"";position:absolute;left:84px;top:14px;bottom:14px;width:1px;background:var(--hair)}
+.wk::after{background:var(--acc);transform-origin:top;transform:scaleY(0);transition:transform 1.6s var(--ease) .2s}
+.wk.in::after,html:not(.rv-on) .wk::after{transform:scaleY(1)}
+.wk li{display:grid;grid-template-columns:72px minmax(0,1fr);gap:0 24px;padding:14px 0;position:relative}
+.wk li::before{content:"";position:absolute;left:80px;top:21px;width:9px;height:9px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px var(--hair),0 0 0 4px var(--paper);z-index:1}
+.wk li[data-chi=tu]::before{background:var(--acc);box-shadow:0 0 0 4px var(--paper)}
+.wk li[data-chi=stop]::before{background:#D9B54A;box-shadow:0 0 0 4px var(--paper)}
+.band.soft .wk li::before{box-shadow:0 0 0 1px var(--hair),0 0 0 4px var(--soft)}
+.band.soft .wk li[data-chi]:not([data-chi=solo])::before{box-shadow:0 0 0 4px var(--soft)}
+.wk .g{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding-top:4px;line-height:1.3}
+.wk .t{grid-column:2}
+.wk .t p{font-size:1rem;line-height:1.5;color:var(--ink);margin-top:.45rem}
+.legenda{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.4rem}
+.wk-ex{position:sticky;top:110px}
+
+/* esempio: cornice comune */
+.ex{position:relative;margin:0;background:#fff;border:1px solid rgba(26,28,23,.10);border-radius:24px;
+  box-shadow:0 1px 2px rgba(26,28,23,.04),0 30px 60px -36px rgba(26,28,23,.38)}
+.ex-tag{position:absolute;top:-12px;left:22px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;background:var(--nero);color:#E2EBA8;padding:4px 10px;border-radius:999px;z-index:1}
+.ex-top{display:flex;align-items:center;gap:12px;padding:20px 22px 14px;border-bottom:1px solid var(--hair)}
+.ex-top b{font-size:13.5px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.ex-dots{display:flex;gap:5px}
+.ex-dots i{width:9px;height:9px;border-radius:50%;background:rgba(26,28,23,.14)}
+.ex-body{padding:18px 22px 20px}
+.ex-piede{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 22px 16px;border-top:1px solid var(--hair);font-size:12.5px;color:var(--ink-3)}
+.ex-cap{margin-top:12px;font-size:12.5px;color:var(--ink-3);text-align:center}
+
+/* email */
+.ex-mail dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13px;padding-bottom:14px;border-bottom:1px solid var(--hair)}
+.ex-mail dt{color:var(--ink-3)}
+.ex-mail dd{margin:0;color:var(--ink);overflow-wrap:anywhere}
+.ex-mail dd.ogg{font-weight:600}
+.ex-mail .txt{padding-top:14px;display:flex;flex-direction:column;gap:.7rem;font-size:14px;line-height:1.55;color:var(--ink-2)}
+
+/* slide */
+.ex-sl .fila{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.ex-sl .sl{aspect-ratio:4/5;border-radius:14px;padding:12px;display:flex;flex-direction:column;justify-content:space-between;
+  transition:transform .4s var(--ease)}
+.ex-sl .sl:nth-child(1){background:#2B3216;color:#F1F4DC}
+.ex-sl .sl:nth-child(2){background:#E8EBD3;color:#1A1C17}
+.ex-sl .sl:nth-child(3){background:var(--soft);color:#1A1C17;box-shadow:inset 0 0 0 1px var(--hair)}
+.ex-sl .fila:hover .sl:nth-child(1){transform:rotate(-2deg) translateY(-3px)}
+.ex-sl .fila:hover .sl:nth-child(3){transform:rotate(2deg) translateY(-3px)}
+.ex-sl .sl i{font-style:normal;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;opacity:.7}
+.ex-sl .sl b{font-family:var(--disp);font-size:clamp(.95rem,1.25vw,1.1rem);font-weight:650;letter-spacing:-.03em;line-height:1.1}
+.ex-sl .cap{margin-top:12px;padding:12px 14px;border-radius:14px;background:var(--soft);font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.ex-sl .cap i{display:block;font-style:normal;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+
+/* dm */
+.ex-dm .post{display:flex;gap:10px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid var(--hair)}
+.ex-dm .av{flex:none;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#D7E08F,#5C6A32)}
+.ex-dm .post p{font-size:13.5px;color:var(--ink-2)}
+.ex-dm .post b{color:var(--ink);margin-right:.35rem}
+.ex-dm .kw{display:inline-block;font-family:var(--mono);font-size:12.5px;background:var(--ok-bg);color:var(--ok);padding:1px 7px;border-radius:6px}
+.ex-dm .freccia{display:flex;align-items:center;gap:8px;margin:12px 0;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.ex-dm .freccia::after{content:"";flex:1;height:1px;background:var(--hair)}
+.ex-dm .bolle{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.ex-dm .bolle p{max-width:85%;padding:10px 14px;border-radius:18px 18px 6px 18px;background:#2B3216;color:#F1F4DC;font-size:13.5px;line-height:1.45}
+.ex-dm .bolle p+p{border-radius:18px 6px 6px 18px}
+
+/* report */
+.ex-rp .kpi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ex-rp .kpi div{padding:12px;border-radius:14px;background:var(--soft)}
+.ex-rp .kpi b{display:block;font-family:var(--disp);font-size:1.35rem;font-weight:650;letter-spacing:-.04em;line-height:1}
+.ex-rp .kpi span{display:block;margin-top:6px;font-size:12px;line-height:1.3;color:var(--ink-3)}
+.ex-rp .h4{margin:18px 0 10px;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.ex-rp .bar{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr) 28px;align-items:center;gap:10px;font-size:13px;color:var(--ink-2);padding:4px 0}
+.ex-rp .bar i{display:block;height:8px;border-radius:99px;background:var(--soft);overflow:hidden}
+.ex-rp .bar i::before{content:"";display:block;height:100%;width:var(--v);border-radius:inherit;background:var(--acc);transform-origin:left;transition:transform 1.1s var(--ease) .3s}
+.rv-on [data-rv] .ex-rp .bar i::before,.rv-on .ex-rp[data-rv] .bar i::before{transform:scaleX(0)}
+.rv-on [data-rv].in .ex-rp .bar i::before,.rv-on .ex-rp[data-rv].in .bar i::before{transform:none}
+.ex-rp .bar em{font-style:normal;font-family:var(--mono);font-size:12px;text-align:right;color:var(--ink-3)}
+.ex-rp ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.ex-rp ul li{display:flex;gap:.6rem;font-size:13.5px;color:var(--ink)}
+.ex-rp ul li::before{content:"\2192";color:var(--acc)}
+
+/* lista */
+.ex-ls{list-style:none;margin:0;padding:4px 10px}
+.ex-ls li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border-radius:14px}
+.ex-ls li+li{border-top:1px solid rgba(26,28,23,.06)}
+.ex-ls li>span:first-child{display:flex;flex-direction:column;min-width:0}
+.ex-ls b{font-size:14px;font-weight:600;letter-spacing:-.012em;color:var(--ink)}
+.ex-ls i{font-style:normal;font-size:13px;color:var(--ink-3);margin-top:1px}
+
+/* ---------- Installazione ---------- */
+.ins-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(24px,4vw,56px);align-items:start}
+.ins{list-style:none;margin:0;padding:0;counter-reset:p}
+.ins li{counter-increment:p;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:16px;align-items:center;padding:20px 4px;border-top:1px solid var(--hair)}
+.ins li:last-child{border-bottom:1px solid var(--hair)}
+.ins li::before{content:counter(p,decimal-leading-zero);font-family:var(--disp);font-size:1.6rem;font-weight:650;letter-spacing:-.04em;color:var(--fill);line-height:1}
+.ins p{font-size:1.02rem;line-height:1.45;color:var(--ink)}
+.ins em{font-style:normal;font-family:var(--mono);font-size:12.5px;color:var(--ink-3);white-space:nowrap}
+.colleg{background:var(--soft);border-radius:22px;padding:24px}
+.band.soft .colleg{background:#fff;border:1px solid var(--hair)}
+.colleg h2,.colleg h3{font-size:1rem;font-weight:600;letter-spacing:-.022em;font-family:var(--sans)}
+.colleg dl{margin:1rem 0 0}
+.colleg dt{font-size:.95rem;font-weight:600;color:var(--ink);margin-top:1rem}
+.colleg dt:first-child{margin-top:0}
+.colleg dd{margin:.25rem 0 0;font-size:.9rem;line-height:1.5;color:var(--ink-2)}
+.video-nota{margin-top:1.2rem;font-size:13.5px;color:var(--ink-3)}
+
+
+/* ---------- Prezzo e garanzia ---------- */
+.pg{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);border-radius:var(--r-l);overflow:hidden;border:1px solid rgba(26,28,23,.10);background:#fff;box-shadow:var(--alza)}
+.pg-a{padding:clamp(24px,3vw,40px);background:var(--nero);color:#fff}
+.pg-a .lab{color:#B7C17E}
+.pg-a .prezzo-big span,.pg-a .somma{color:rgba(255,255,255,.6)}
+.pg-a .tl li{color:rgba(255,255,255,.78)}
+.pg-a .tl li::before{color:#B7C17E}
+.pg-a .tl{margin-top:1.4rem}
+.pg-a .b.su{background:linear-gradient(180deg,#FFFFFF,#E9E9E4);color:#0D0D0D;border:1px solid rgba(255,255,255,.7);box-shadow:inset 0 1px 0 #FFFFFF,0 0 0 1px rgba(0,0,0,.5);width:100%;margin-top:1.6rem}
+.pg-a .anteprima{border-color:rgba(255,255,255,.16);color:rgba(255,255,255,.55)}
+.pg-a .anteprima b{color:#E2C46B}
+.pg-b{padding:clamp(24px,3vw,40px);display:flex;flex-direction:column}
+.pg-b>div{padding:18px 0;border-top:1px solid var(--hair)}
+.pg-b>div:first-child{padding-top:0;border-top:0}
+.pg-b h3{font-size:1.02rem}
+.pg-b p{margin-top:.4rem;font-size:.93rem;line-height:1.55;color:var(--ink-2)}
+.pg-b a.link{color:var(--ink);border-bottom:1px solid var(--hair);transition:border-color .2s}
+.pg-b a.link:hover{border-color:var(--ink)}
+
+/* FAQ split */
+.faq-split{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(24px,5vw,80px);align-items:start}
+.faq-split .testa{position:sticky;top:110px}
+.faq-split h2{margin-top:.8rem}
+.fq{border-bottom:1px solid var(--hair)}
+.fq:first-child{border-top:1px solid var(--hair)}
+.fq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;padding:20px 2px;font-weight:600;letter-spacing:-.015em;font-size:1.02rem;transition:color .2s}
+.fq summary:hover{color:var(--acc)}
+.fq summary::-webkit-details-marker{display:none}
+.fq summary::after{content:"+";flex:none;font-weight:400;font-size:1.3rem;line-height:1;color:var(--acc);transition:transform .3s var(--ease)}
+.fq[open] summary::after{transform:rotate(45deg)}
+.fq p{padding:0 2px 20px;max-width:62ch;font-size:.95rem;line-height:1.6;color:var(--ink-2)}
+
+.altro{display:inline-block;margin-top:1.4rem;font-size:14px;color:var(--ink-2);border-bottom:1px solid var(--hair);padding-bottom:1px;transition:border-color .2s,color .2s}
+.altro:hover{color:var(--ink);border-color:var(--ink)}
+.fine .prezzo-big{justify-content:center}
+
+/* ---------- Hub ---------- */
+.porte{list-style:none;margin:0;padding:0;border-top:1px solid var(--ink)}
+.porte li{border-bottom:1px solid var(--hair)}
+.porta{position:relative;display:grid;grid-template-columns:72px minmax(0,1fr) minmax(0,.9fr) 56px;gap:24px;align-items:center;padding:clamp(26px,3vw,40px) 8px;isolation:isolate}
+.porta::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--soft);transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--ease)}
+.porta:hover::before,.porta:focus-visible::before{transform:none}
+.porta .n{font-family:var(--mono);font-size:12.5px;color:var(--ink-3);letter-spacing:.06em}
+.porta h2{font-size:clamp(2rem,4.2vw,3.6rem);letter-spacing:-.05em;line-height:1;transition:transform .5s var(--ease)}
+.porta:hover h2{transform:translateX(8px)}
+.porta p{margin-top:.6rem;font-size:1rem;line-height:1.5;color:var(--ink-2);max-width:42ch}
+.porta-cosa{list-style:none;margin:1.1rem 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.porta-cosa li{padding:7px 13px;border:1px solid var(--hair);border-radius:999px;background:#fff;font-size:.86rem;line-height:1.2;font-weight:500;letter-spacing:-.01em;color:var(--ink);
+  transition:border-color .35s var(--ease)}
+.porta:hover .porta-cosa li{border-color:rgba(26,28,23,.22)}
+.porta .come{font-family:var(--mono);font-size:12.5px;letter-spacing:.04em;color:var(--ink-2);line-height:1.5}
+.porta .come b{display:block;font-family:var(--sans);font-size:1rem;font-weight:600;letter-spacing:-.015em;color:var(--ink);margin-bottom:.2rem}
+.freccia-c{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--hair);font-size:18px;
+  transition:background-color .35s var(--ease),color .35s,border-color .35s,transform .5s var(--ease)}
+.porta:hover .freccia-c{background:var(--nero);color:#fff;border-color:var(--nero);transform:rotate(-45deg)}
+
+.scegli{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.scegli>div{border-radius:var(--r-l);padding:clamp(24px,3vw,40px)}
+.sc-tu{background:#fff;border:1px solid rgba(26,28,23,.10);box-shadow:var(--alza)}
+.sc-noi{background:var(--nero);color:#fff}
+.sc-noi .lab{color:#B7C17E}
+.scegli h3{font-family:var(--disp);font-size:clamp(1.6rem,2.4vw,2.1rem);font-weight:650;letter-spacing:-.04em;margin-top:.7rem}
+.scegli .body{margin-top:.7rem;max-width:44ch}
+.sc-noi .body{color:rgba(255,255,255,.66)}
+.sc-righe{list-style:none;margin:1.4rem 0 0;padding:0}
+.sc-righe a{display:grid;grid-template-columns:auto 1fr auto;align-items:baseline;gap:.8rem;padding:14px 0;border-top:1px solid rgba(255,255,255,.12);color:#fff;font-weight:600;letter-spacing:-.015em}
+.sc-righe a span{font-weight:400;font-size:.9rem;color:rgba(255,255,255,.56)}
+.sc-righe a i{font-style:normal;transition:transform .35s var(--ease)}
+.sc-righe a:hover i{transform:translateX(4px)}
+.sc-tu .b{margin-top:1.6rem}
+
+.regole{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.regole li{padding:4px clamp(16px,2.4vw,32px) 4px 0}
+.regole li+li{padding-left:clamp(16px,2.4vw,32px);border-left:1px solid var(--hair)}
+.regole b{display:block;font-family:var(--disp);font-size:clamp(1.3rem,1.9vw,1.6rem);font-weight:650;letter-spacing:-.035em;line-height:1.1}
+.regole p{margin-top:.7rem;font-size:.95rem;line-height:1.55;color:var(--ink-2)}
+
+/* ---------- Catalogo ---------- */
+.fatti{display:flex;justify-content:center;flex-wrap:wrap;margin-top:2.2rem}
+.fatti span{padding:4px 22px;font-size:14px;color:var(--ink-2)}
+.fatti span+span{border-left:1px solid var(--hair)}
+.rep{display:grid;grid-template-columns:minmax(0,.55fr) minmax(0,1.45fr);gap:clamp(20px,4vw,64px);padding:clamp(32px,4vw,52px) 0;border-top:1px solid var(--hair)}
+.rep:first-of-type{border-top:1px solid var(--ink)}
+.rep-t{position:sticky;top:110px;align-self:start}
+.rep-t h2{font-family:var(--disp);font-size:clamp(1.6rem,2.4vw,2.1rem);font-weight:650;letter-spacing:-.04em;margin-top:.5rem}
+.rep-t p{margin-top:.5rem;font-size:.93rem;line-height:1.5;color:var(--ink-2);max-width:30ch}
+.rep-t a{display:inline-block;margin-top:.9rem;font-size:13.5px;font-weight:600;border-bottom:1px solid var(--hair);transition:border-color .2s}
+.rep-t a:hover{border-color:var(--ink)}
+.righe{list-style:none;margin:0;padding:0}
+.riga{position:relative;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) auto 40px;gap:18px;align-items:center;padding:20px 14px;border-radius:18px;transition:background-color .3s}
+.righe li+li{border-top:1px solid var(--hair)}
+.riga:hover,.riga:focus-visible{background:var(--soft)}
+.riga b{display:block;font-size:1.12rem;font-weight:600;letter-spacing:-.022em;color:var(--ink)}
+.riga .r{display:block;margin-top:.25rem;font-size:.92rem;line-height:1.45;color:var(--ink-2)}
+.riga .req{font-family:var(--mono);font-size:12px;line-height:1.5;color:var(--ink-3)}
+.riga .dx{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.riga .pz{font-family:var(--disp);font-size:1.15rem;font-weight:650;letter-spacing:-.03em;white-space:nowrap}
+.riga .pz.wl{font-family:var(--sans);font-size:.88rem;font-weight:600;letter-spacing:-.01em;color:var(--ink-2)}
+.riga .vai{justify-self:end;transition:transform .35s var(--ease);color:var(--ink-3)}
+.riga:hover .vai{transform:translateX(5px);color:var(--ink)}
+.riga.arr b{color:var(--ink-2)}
+
+.bundle{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(24px,4vw,56px);align-items:center;
+  padding:clamp(28px,4vw,52px);border-radius:var(--r-l);background:var(--nero);color:#fff}
+.bundle .lab{color:#B7C17E}
+.bundle h2{color:#fff;margin-top:.8rem}
+.somma-riga{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:1.4rem}
+.somma-riga span{padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.18);font-size:14px;color:rgba(255,255,255,.85)}
+.somma-riga i{font-style:normal;color:rgba(255,255,255,.4)}
+.bundle .prezzo-big span,.bundle .somma{color:rgba(255,255,255,.6)}
+.bundle .b{margin-top:1.4rem}
+.nera .b.suv,.bundle .b.suv{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+.bundle .b.suv:hover{background:rgba(255,255,255,.08)}
+
+.tracker{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));position:relative}
+.tracker::before{content:"";position:absolute;left:12px;right:12px;top:15px;height:1px;background:var(--hair)}
+.tracker li{position:relative;padding-right:20px}
+.tracker .pt{display:grid;place-items:center;width:31px;height:31px;border-radius:50%;background:#fff;border:1px solid var(--hair);font-family:var(--mono);font-size:12px;color:var(--ink-2);position:relative;transition:background-color .4s,color .4s,border-color .4s;transition-delay:calc(var(--i,0) * 160ms)}
+.tracker.in .pt,html:not(.rv-on) .tracker .pt{background:var(--nero);color:#fff;border-color:var(--nero)}
+.tracker b{display:block;margin-top:1rem;font-size:1.02rem;font-weight:600;letter-spacing:-.02em}
+.tracker p{margin-top:.35rem;font-size:.9rem;line-height:1.5;color:var(--ink-2);max-width:26ch}
+
+.cfr{width:100%;border-collapse:collapse;font-size:.95rem}
+.cfr th,.cfr td{text-align:left;padding:16px 14px;border-bottom:1px solid var(--hair);vertical-align:top;line-height:1.5}
+.cfr thead th{font-family:var(--disp);font-size:1.15rem;font-weight:650;letter-spacing:-.025em;border-bottom:1px solid var(--ink)}
+.cfr thead th:first-child{width:24%}
+.cfr tbody th{font-weight:500;color:var(--ink-3);font-size:.9rem}
+.cfr td{color:var(--ink)}
+.cfr td:nth-child(2){background:rgba(183,193,126,.10)}
+
+/* pagine brevi (dopo-acquisto, lista-grazie) */
+.breve{padding:clamp(140px,14vw,184px) 0 clamp(64px,7vw,96px);position:relative}
+.breve::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 70% at 50% 115%,rgba(183,193,126,.30),transparent 68%)}
+.breve>*{position:relative}
+.breve-in{width:min(760px,92vw);margin-inline:auto}
+.breve h1{font-family:var(--disp);font-weight:700;font-size:clamp(2.4rem,5vw,4rem);line-height:.98;letter-spacing:-.055em;color:#0D0D0D;margin-top:1rem}
+.breve .lead{margin-top:1.2rem;font-size:clamp(1.02rem,1.3vw,1.16rem);line-height:1.55;color:#55554F;max-width:52ch}
+.spunta{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:var(--nero);color:#E2EBA8}
+.spunta svg{width:24px;height:24px}
+.spunta path{stroke-dasharray:30;stroke-dashoffset:0;animation:spunta .8s var(--ease) .2s backwards}
+@keyframes spunta{from{stroke-dashoffset:30}}
+.breve .ins{margin-top:2rem}
+.breve .ins li{grid-template-columns:56px minmax(0,1fr)}
+.breve .ins p span{display:block;margin-top:.2rem;font-size:.9rem;color:var(--ink-2)}
+.breve .colleg{margin-top:1.6rem}
+.breve .bs{justify-content:flex-start}
+
+@media(max-width:960px){
+  .ah-grid,.zip-grid,.wk-grid,.ins-grid,.faq-split,.bundle,.pg,.scegli{grid-template-columns:1fr}
+  .wk-ex,.faq-split .testa,.rep-t{position:static}
+  .rep{grid-template-columns:1fr;gap:16px}
+  .porta{grid-template-columns:48px minmax(0,1fr) 52px}
+  .porta .come{grid-column:2;grid-row:2}
+  .porta .freccia-c{grid-column:3;grid-row:1/3}
+  .tracker{grid-template-columns:1fr 1fr;row-gap:32px}
+  .tracker::before{display:none}
+}
+@media(max-width:700px){
+  .wk li{grid-template-columns:56px minmax(0,1fr);gap:0 20px}
+  .wk::before,.wk::after{left:66px}
+  .wk li::before{left:62px}
+  .regole{grid-template-columns:1fr}
+  .regole li,.regole li+li{padding:20px 0;border-left:0;border-top:1px solid var(--hair)}
+  .riga{grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;padding:18px 6px}
+  .riga .req{grid-column:1;grid-row:2}
+  .riga .dx{grid-column:2;grid-row:1/3}
+  .riga .vai{display:none}
+  .zip li{grid-template-columns:18px minmax(0,1fr);gap:4px 10px}
+  .zip li span{grid-column:2}
+  .ins li{grid-template-columns:44px minmax(0,1fr);gap:4px 12px}
+  .ins em{grid-column:2}
+  .cfr{font-size:.88rem}
+  .cfr th,.cfr td{padding:12px 8px}
+  .fatti{flex-direction:column;align-items:center;gap:6px}
+  .fatti span+span{border-left:0}
+  .wl-row{flex-direction:column}
+  .wl .b{width:100%}
+  .porta{grid-template-columns:minmax(0,1fr) 44px;gap:10px 14px}
+  .porta .n{grid-column:1/-1}
+  .porta .come{grid-column:1;grid-row:3}
+  .porta .freccia-c{grid-column:2;grid-row:2;width:44px;height:44px}
+  .tracker{grid-template-columns:1fr}
+}
+@media(max-width:440px){
+  .ex-sl .fila{grid-template-columns:1fr 1fr}
+  .ex-sl .sl:nth-child(3){display:none}
+  .ex-rp .kpi{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){.spunta path{animation:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.bundle.chiaro{background:var(--soft);color:var(--ink)}
+.bundle.chiaro .lab{color:var(--acc)}
+.bundle.chiaro h2{color:var(--ink)}
+.bundle.chiaro .somma-riga span{border-color:var(--hair);background:#fff;color:var(--ink)}
+.bundle.chiaro .somma-riga i,.bundle.chiaro .prezzo-big span,.bundle.chiaro .somma{color:var(--ink-3)}
+
+/* ---------- card agente (pattern catalogo Orbit: filetto, loghi, stato, esempio, per chi, tempo) ---------- */
+.ag-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.ag{position:relative;display:flex;flex-direction:column;height:100%;background:#fff;border:1px solid rgba(26,28,23,.09);border-radius:18px;
+  padding:22px 20px 18px;overflow:hidden;box-shadow:0 1px 2px rgba(26,28,23,.04),0 18px 44px -30px rgba(26,28,23,.28);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s}
+.ag::before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--c)}
+.ag:hover,.ag:focus-visible{transform:translateY(-3px);box-shadow:0 1px 2px rgba(26,28,23,.04),0 26px 56px -28px rgba(26,28,23,.34);border-color:color-mix(in srgb,var(--c) 40%,transparent)}
+.ag-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tools{display:inline-flex;gap:6px}
+.tool{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#fff;border:1px solid rgba(26,28,23,.10);color:var(--ink-2)}
+.tool svg{width:18px;height:18px}
+.ag-rep{margin-top:18px;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.ag h3{margin-top:.35rem;font-family:var(--disp);font-size:1.32rem;font-weight:650;letter-spacing:-.035em;line-height:1.15;color:var(--ink)}
+.ag-r{margin-top:.55rem;font-size:.93rem;line-height:1.55;color:var(--ink-2)}
+.ag-ex{display:block;margin-top:16px;padding:12px 6px 6px;border-radius:12px;background:#F7F7F3;border:1px solid rgba(26,28,23,.07);flex:1}
+.ag-ex-t{display:block;padding:0 8px 4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.ag-ex .ex-ls{padding:0}
+.ag-ex .ex-ls li{padding:9px 8px;align-items:flex-start}
+.ag-ex .ex-ls b{font-size:13px;line-height:1.35}
+.ag-ex .ex-ls i{font-size:12px;line-height:1.4}
+.ag-ex .st{font-size:11px;padding:3px 8px;white-space:nowrap;flex:none}
+.ag-chi{display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-size:13px;line-height:1.45;color:var(--ink-2)}
+.ag-chi svg,.ag-t svg{flex:none;width:15px;height:15px;margin-top:2px;color:var(--ink-3)}
+.ag-piede{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--hair)}
+.ag-t{display:flex;gap:7px;align-items:flex-start;font-size:13px;color:var(--ink-2)}
+.mese{margin-top:.6rem;font-size:13px;line-height:1.45;color:var(--ink-3)}
+.pg-a .mese{color:rgba(255,255,255,.6)}
+.mese a{color:var(--acc);font-weight:600}
+.mese a:hover{text-decoration:underline;text-underline-offset:.2em}
+.pg-a .mese a{color:#B7C17E}
+.ag-pz{font-family:var(--disp);font-size:1.25rem;font-weight:650;letter-spacing:-.03em;white-space:nowrap}
+.ag-pz small{margin-left:5px;font-family:var(--sans);font-size:11.5px;font-weight:500;letter-spacing:0;color:var(--ink-3)}
+.ag-vai{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:14px;font-weight:600;color:var(--c)}
+.ag-vai s{text-decoration:none;transition:transform .3s var(--ease)}
+.ag:hover .ag-vai s{transform:translateX(4px)}
+.band.soft .ag-ex{background:#F9F9F6}
+
+/* apertura pagina agente: per chi, tempo, strumenti */
+.fatti-ag{margin:2rem 0 0;padding-top:1.3rem;border-top:1px solid var(--hair);display:grid;gap:14px;max-width:52ch}
+.fatti-ag>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;align-items:center}
+.fatti-ag dt{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc)}
+.fatti-ag dd{margin:0;font-size:.95rem;line-height:1.45;color:var(--ink)}
+
+/* problema -> risultato */
+.prob{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,4vw,64px)}
+.prob>div+div{padding-left:clamp(20px,4vw,64px);border-left:1px solid var(--hair)}
+.prob-t{margin-top:.8rem;font-family:var(--disp);font-size:clamp(1.3rem,2vw,1.7rem);font-weight:600;letter-spacing:-.03em;line-height:1.25;color:var(--ink)}
+.prob>div:first-child .prob-t{color:var(--ink-3)}
+
+/* cosa ricevi: voci senza nomi di file */
+.zip b{font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:#fff}
+
+@media(max-width:960px){
+  .ag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+  .ag-grid{grid-template-columns:1fr}
+  .prob{grid-template-columns:1fr}
+  .prob>div+div{padding-left:0;border-left:0;padding-top:20px;border-top:1px solid var(--hair)}
+  .fatti-ag>div{grid-template-columns:1fr;gap:4px}
+}
+
+/* ---------- v4: catalogo per reparto, filtri, tu approvi ---------- */
+.filtri{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(20px,2.4vw,28px)}
+.filtri a{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border:1px solid var(--hair);border-radius:999px;background:#fff;font-size:.9rem;color:var(--ink-2);transition:border-color .2s,background .2s,color .2s}
+.filtri a::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--c,var(--ink-3))}
+.filtri a[data-f=tutti]::before{display:none}
+.filtri a:hover{border-color:var(--ink-3);color:var(--ink)}
+.filtri a[aria-current=true]{background:var(--nero);border-color:var(--nero);color:#fff}
+.filtri a small{font-family:var(--mono);font-size:11px;color:inherit;opacity:.7}
+.rep-g{margin-top:clamp(28px,3.4vw,44px);scroll-margin-top:110px}
+.rep-g h2{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2)}
+.rep-g h2::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+.approvi{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.approvi li{display:flex;gap:12px;font-family:var(--disp);font-size:clamp(1.1rem,1.6vw,1.35rem);font-weight:600;letter-spacing:-.025em;line-height:1.35;color:var(--ink)}
+.approvi li::before{content:"✓";flex:none;color:var(--acc);font-weight:700}
+.previsto{margin-top:1rem;font-size:.95rem;color:var(--ink-2)}
+.previsto b{color:var(--ink)}
+.wl .wl-nota{margin-top:.8rem}
+.regole.q4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:960px){.regole.q4{grid-template-columns:1fr 1fr;row-gap:28px}.regole.q4 li:nth-child(odd){border-left:0;padding-left:0}}
+@media(max-width:600px){.regole.q4{grid-template-columns:1fr}}
+
+/* ---------- v4b: giro dell'agente (pattern "flow run" di Orbit: passi, registro, si ferma sul tuo sì) ---------- */
+.giro{margin-top:clamp(28px,3.4vw,44px)}
+.gp-fila{list-style:none;margin:0;padding:22px;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:18px}
+.gp{position:relative;display:flex;flex-direction:column;gap:8px;min-height:128px;padding:14px;border:1px solid var(--hair);border-radius:14px;background:#fff;
+  transition:opacity .4s,border-color .4s,background-color .4s,box-shadow .4s}
+.gp:not(:last-child)::after{content:"\2192";position:absolute;right:-15px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--ink-3)}
+.gp-n{font-family:var(--mono);font-size:11.5px;color:var(--ink-3)}
+.gp b{font-size:14px;font-weight:600;letter-spacing:-.01em;line-height:1.3;color:var(--ink)}
+.gp-st{margin-top:auto;font-size:12px;font-weight:600;color:var(--ink-3)}
+.gp[data-s=""]{opacity:.45}
+.gp[data-s=ora]{border-color:var(--acc);background:rgba(183,193,126,.12);box-shadow:0 0 0 3px rgba(183,193,126,.22)}
+.gp[data-s=ora] .gp-st::before{content:"Working"}
+.gp[data-s=fatto] .gp-st{color:var(--ok)}
+.gp[data-s=fatto] .gp-st::before{content:"\2713  Done"}
+.gp[data-s=attesa]{border-color:#D9B54A;background:var(--wait-bg);box-shadow:0 0 0 3px rgba(217,181,74,.18)}
+.gp[data-s=attesa] .gp-st{color:var(--wait)}
+.gp[data-s=attesa] .gp-st::before{content:"Waiting"}
+.gp[data-s=dopo]{border-style:dashed;background:transparent}
+.gp[data-s=dopo] b{color:var(--ink-3)}
+.gp[data-s=dopo] .gp-st::before{content:"After your yes"}
+:lang(it) .gp[data-s=ora] .gp-st::before{content:"Al lavoro"}
+:lang(it) .gp[data-s=fatto] .gp-st::before{content:"\2713  Fatto"}
+:lang(it) .gp[data-s=attesa] .gp-st::before{content:"Aspetta te"}
+:lang(it) .gp[data-s=dopo] .gp-st::before{content:"Dopo il tuo sì"}
+.giro-sotto{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:18px;padding:0 22px 22px}
+.giro-h{margin-bottom:10px;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.gl{list-style:none;margin:0;padding:12px 14px;border-radius:14px;background:var(--soft);font-family:var(--mono);font-size:12.5px;line-height:1.45;color:var(--ink-2)}
+.gl li{display:grid;grid-template-columns:44px 16px minmax(0,1fr);padding:4px 0;animation:gl-in .4s var(--ease)}
+.gl li span{color:var(--ink-3)}
+.gl li i{font-style:normal;color:var(--acc)}
+.gl li.w{color:var(--ink);font-weight:500}
+.gl li.w i{color:var(--wait)}
+@keyframes gl-in{from{opacity:0;transform:translateY(-4px)}}
+.bolla{padding:12px 14px;border:1px solid var(--hair);border-radius:16px 16px 16px 4px;background:#fff;box-shadow:var(--alza);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.giro-via .bolla{opacity:0;transform:translateY(8px)}
+.bolla-da{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--ink-3)}
+.bolla-c{display:inline-flex;align-items:center;gap:5px;font-weight:600;color:var(--ink)}
+.bolla-c svg,.cn svg{width:14px;height:14px}
+.bolla p{margin-top:8px;font-size:14px;line-height:1.5;color:var(--ink)}
+.canali{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.cn{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border:1px solid var(--hair);border-radius:999px;background:#fff;font-size:12.5px;color:var(--ink-2)}
+
+/* limiti: cosa fa da solo / cosa chiede a te */
+.lim-nota{margin-top:1rem;max-width:36ch}
+.lim{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.lim>div{padding:20px 22px;border:1px solid rgba(26,28,23,.09);border-radius:18px;background:#fff}
+.lim h3{margin-bottom:12px;font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.lim-b h3{color:var(--wait)}
+.lim ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.lim-a li{display:flex;gap:10px;font-size:1rem;line-height:1.4;color:var(--ink)}
+.lim-a li::before{content:"\2192";flex:none;color:var(--ink-3)}
+.lim .approvi li{font-family:var(--sans);font-size:1rem;font-weight:500;letter-spacing:-.01em;line-height:1.4}
+
+/* report del venerdì (Coordinatore) */
+.vn .ex-body{font-size:13.5px}
+.vn-da{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;padding-bottom:12px;border-bottom:1px solid var(--hair)}
+.vn-da dt{color:var(--ink-3)}
+.vn-da dd{margin:0;color:var(--ink)}
+.vn-da dd.ogg{font-weight:600}
+.vn-intro{margin-top:12px;font-size:14px;color:var(--ink)}
+.vn-conti{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.vn-conti div{padding:10px 12px;border-radius:12px;background:var(--soft)}
+.vn-conti b{display:block;font-family:var(--disp);font-size:1.3rem;font-weight:650;letter-spacing:-.04em;line-height:1}
+.vn-conti span{display:block;margin-top:4px;font-size:12px;color:var(--ink-3)}
+.vn h3{margin:18px 0 8px;font-family:var(--mono);font-size:11.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.vn ul{list-style:none;margin:0;padding:0;display:grid;gap:7px}
+.vn-fatto li{display:grid;gap:1px;line-height:1.45;color:var(--ink-2)}
+.vn-fatto b{color:var(--ink);font-weight:600}
+.vn-l li{display:flex;gap:.6rem;line-height:1.45;color:var(--ink)}
+.vn-l li::before{content:"\2192";flex:none;color:var(--acc)}
+.vn-wait li::before{content:"\25CF";font-size:9px;line-height:2.1;color:#D9B54A}
+.vn-fine{margin-top:16px;padding-top:12px;border-top:1px solid var(--hair);font-size:12.5px;color:var(--ink-3)}
+
+/* catalogo: organigramma per reparto (pattern "Company" di Orbit), sopra i filtri */
+.org{margin-top:clamp(20px,2.4vw,28px);padding:20px;border:1px solid rgba(26,28,23,.09);border-radius:22px;background:#fff}
+.org-cima{display:flex;flex-direction:column;align-items:center;gap:14px;position:relative}
+.org-tu,.org-co{display:flex;flex-direction:column;align-items:center;padding:8px 18px;border-radius:14px;text-align:center;position:relative}
+.org-tu{background:var(--nero);color:#fff}
+.org-tu small{color:rgba(255,255,255,.68)}
+.org-co{border:1px solid var(--hair);background:var(--soft);transition:border-color .2s}
+.org-co:hover{border-color:var(--ink-3)}
+.org-tu b,.org-co b{font-size:13.5px;font-weight:600}
+.org-tu small,.org-co small{font-size:11.5px}
+.org-co small{color:var(--ink-3)}
+.org-tu::after,.org-co::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:14px;background:var(--hair)}
+.org-co::after{height:15px}
+.org-rep{list-style:none;margin:15px 0 0;padding:14px 0 0;display:grid;grid-template-columns:repeat(9,minmax(0,1fr));gap:8px;position:relative}
+.org-rep::before{content:"";position:absolute;top:0;left:calc(100% / 18);right:calc(100% / 18);height:1px;background:var(--hair)}
+.org-rep>li{position:relative;min-width:0}
+.org-rep>li::before{content:"";position:absolute;left:50%;top:-14px;width:1px;height:14px;background:var(--hair)}
+.org-r{display:flex;flex-direction:column;gap:2px;padding:9px 8px;border:1px solid var(--hair);border-top:3px solid var(--c);border-radius:12px;background:#fff;transition:background .2s,color .2s,border-color .2s}
+.org-r:hover{border-color:var(--ink-3);border-top-color:var(--c)}
+.org-r b{font-size:12.5px;font-weight:600;line-height:1.2;hyphens:auto;-webkit-hyphens:auto}
+.org-r small{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.org-r[aria-current=true]{background:var(--nero);border-color:var(--nero);border-top-color:var(--c);color:#fff}
+.org-r[aria-current=true] small{color:rgba(255,255,255,.68)}
+.org-rep ul{list-style:none;margin:8px 0 0;padding:0 2px;display:grid;gap:5px}
+.org-rep ul li,.org-leg span{display:flex;gap:6px;font-size:12px;line-height:1.3}
+.org-rep ul a{color:var(--ink-2);transition:color .2s}
+.org-rep ul a:hover{color:var(--ink)}
+.org-rep ul li::before,.org-leg span::before{content:"";flex:none;width:6px;height:6px;margin-top:4px;border-radius:50%;background:var(--c,var(--ink-3))}
+.org-rep ul li.w::before,.org-leg .w::before{background:transparent;box-shadow:inset 0 0 0 1.4px var(--c,var(--ink-3))}
+.org-leg{display:flex;justify-content:center;gap:16px;margin-top:16px;color:var(--ink-3)}
+
+@media(max-width:960px){
+  .gp-fila{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .gp::after{display:none}
+  .org-rep{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .org-rep::before,.org-rep>li::before,.org-rep ul,.org-leg{display:none}
+}
+@media(max-width:700px){
+  .gp-fila{grid-template-columns:1fr;gap:8px;padding:16px}
+  .gp{flex-direction:row;align-items:center;gap:10px;min-height:0;padding:10px 12px}
+  .gp b{flex:1;min-width:0}
+  .gp-st{margin:0;text-align:right;white-space:nowrap}
+  .giro-sotto,.lim{grid-template-columns:1fr}
+  .giro-sotto{padding:0 16px 16px}
+  .org{padding:16px 12px}
+  .org-rep{gap:6px}
+  .org-r{padding:8px}
+  .org-r b{font-size:12px}
+}
+@media(max-width:440px){   /* nomi lunghi (Amministrazione, Communication) interi, senza trattino */
+  .org-r{padding:8px 6px}
+  .org-r b{font-size:11px;letter-spacing:-.01em;hyphens:manual;-webkit-hyphens:manual}
+}
+
+/* pacchetti: Department pack e Full company (confronto con la somma dei singoli, mai prezzi barrati) */
+.pack-top{margin:1.2rem auto 0;max-width:62ch;text-align:center;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.pack-top b,.rep-pack b,.pack-riga b{color:var(--ink);font-weight:600}
+.rep-pack{margin:-6px 0 14px;font-size:13.5px;line-height:1.45;color:var(--ink-2)}
+.pack-riga{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--hair);font-size:13px;line-height:1.5;color:var(--ink-2)}
+.pg-a .pack-riga{border-color:rgba(255,255,255,.14);color:rgba(255,255,255,.62)}
+.pg-a .pack-riga b{color:#fff}
+
+/* ---------- PROVA bollini: sfera del reparto (stessa ricetta di .ccp-orb in home: gradienti + grana, solo CSS, statica) ---------- */
+.orb{--o1:#D7E08F;--o2:#7C8A3C;--o3:#26310F;--o4:#EEF3B8;--o5:#4E6A2A;--s:44px;
+  position:relative;display:inline-grid;place-items:center;width:var(--s);height:var(--s);flex:none;border-radius:50%;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(ellipse 60% 44% at 26% 22%,color-mix(in srgb,var(--o4) 70%,transparent) 0,transparent 70%),
+    radial-gradient(ellipse 54% 60% at 80% 78%,var(--o3) 0,transparent 72%),
+    radial-gradient(ellipse 70% 50% at 60% 52%,var(--o5) 0,transparent 75%),
+    radial-gradient(circle at 42% 40%,var(--o1) 0,var(--o2) 58%,color-mix(in srgb,var(--o2) 60%,var(--o3)) 100%);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset -4px -7px 16px rgba(0,0,0,.22),0 10px 22px -14px rgba(26,28,23,.7)}
+.orb::after{content:"";position:absolute;inset:0;z-index:1;border-radius:50%;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.15' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:90px 90px}
+.orb svg{position:relative;z-index:2;width:42%;height:42%;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 1px 3px rgba(0,0,0,.25))}
+.orb svg .pt{stroke-width:3}
+.orb[data-o="1"]{--o1:#A9BC4A;--o2:#5D7022;--o3:#1B2608;--o4:#DCE88A;--o5:#84A030}
+.orb[data-o="2"]{--o1:#C9C243;--o2:#8A8320;--o3:#2A2606;--o4:#F0E890;--o5:#A9B238}
+.orb[data-o="3"]{--o1:#82AA88;--o2:#3F6A4C;--o3:#0E2216;--o4:#C6E3C4;--o5:#5E9470}
+.orb[data-o="4"]{--o1:#8CC7A6;--o2:#3F8466;--o3:#0D2A1E;--o4:#D2F0DD;--o5:#6DB896}
+.orb[data-o="5"]{--o1:#8A9A45;--o2:#3C4A18;--o3:#0D1306;--o4:#C3CF7A;--o5:#5E6E26}
+.orb[data-o="6"]{--o1:#6FAFA2;--o2:#2F6B62;--o3:#0A1F1C;--o4:#BFE5DA;--o5:#4F978A}
+.orb[data-o="7"]{--o1:#BBAE62;--o2:#75692C;--o3:#221D08;--o4:#E9DEA2;--o5:#998D45}
+.orb[data-o="8"]{--o1:#B7C17E;--o2:#3D5A26;--o3:#0A1607;--o4:#E2EBA8;--o5:#7F9A45}
+/* iniziale dell'agente: piccolo sigillo tondo in basso a destra, distingue agenti dello stesso reparto */
+.orb-w{position:relative;display:inline-flex;flex:none}
+.orb-w>b{position:absolute;right:-3px;bottom:-3px;z-index:3;display:grid;place-items:center;width:calc(var(--s) * .42);height:calc(var(--s) * .42);
+  border-radius:50%;background:#fff;color:var(--ink);font-family:var(--disp);font-size:calc(var(--s) * .22);font-weight:700;letter-spacing:-.04em;line-height:1;
+  box-shadow:0 0 0 2px #fff,0 2px 6px rgba(26,28,23,.25)}
+.ag .orb-w,.ag .orb-w .orb{--s:48px}
+.ag:hover .orb{transform:scale(1.04)}
+.ag .orb{transition:transform .4s var(--ease)}
+.ag-rep{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ag-rep .tools{gap:4px}
+.ag-rep .tool{width:22px;height:22px;border:0;border-radius:0;background:none;color:var(--ink-3)}
+.ag-rep .tool svg{width:15px;height:15px}
+.ah-orb{display:flex;width:max-content;margin-top:1.8rem}
+.ah-orb,.ah-orb .orb{--s:clamp(76px,7vw,96px)}
+.ah-orb .orb{box-shadow:inset 0 0 0 1px rgba(255,255,255,.06),inset -6px -10px 24px rgba(0,0,0,.22),0 22px 40px -22px rgba(26,28,23,.75)}
+.ah-orb>b{box-shadow:0 0 0 3px #fff,0 4px 10px rgba(26,28,23,.25)}
+/* fila di sfere del pack, sovrapposte come nel bottone "Book a call" */
+.rep-pack{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pk-orbs{display:inline-flex}
+.pk-orbs .orb{--s:30px;margin-left:-3px;box-shadow:0 0 0 2px #fff,inset -2px -3px 6px rgba(0,0,0,.22)}
+.pk-orbs .orb:first-child{margin-left:0}
+.pk-orbs .orb i{position:relative;z-index:2;font-style:normal;font-family:var(--disp);font-size:10px;font-weight:700;letter-spacing:-.03em;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+@media (prefers-reduced-motion:reduce){.ag .orb{transition:none}.ag:hover .orb{transform:none}}
+
+</style>
+</head>
+<body>
+
+<header class="mh" id="mh">
+  <link rel="stylesheet" href="../../css/megamenu.css">
+  <div class="mh-shell">
+    <div class="mh-bar">
+      <a href="../../index.html" class="mh-brand wm" aria-label="21studio home">21STUDIO</a>
+      <nav class="mh-links" aria-label="Sections">
+        <div class="mm" data-mm>
+          <a class="mm-a" href="../../servizi/agenti/index.html" aria-haspopup="true" aria-expanded="false" aria-controls="mmP">Agents<svg viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></a>
+          <div class="mm-p" id="mmP">
+            <div class="mm-in">
+            <div class="mm-sx">
+            <ul class="mm-ag">
+              <li><a href="../../servizi/agenti/coordinatore.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span><b>C</b></span><span class="mm-t"><b>Coordinator</b><span>Every request reaches the right agent.</span></span></a></li>
+              <li><a href="../../servizi/agenti/offerta-prezzi.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="1"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M15.6 8.4l-2.1 5.1-5.1 2.1 2.1-5.1z"/></svg></span><b>OP</b></span><span class="mm-t"><b>Offer &amp; Pricing</b><span>It studies your competitors, your offer and your prices, then shows you what to change, with several options side by side.</span></span></a></li>
+              <li><a href="../../servizi/agenti/trova-clienti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="2"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><b>LF</b></span><span class="mm-t"><b>Lead Finder</b><span>It finds the right companies, writes each one a tailored email, sends it after your yes and follows up with those who don&#x27;t reply.</span></span></a></li>
+              <li><a href="../../servizi/agenti/ricerca-fornitori.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="2"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span><b>SP</b></span><span class="mm-t"><b>Supplier &amp; Partner Finder</b><span>It delivers a list of suppliers, manufacturers or influencers that fit, each one checked, with the right person to contact.</span></span></a></li>
+              <li><a href="../../servizi/agenti/social.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>S</b></span><span class="mm-t"><b>Social</b><span>Every week: carousels, posts and reel scripts in your voice, already reviewed.</span></span></a></li>
+              <li><a href="../../servizi/agenti/video-reel.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>VR</b></span><span class="mm-t"><b>Video &amp; Reels</b><span>From your footage and a reel you like: a finished reel with cuts, captions and voice-over, checked before delivery.</span></span></a></li>
+              <li><a href="../../servizi/agenti/dm-instagram.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="3"><svg viewBox="0 0 24 24"><path d="M8.5 5.6v12.8a.8.8 0 0 0 1.22.68l10.1-6.4a.8.8 0 0 0 0-1.36L9.72 4.92a.8.8 0 0 0-1.22.68z"/></svg></span><b>ID</b></span><span class="mm-t"><b>Instagram DM</b><span>Anyone who comments a keyword under your post instantly gets your private message with the link.</span></span></a></li>
+              <li><a href="../../servizi/agenti/annunci-concorrenti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="4"><svg viewBox="0 0 24 24"><path d="M3 10.5v3a1 1 0 0 0 1 1h2.5l5.5 4v-13l-5.5 4H4a1 1 0 0 0-1 1z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6"/><path d="M18.5 6a8.4 8.4 0 0 1 0 12"/></svg></span><b>CA</b></span><span class="mm-t"><b>Competitor Ads</b><span>Every week: your competitors&#x27; new ads, the ones they keep paying for, and the ideas worth making your own.</span></span></a></li>
+              <li><a href="../../servizi/agenti/siti-landing.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="5"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="13" rx="1.6"/><path d="M8.5 20.5h7M12 17.5v3"/></svg></span><b>WL</b></span><span class="mm-t"><b>Websites &amp; Landing Pages</b><span>A website or landing page built on the best examples in your industry, designed to bring you enquiries.</span></span></a></li>
+              <li><a href="../../servizi/agenti/e-commerce.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="5"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="13" rx="1.6"/><path d="M8.5 20.5h7M12 17.5v3"/></svg></span><b>E</b></span><span class="mm-t"><b>E-commerce</b><span>Your online store on Shopify or WooCommerce: built, fast, and better every week.</span></span></a></li>
+              <li><a href="../../servizi/agenti/documenti.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="8"><svg viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9.5 12.5h5M9.5 16h3.5"/></svg></span><b>D</b></span><span class="mm-t"><b>Documents</b><span>Invoices, quotes and contracts drafted in minutes.</span></span></a></li>
+              <li><a href="../../servizi/agenti/automazioni.html"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="9"><svg viewBox="0 0 24 24"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4.3 7.7L12 12l7.7-4.3"/><path d="M12 12v8.6"/></svg></span><b>A</b></span><span class="mm-t"><b>Automations</b><span>Your apps talk to each other.</span></span></a></li>
+            </ul>
+            <a class="mm-tutti" href="../../servizi/agenti/index.html">Browse all agents <span aria-hidden="true">&nearr;</span></a>
+            </div>
+            <div class="mm-dx">
+              <a class="mm-feat" href="../../index.html#pricing">
+                <span class="mm-k">Featured</span>
+                <b>Your whole company, in one pack</b>
+                <span class="mm-d">All 16 available agents, installed and working as one team.</span>
+                <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+                <span class="mm-pr">&euro;2,490 <small>once + VAT</small></span>
+                <span class="mm-go">See the pack <span aria-hidden="true">&nearr;</span></span>
+              </a>
+              <a class="mm-mese" href="../../abbonamento.html">
+                <span class="mm-k">Prefer monthly?</span>
+                <b>Plans from &euro;79/month</b>
+                <span class="mm-d">AI credits included.</span>
+                <span class="mm-fr" aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+            </div>
+          </div>
+        </div>
+        <a href="../../index.html#how-it-works">How it works</a>
+        <a href="../../index.html#custom">Custom</a>
+        <a href="../../contatti.html">Contact</a>
+      </nav>
+      <div class="mh-dx">
+        <div class="mh-lang" role="group" aria-label="Language"><span aria-current="true">EN</span><a href="../../it/servizi/agenti/solleciti-pagamenti.html" hreflang="it" lang="it" aria-label="Italiano">IT</a></div>
+        <a class="mh-cta" href="../../contatti.html">
+          <span class="mh-cta-t">Book a call</span>
+          <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+        </a>
+        <button class="mh-tog" id="mhTog" type="button" aria-expanded="false" aria-controls="mhMenu" aria-label="Open menu">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+    <div class="mh-menu" id="mhMenu" hidden>
+      <nav aria-label="Sections (menu)">
+        <a href="../../servizi/agenti/index.html" aria-current="page">Agents</a>
+        <a href="../../index.html#how-it-works">How it works</a>
+        <a href="../../index.html#custom">Custom</a>
+        <a href="../../contatti.html">Contact</a>
+      </nav>
+      <div class="mh-lang mh-lang-m" role="group" aria-label="Language"><span aria-current="true">EN</span><a href="../../it/servizi/agenti/solleciti-pagamenti.html" hreflang="it" lang="it" aria-label="Italiano">IT</a></div>
+      <a class="mh-cta mh-cta-big" href="../../contatti.html">
+        <span class="mh-cta-t">Book a call</span>
+        <span class="mh-orbs" aria-hidden="true"><i data-o="1"></i><i data-o="3"></i><i data-o="4"></i><i data-o="6"></i><i data-o="8"></i></span>
+      </a>
+    </div>
+  </div>
+  <script src="../../js/megamenu.js" defer></script>
+</header>
+
+<main id="top">
+<section class="ah">
+  <div class="wrap ah-grid">
+    <div>
+      <a class="indietro" href="index.html"><span aria-hidden="true">&larr;</span> All agents</a>
+      <span class="orb-w ah-orb" aria-hidden="true"><span class="orb" data-o="8"><svg viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9.5 12.5h5M9.5 16h3.5"/></svg></span><b>PR</b></span>
+      <div class="ah-meta"><span class="lab">Admin</span><span class="st st-wait">Coming soon</span></div>
+      <h1>Payment Reminders</h1>
+      <p class="lead">Flags overdue invoices and writes the right reminder for each customer. Kind the first time, firmer after.</p>
+      <dl class="fatti-ag"><div><dt>For</dt><dd>Anyone who sends invoices and waits too long to get paid</dd></div><div><dt>Works with</dt><dd><span class="tools"><span class="tool" title="Gmail"><svg viewBox="0 0 24 24" role="img" aria-label="Gmail"><path fill="#EA4335" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg></span><span class="tool" title="Google Sheets"><svg viewBox="0 0 24 24" role="img" aria-label="Google Sheets"><path fill="#34A853" d="M11.318 12.545H7.91v-1.909h3.41v1.91zM14.728 0v6h6l-6-6zm1.363 10.636h-3.41v1.91h3.41v-1.91zm0 3.273h-3.41v1.91h3.41v-1.91zM20.727 6.5v15.864c0 .904-.732 1.636-1.636 1.636H4.909a1.636 1.636 0 0 1-1.636-1.636V1.636C3.273.732 4.005 0 4.909 0h9.318v6.5h6.5zm-3.273 2.773H6.545v7.909h10.91v-7.91zm-6.136 4.636H7.91v1.91h3.41v-1.91z"/></svg></span></span></dd></div></dl>
+    </div>
+    <aside class="ordine" id="avvisami" aria-labelledby="avv-t"><span class="st st-wait">Coming soon</span><h2 id="avv-t" style="font-size:1.5rem;margin-top:1rem">Tell me when it launches</h2><p class="body" style="margin-top:.5rem">We’re building it. We’ll write to you once, on launch day.</p><p class="previsto">Expected price: <b>from €149</b>, one-off + VAT.</p><!-- anteprima: nessun invio reale, lo script porta a lista-grazie.html con il solo slug (l'email non va nell'URL) -->
+<form class="wl" action="lista-grazie.html" method="get" data-wl><input type="hidden" name="lista" value="solleciti-pagamenti"><label for="wl-top">Your email</label><div class="wl-row"><input id="wl-top" name="email" type="email" required autocomplete="email" placeholder="name@company.com"><button class="b su" type="submit"><i>Notify me</i></button></div><label class="wl-ok"><input type="checkbox" name="consenso" value="si" required><span>Send me one email when Payment Reminders launches.</span></label><p class="wl-nota">Preview: sign-up isn’t live yet and your email is not saved.</p></form></aside>
+  </div>
+</section>
+<section class="band soft"><div class="wrap prob" data-rv><div><span class="lab">The problem</span><p class="prob-t">Overdue invoices pile up. Chasing them costs time and awkwardness, and your cash flow suffers.</p></div><div><span class="lab">The result</span><p class="prob-t">Flags overdue invoices and writes the right reminder for each customer. Kind the first time, firmer after.</p></div></div></section>
+<section class="band"><div class="wrap"><div class="testa"><span class="lab">One agent run</span><h2 style="margin-top:.8rem">It works on its own. It stops where your yes matters.</h2></div><figure class="ex giro" data-giro aria-label="Example with made-up data: one run of Payment Reminders"><span class="ex-tag">Example · made-up data</span><div class="ex-top"><span class="ex-dots" aria-hidden="true"><i></i><i></i><i></i></span><b>One run · Payment Reminders</b></div><ol class="gp-fila" style="--n:6"><li class="gp" data-s="fatto"><span class="gp-n">01</span><b>Checks overdue invoices</b><span class="gp-st"></span></li><li class="gp" data-s="fatto"><span class="gp-n">02</span><b>Drops anyone who&#x27;s paid</b><span class="gp-st"></span></li><li class="gp" data-s="fatto"><span class="gp-n">03</span><b>Writes the reminders</b><span class="gp-st"></span></li><li class="gp" data-s="attesa"><span class="gp-n">04</span><b>Waits for your yes</b><span class="gp-st"></span></li><li class="gp" data-s="dopo"><span class="gp-n">05</span><b>Sends the reminders</b><span class="gp-st"></span></li><li class="gp" data-s="dopo"><span class="gp-n">06</span><b>Passes replies to you</b><span class="gp-st"></span></li></ol><div class="giro-sotto"><div><p class="giro-h">Log</p><ol class="gl"><li><span>9:00</span><i aria-hidden="true">✓</i>4 overdue invoices, €6,200 in total</li><li><span>9:03</span><i aria-hidden="true">✓</i>1 payment arrived yesterday</li><li><span>9:08</span><i aria-hidden="true">✓</i>2 polite, 1 firmer</li><li class=w><span>9:14</span><i aria-hidden="true">›</i>Waiting for your yes: 3 reminders</li></ol></div><div class="giro-msg"><p class="giro-h">Lands on Gmail or WhatsApp</p><div class="bolla"><span class="bolla-da"><span class="bolla-c"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>Gmail</span><span>Payment Reminders · 9:14</span></span><p>3 invoices are still overdue, €4,700 in total. The reminders are written: reply OK to send them.</p></div><div class="canali"><span class="cn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>Gmail</span><span class="cn"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>WhatsApp</span></div></div></div></figure></div></section>
+
+<section class="band"><div class="wrap wk-grid"><div><span class="lab">How it works</span><h2 style="margin-top:.8rem">A week with the Payment Reminders agent.</h2><ol class="wk" data-rv><li data-chi="solo"><span class="g">Mon</span><div class="t"><span class="st st-new">On its own</span><p>Checks overdue invoices, from your business software or a spreadsheet.</p></div></li><li data-chi="solo"><span class="g">Tue</span><div class="t"><span class="st st-new">On its own</span><p>Writes a reminder for each: polite the first time, firmer after.</p></div></li><li data-chi="tu"><span class="g">Wed</span><div class="t"><span class="st st-ok">Your turn</span><p>You approve or edit. The first reminder to each customer goes out only with your ok.</p></div></li><li data-chi="stop"><span class="g">Thu</span><div class="t"><span class="st st-wait">Pauses</span><p>The customer replies or disputes: it stops. That conversation is yours.</p></div></li><li data-chi="solo"><span class="g">Fri</span><div class="t"><span class="st st-new">On its own</span><p>Sends you the recap: who paid, who didn&#x27;t, what&#x27;s still owed.</p></div></li></ol></div><div class="wk-ex" data-rv><figure class="ex" aria-label="Example with made-up data: Reminder · to approve"><span class="ex-tag">Example · made-up data</span><div class="ex-top"><span class="ex-dots" aria-hidden="true"><i></i><i></i><i></i></span><b>Reminder · to approve</b></div><div class="ex-body ex-mail"><dl><dt>To</dt><dd>accounts@bar-example.com</dd><dt>Subject</dt><dd class=ogg>Reminder: invoice no. 118</dd><dt>Overdue</dt><dd>15 days</dd></dl><div class="txt"><p>Hello,</p><p>a quick reminder that invoice no. 118 of 30 September is still unpaid.</p><p>If you&#x27;ve already paid, please ignore this message. Otherwise, a copy is attached with our bank details.</p></div></div><div class="ex-piede"><span>Goes out only after your yes</span><span class="st st-wait">To approve</span></div></figure><p class="ex-cap">Illustrative example, with a made-up business and data.</p></div></div></section>
+<section class="band soft"><div class="wrap wk-grid"><div><span class="lab">You approve</span><h2 style="margin-top:.8rem">Nothing goes out without your OK.</h2><p class="body lim-nota">What it does alone and what it asks you, we decide together at installation.</p></div><div class="lim" data-rv><div class="lim-a"><h3>On its own</h3><ul><li>Checks overdue invoices</li><li>Writes the right reminder for each</li><li>Tells you who paid and who didn&#x27;t</li></ul></div><div class="lim-b"><h3>Asks you</h3><ul class="approvi"><li>The first reminder to each customer goes out only with your ok.</li><li>If the customer replies or disputes, the agent stops and the conversation passes to you.</li><li>It writes only polite reminders: formal notices and legal steps stay with you.</li></ul></div></div></div></section>
+<section class="band nera" data-scuro><div class="wrap zip-grid"><div><span class="lab">What’s included</span><h2>At launch, it includes.</h2><p class="body">One payment. We install it, tune it to your business, and it stays yours.</p></div><div class="zip" data-rv><div class="zip-top">Payment Reminders<span>all included</span></div><ol><li><b>Installation</b><span>We install it and connect it to your tools. You don&#x27;t lift a finger.</span></li><li><b>Tuned to your business</b><span>We teach it your offer, your voice and your rules, then test it with you on real cases.</span></li><li><b>30 days of support</b><span>For a month after launch, write to us anytime. We fix it.</span></li><li><b>Yours to keep</b><span>One payment. The agent, the code and the data stay yours. On your machine, €0/month. On our server, optional Support from €49/month.</span></li></ol></div></div></section>
+<section class="band fine"><div class="wrap"><span class="lab">Admin</span><h2>Payment Reminders</h2><span class="st st-wait">Coming soon</span><p class="previsto">Expected price: <b>from €149</b>, one-off + VAT.</p><div class="bs"><a class="b su" href="#avvisami"><i>Tell me when it launches</i><s aria-hidden="true">&uarr;</s></a></div><a class="altro" href="../../contatti.html">Need it sooner? Book a call &rarr;</a></div></section>
+<section class="band"><div class="wrap faq-split"><div class="testa"><span class="lab">Questions</span><h2>Straight answers.</h2></div><div><details class="fq"><summary>What do I need?</summary><p>Your list of invoices with due dates and payment status, from your business software or a spreadsheet, and the inbox to write from.</p></details><details class="fq"><summary>Does it send formal notices or lawyer&#x27;s letters?</summary><p>No. It writes only polite reminders. Legal steps stay with you and your lawyer.</p></details><details class="fq"><summary>Who sees my data?</summary><p>Invoices and contacts stay in your tools. The agent reads them only to write the reminders.</p></details><details class="fq"><summary>Can I use it for my clients?</summary><p>Yes. The agent is yours: use it for your business and for the work you do for your clients.</p></details><details class="fq"><summary>Do I need to know about AI?</summary><p>No. We install it and tune it. You read what it proposes and decide.</p></details><details class="fq"><summary>Any other costs?</summary><p>You pay us once, plus Support only if you want it. The agent runs on an AI service under an account in your name: you pay that usage straight to the provider, with no markup. On the call we tell you what it costs in your case.</p></details><details class="fq"><summary>Can I pay monthly?</summary><p>Yes, with a plan: from €79/month + VAT, with the agents you choose, AI credits, setup and our server included. Minimum 3 months, then cancel anytime.</p></details><details class="fq"><summary>What happens after 30 days?</summary><p>The agent stays yours and keeps working: on your machine for €0/month, or on our server with Support from €49/month. No minimum term, cancel anytime.</p></details></div></div></section>
+<section class="band soft"><div class="wrap"><div class="testa"><span class="lab">Admin</span><h2 style="margin-top:.8rem">More agents in this department.</h2></div><ul class="ag-grid"><li data-rv><a class="ag" href="documenti.html" style="--c:#78716C"><span class="ag-top"><span class="orb-w" aria-hidden="true"><span class="orb" data-o="8"><svg viewBox="0 0 24 24"><path d="M14 3H7a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V7z"/><path d="M14 3v4h4"/><path d="M9.5 12.5h5M9.5 16h3.5"/></svg></span><b>D</b></span><span class="st st-ok">Available</span></span><span class="ag-rep">Admin<span class="tools"><span class="tool" title="Google Drive"><svg viewBox="0 0 24 24" role="img" aria-label="Google Drive"><path fill="#4285F4" d="M12.01 1.485c-2.082 0-3.754.02-3.743.047.01.02 1.708 3.001 3.774 6.62l3.76 6.574h3.76c2.081 0 3.753-.02 3.742-.047-.005-.02-1.708-3.001-3.775-6.62l-3.76-6.574zm-4.76 1.73a789.828 789.861 0 0 0-3.63 6.319L0 15.868l1.89 3.298 1.885 3.297 3.62-6.335 3.618-6.33-1.88-3.287C8.1 4.704 7.255 3.22 7.25 3.214zm2.259 12.653-.203.348c-.114.198-.96 1.672-1.88 3.287a423.93 423.948 0 0 1-1.698 2.97c-.01.026 3.24.042 7.222.042h7.244l1.796-3.157c.992-1.734 1.85-3.23 1.906-3.323l.104-.167h-7.249z"/></svg></span><span class="tool" title="Gmail"><svg viewBox="0 0 24 24" role="img" aria-label="Gmail"><path fill="#EA4335" d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg></span></span></span><h3>Documents</h3><p class="ag-r">Invoices, quotes and contracts drafted in minutes. Ask in plain words, check, approve.</p><span class="ag-ex"><span class="ag-ex-t">Example · made-up data</span><ul class="ex-ls"><li><span><b>Quote · Hotel Miramare</b><i>10 outdoor chairs, price to check</i></span><span class="st st-wait">To approve</span></li><li><span><b>Invoice 47 · Studio Bassi</b><i>Created from the approved quote</i></span><span class="st st-ok">Issued</span></li></ul></span><span class="ag-chi"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="8" cy="5.5" r="2.6"/><path d="M2.8 14c.6-2.7 2.7-4.3 5.2-4.3s4.6 1.6 5.2 4.3"/></svg>Small businesses and freelancers who make documents by hand</span><span class="ag-piede"><span class="ag-t"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="8" cy="8" r="6.2"/><path d="M8 4.6V8l2.3 1.5"/></svg>Installation included</span><b class="ag-pz"><small style="margin:0 4px 0 0">from</small>€249<small>one-off</small></b></span><span class="ag-vai">See how it works <s aria-hidden="true">&rarr;</s></span></a></li></ul><a class="altro" href="index.html">See all agents &rarr;</a></div></section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-card">
+      <div class="ft-top">
+        <div class="ft-brand">
+          <a href="../../index.html" class="wm" aria-label="21studio home">21STUDIO</a>
+          <p>An AI agent for every department. Built around your business, yours to keep.</p>
+          <a href="mailto:info@21studio.io">info@21studio.io</a>
+        </div>
+        <nav class="ft-col" aria-label="Site">
+          <h3>Site</h3>
+          <ul>
+            <li><a href="../../servizi/agenti/index.html">Agents</a></li>
+            <li><a href="../../index.html#how-it-works">How it works</a></li>
+            <li><a href="../../index.html#custom">Custom</a></li>
+            <li><a href="../../contatti.html">Contact</a></li>
+          </ul>
+        </nav>
+        <nav class="ft-col" aria-label="Contact">
+          <h3>Talk to us</h3>
+          <ul>
+            <li><a href="../../contatti.html">Book a call</a></li>
+            <li><a href="mailto:info@21studio.io">info@21studio.io</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="ft-bot">
+        <a class="ft-ig" href="https://instagram.com/21studio.io" target="_blank" rel="noopener" aria-label="21studio on Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".9" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <small>&copy; 2026 21studio</small>
+      </div>
+    </div>
+  </div>
+  <span class="ft-big wm" aria-hidden="true">21STUDIO</span>
+</footer>
+
+<script>
+/* giro 5: snippet header-mez */
+/* Header a pillola — giro 5. Stato allo scroll, fasce scure, menu mobile accessibile. */
+(function(){
+  var mh=document.getElementById('mh');
+  if(!mh) return;
+  var tog=document.getElementById('mhTog');
+  var menu=document.getElementById('mhMenu');
+  var RID=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* 1. scroll: pillola più stretta + bordo acceso sopra le fasce nere */
+  /* nella versione bianca le sole fasce nere sono #sistema e #trio */
+  var SCURE='#sistema,section#trio.ccp,[data-scuro]';
+  var scure=[].slice.call(document.querySelectorAll(SCURE));
+  var tick=false;
+  function aggiorna(){
+    tick=false;
+    mh.classList.toggle('is-scrolled', scrollY>24);
+    var y=mh.querySelector('.mh-shell').getBoundingClientRect();
+    var mid=y.top+y.height/2;
+    mh.classList.toggle('su-scuro', scure.some(function(s){var r=s.getBoundingClientRect();return r.top<=mid && r.bottom>=mid}));
+  }
+  function suScroll(){ if(!tick){tick=true;requestAnimationFrame(aggiorna)} }
+  aggiorna();
+  addEventListener('scroll',suScroll,{passive:true});
+  addEventListener('resize',suScroll,{passive:true});
+
+  /* 2. menu mobile */
+  var chiudiTimer;
+  function apri(){
+    clearTimeout(chiudiTimer);
+    menu.hidden=false;
+    tog.setAttribute('aria-expanded','true');
+    tog.setAttribute('aria-label','Close menu');
+    requestAnimationFrame(function(){ mh.classList.add('is-open') });
+    var primo=menu.querySelector('a');
+    if(primo) primo.focus({preventScroll:true});
+  }
+  function chiudi(rimettiFocus){
+    if(tog.getAttribute('aria-expanded')!=='true') return;
+    mh.classList.remove('is-open');
+    tog.setAttribute('aria-expanded','false');
+    tog.setAttribute('aria-label','Open menu');
+    chiudiTimer=setTimeout(function(){ menu.hidden=true }, RID?0:450);
+    if(rimettiFocus) tog.focus({preventScroll:true});
+  }
+  tog.addEventListener('click',function(){
+    tog.getAttribute('aria-expanded')==='true' ? chiudi(false) : apri();
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape' && tog.getAttribute('aria-expanded')==='true'){ e.preventDefault(); chiudi(true); }
+  });
+  /* clic su un link del menu o fuori dalla pillola: chiude */
+  menu.addEventListener('click',function(e){ if(e.target.closest('a')) chiudi(false) });
+  document.addEventListener('pointerdown',function(e){ if(!mh.contains(e.target)) chiudi(false) });
+  /* il focus esce dalla pillola con Tab: chiude */
+  mh.addEventListener('focusout',function(e){ if(e.relatedTarget && !mh.contains(e.relatedTarget)) chiudi(false) });
+  /* tornando a desktop il menu non resta aperto */
+  matchMedia('(min-width: 901px)').addEventListener('change',function(m){ if(m.matches) chiudi(false) });
+})();
+</script>
+<script>
+/* reveal una sola volta; niente animazioni con prefers-reduced-motion o senza IntersectionObserver */
+(function(){
+  if(!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('rv-on');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
+  [].forEach.call(document.querySelectorAll('[data-rv]'),function(el){io.observe(el)});
+})();
+</script>
+<script>
+/* giro dell'agente: un passo ogni 1,5 s, una volta sola quando entra in vista, poi resta fermo sul passo del tuo si'.
+   Senza JS o con prefers-reduced-motion resta lo stato finale scritto nell'HTML. */
+(function(){
+  var g=document.querySelector('[data-giro]');
+  if(!g || !('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var passi=[].slice.call(g.querySelectorAll('.gp')), righe=[].slice.call(g.querySelectorAll('.gl li'));
+  var fine=passi.map(function(p){ return p.dataset.s }), k=fine.indexOf('attesa');
+  passi.forEach(function(p,i){ if(i<=k) p.dataset.s='' });
+  righe.forEach(function(r){ r.hidden=true });
+  g.classList.add('giro-via');
+  var io=new IntersectionObserver(function(es){
+    if(!es[0].isIntersecting) return; io.disconnect();
+    var i=0; passi[0].dataset.s='ora';
+    var t=setInterval(function(){
+      passi[i].dataset.s=fine[i]; righe[i].hidden=false;
+      if(i===k){ clearInterval(t); g.classList.remove('giro-via'); return }
+      passi[++i].dataset.s='ora';
+    },1500);
+  },{threshold:.45});
+  io.observe(g);
+})();
+</script><script>
+[].forEach.call(document.querySelectorAll('form[data-wl]'),function(f){
+  f.addEventListener('submit',function(ev){ ev.preventDefault(); if(!f.reportValidity()) return;
+    location.href='lista-grazie.html?lista='+encodeURIComponent(f.elements.lista.value); });
+});
+</script>
+</body>
+</html>
