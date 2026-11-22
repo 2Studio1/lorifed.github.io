@@ -4,7 +4,10 @@ var CONFIG = {
   /* Dove finiscono le risposte.
      Incolla qui l'indirizzo della tua Google Apps Script (vedi salva-candidature.gs).
      Finche' e' vuoto, il questionario funziona ma non salva niente. */
-  ENDPOINT: 'https://script.google.com/macros/s/AKfycbwvZmN4pDdJT-BgURPGF16nSZQ00MFxsesp6frowS91j8dtU08DSyGzVIJJtRb3fXvbNQ/exec'
+  ENDPOINT: 'https://script.google.com/macros/s/AKfycbwvZmN4pDdJT-BgURPGF16nSZQ00MFxsesp6frowS91j8dtU08DSyGzVIJJtRb3fXvbNQ/exec',
+  /* Tobia (WhatsApp di 21studio): riceve una copia della call per avvisare Lorenzo e riconoscere chi scrive dal bottone */
+  TOBIA: 'https://tobia-demo.21studio.io/chat/call-21studio',
+  WHATSAPP: '393924311252'
 };
 /* Italiano sulle pagine it/ (lang="it"). Le landing italiane (?servizio=siti|contenuti) restano in italiano: i testi fissi hanno data-it. */
 window.__IT=document.documentElement.lang==='it' || (!/[?&]agente=/.test(location.search) && /[?&]servizio=(siti|contenuti)/.test(location.search));
@@ -99,6 +102,9 @@ window.__IT=document.documentElement.lang==='it' || (!/[?&]agente=/.test(locatio
       racconto:(q.racconto||v('pesa'))+(!sv&&v('tool')?('\n\nStrumenti in uso: '+v('tool')):''),
       pagina:location.href
     };
+    /* codice che lega la call al messaggio WhatsApp (alfabeto senza I, O, 0, 1 come Tobia) */
+    var ALFA='ABCDEFGHJKLMNPQRSTUVWXYZ23456789', codice='';
+    try{ var rnd=crypto.getRandomValues(new Uint8Array(6)); for(var k=0;k<6;k++) codice+=ALFA[rnd[k]&31]; }catch(_c){}
 
     var bottone=document.querySelector('#modulo .invia .btn');
     if(bottone){ bottone.disabled=true; bottone.textContent=IT?'Fatto':'Done'; }
@@ -121,6 +127,13 @@ window.__IT=document.documentElement.lang==='it' || (!/[?&]agente=/.test(locatio
         }catch(_e2){}
       }
     }
+    if(CONFIG.TOBIA){
+      try{
+        fetch(CONFIG.TOBIA,{method:'POST',keepalive:true,headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({nome:dati.nome,azienda:dati.azienda,email:dati.email,telefono:dati.telefono,
+            data:iso.slice(0,10),ora:ora,codice:codice})}).catch(function(){});
+      }catch(_e3){}
+    }
 
     var f=document.getElementById('fatto');
     if(f){
@@ -128,6 +141,16 @@ window.__IT=document.documentElement.lang==='it' || (!/[?&]agente=/.test(locatio
       [].slice.call(document.querySelectorAll('#prenota .scheda')).forEach(function(x){
         if(x.id!=='fatto') x.hidden=true;
       });
+      if(CONFIG.WHATSAPP && !document.getElementById('fattoWa')){
+        var testo=IT?'Ciao, sono '+dati.nome+' di '+dati.azienda+'. Ho prenotato la call con 21studio per il '+quando+'.'
+                    :'Hi, I\u2019m '+dati.nome+' from '+dati.azienda+'. I booked the call with 21studio for '+MESI[giorno.getMonth()]+' '+giorno.getDate()+', '+ora+'.';
+        var pw=document.createElement('p'); pw.className='fattoP'; pw.id='fattoWa';
+        pw.textContent=IT?'Confermala su WhatsApp: ti risponde subito Tobia, il nostro assistente.':'Confirm it on WhatsApp: Tobia, our assistant, replies right away.';
+        var a=document.createElement('a'); a.className='btn'; a.target='_blank'; a.rel='noopener';
+        a.href='https://wa.me/'+CONFIG.WHATSAPP+'?text='+encodeURIComponent(testo+(codice?' #'+codice:''));
+        a.textContent=IT?'Conferma su WhatsApp':'Confirm on WhatsApp';
+        f.appendChild(pw); f.appendChild(a);
+      }
       f.hidden=false;
       f.scrollIntoView({behavior:'smooth',block:'start'});
     }
